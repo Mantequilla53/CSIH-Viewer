@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>test</title>
+  <style>
+    #stopScraping {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>CS2 Inventory History Scraper</h1>
+  <div id="userId">
+  </div>
+  <form>
+    <label for="input-field">Enter your cookies:</label><br>
+    <input type="text" id="input-field" name="input-field"><br>
+    <button type="submit">Submit</button>
+  </form>
+  <button id="stopScraping">Stop Scraping</button>
+  <div id="drop-area">
+    <p>Drag and drop a JSON file here</p>
+  </div>
+  <h2>Scraped Data</h2> 
+  <div id="tab-container"></div>
+
+  <div id="content-container"></div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
