@@ -1,7 +1,6 @@
 const { userInfo } = require('node:os');
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
-const { json } = require('express');
 const fs = require('fs');
 
 const keywordMap = {
@@ -119,13 +118,18 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
             const classId = $(el).data('classid');
             const instanceId = $(el).data('instanceid');
             const jsonId = `${classId}_${instanceId}`;
-            const itemDescription = jsonData.descriptions[appid][jsonId];
-            const itemType = jsonData.descriptions[appid][jsonId]['type'];
-            const trimmedIT = trimItemType(itemType)
-            return {
-              market_name: itemDescription.market_name,
-              itemType: trimmedIT
-            };
+            const itemDescription = jsonData.descriptions?.[appid]?.[jsonId] ?? ''
+            if (itemDescription){
+              const itemType = jsonData.descriptions[appid][jsonId]['type'];
+              const trimmedIT = trimItemType(itemType)
+              return {
+                market_name: itemDescription.market_name,
+                itemType: trimmedIT
+              };
+            } else {
+              console.log('item description not found')
+              return null;
+            }
           };
         })
         if (plusMinus === '+') {
