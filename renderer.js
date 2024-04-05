@@ -1,8 +1,8 @@
 const { ipcRenderer } = require('electron');
-const { showUnlockedCaseContent } = require('./unlockedCase');
 const { showTradeContent } = require('./trade');
-const { showCapContainerContent } = require('./capsule_container');
+const { showPackageContent } = require('./capsule_container');
 const { caseContentRewrite } = require('./newUnlockedCase');
+const { showStickerCapContent } = require('./stickerCapsule');
 
 let existingData = {};
 let currentTab = null;
@@ -84,9 +84,10 @@ ipcRenderer.on('scraped-data', (event, newData) => {
       caseContentRewrite(description, entries, contentContainer, tabStatsContainer);
     } else if (description === 'You traded with') {
       showTradeContent(description, entries, contentContainer);
-    }
-    else if (description === 'Unlocked a sticker capsule' || description === 'Unlocked a container') {
-      showCapContainerContent(description, entries, contentContainer);
+    } else if (description === 'Unlocked a sticker capsule') {
+      showStickerCapContent(description, entries, contentContainer, tabStatsContainer);
+    } else if (description === 'Unlocked a container') {
+      showPackageContent(description, entries, contentContainer, tabStatsContainer);
     } else {
       entries.forEach((entry) => {
         const { date, timestamp, plusItems, minusItems, tradeName } = entry;

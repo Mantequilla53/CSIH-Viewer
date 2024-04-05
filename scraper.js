@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const keywordMap = {
   'Mil-Spec': 'Mil-Spec (Blue)',
-  'Consumer Grade': 'Consumer Grade (Light Gray)',
+  'Consumer Grade': 'Consumer Grade (Gray)',
   'Industrial Grade': 'Industrial Grade (Light Blue)',
   'Restricted': 'Restricted (Purple)',
   'Classified': 'Classified (Pink)',
