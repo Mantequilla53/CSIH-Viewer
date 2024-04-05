@@ -30,7 +30,6 @@ function showTradeContent(description, entries, contentContainer) {
         <div id="trade-name-entries"></div>
       `;
       contentContainer.appendChild(tabContentElement);
-    
       const tradeNameSelect = tabContentElement.querySelector('#trade-name-select');
       const unselectButton = tabContentElement.querySelector('#unselect-button');
       const selectedTradeNameContainer = tabContentElement.querySelector('#selected-trade-name');
@@ -53,7 +52,9 @@ function showTradeContent(description, entries, contentContainer) {
         unselectButton.style.display = 'none';
         showAllTrades();
       });
-    
+      
+      showAllTrades();
+      
       function showTradeNameEntries(tradeName) {
         contentContainer.innerHTML = '';
         contentContainer.appendChild(tabContentElement);
@@ -89,39 +90,38 @@ function showTradeContent(description, entries, contentContainer) {
         selectedTradeNameContainer.innerHTML = '';
         tradeNameEntriesContainer.innerHTML = '';
         entries.forEach((entry) => {
-            const { date, timestamp, plusItems, minusItems, tradeName } = entry;
-            const entryElement = document.createElement('div');
-            entryElement.innerHTML = `
-                <p>Date: ${date}</p>
-                <p>Timestamp: ${timestamp}</p>
-                <p>Trade Name: ${tradeName}</p>
-                ${
-                    plusItems.length > 0
-                    ? `
-                    <p>Given to Inventory:</p>
-                    <ul>
-                        ${plusItems.map((item) => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
-                    </ul>
-                    `
-                    : ''
-                }
-                ${
-                    minusItems.length > 0
-                    ? `
-                    <p>Taken from Inventory:</p>
-                    <ul>
-                        ${minusItems.map((item) => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
-                    </ul>
-                    `
-                    : ''
-                }
-                <hr>
-                `;
+          const { date, timestamp, plusItems, minusItems, tradeName } = entry;
+          const entryElement = document.createElement('div');
+          entryElement.innerHTML = `
+            <p>Date: ${date}</p>
+            <p>Timestamp: ${timestamp}</p>
+            <p>Trade Name: ${tradeName}</p>
+            ${
+              plusItems.length > 0
+              ? `
+              <p>Given to Inventory:</p>
+              <ul>
+                ${plusItems.map((item) => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
+              </ul>
+              `
+              : ''
+            }
+            ${
+              minusItems.length > 0
+              ? `
+              <p>Taken from Inventory:</p>
+              <ul>
+                ${minusItems.map((item) => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
+              </ul>
+              `
+              : ''
+            }
+            <hr>
+            `;
       tradeNameEntriesContainer.appendChild(entryElement);
     });
-
-      }
-    }
+  }
+}
 module.exports = {
     showTradeContent
 }

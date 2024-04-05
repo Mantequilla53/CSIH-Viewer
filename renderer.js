@@ -2,6 +2,7 @@ const { ipcRenderer } = require('electron');
 const { showUnlockedCaseContent } = require('./unlockedCase');
 const { showTradeContent } = require('./trade');
 const { showCapContainerContent } = require('./capsule_container');
+const { caseContentRewrite } = require('./newUnlockedCase');
 
 let existingData = {};
 let currentTab = null;
@@ -75,41 +76,42 @@ ipcRenderer.on('scraped-data', (event, newData) => {
 
   function showTabContent(description) {
     const contentContainer = document.getElementById('content-container');
+    const tabStatsContainer = document.getElementById('tab-stats')
     contentContainer.innerHTML = '';
-
+    tabStatsContainer.innerHTML = '';
     const entries = existingData[description];
     if (description === 'Unlocked a case') {
-      showUnlockedCaseContent(description, entries, contentContainer);
+      caseContentRewrite(description, entries, contentContainer, tabStatsContainer);
     } else if (description === 'You traded with') {
       showTradeContent(description, entries, contentContainer);
     }
     else if (description === 'Unlocked a sticker capsule' || description === 'Unlocked a container') {
       showCapContainerContent(description, entries, contentContainer);
-    }
-
+    } else {
       entries.forEach((entry) => {
-      const { date, timestamp, plusItems, minusItems, tradeName } = entry;
-      const entryElement = document.createElement('div');
-      entryElement.innerHTML = `
-        <p>Date: ${date}</p>
-        <p>Timestamp: ${timestamp}</p>
-        ${tradeName ? `<p>Trade Name: ${tradeName}</p>` : ''}
-        ${plusItems.length > 0 ? `
-          <p>Given to Inventory:</p>
-          <ul>
-            ${plusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
-          </ul>
-      ` : ''}
-      ${minusItems.length > 0 ? `
-          <p>Taken from Inventory:</p>
-          <ul>
-            ${minusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
-          </ul>
-      ` : ''} 
-        <hr>
-        `;
-      contentContainer.appendChild(entryElement);
+        const { date, timestamp, plusItems, minusItems, tradeName } = entry;
+        const entryElement = document.createElement('div');
+        entryElement.innerHTML = `
+          <p>Date: ${date}</p>
+          <p>Timestamp: ${timestamp}</p>
+          ${tradeName ? `<p>Trade Name: ${tradeName}</p>` : ''}
+          ${plusItems.length > 0 ? `
+            <p>Given to Inventory:</p>
+            <ul>
+              ${plusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
+            </ul>
+          ` : ''}
+          ${minusItems.length > 0 ? `
+            <p>Taken from Inventory:</p>
+            <ul>
+              ${minusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
+            </ul>
+          ` : ''} 
+          <hr>
+          `;
+        contentContainer.appendChild(entryElement);
     });
+  }
   }
   if (currentTab && existingData[currentTab]) {
     showTabContent(currentTab);
