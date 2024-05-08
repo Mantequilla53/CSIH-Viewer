@@ -1,1 +1,5 @@
+.vscode/
+dump/
+images/
 node_modules/
+dist/

@@ -1,11 +1,33 @@
 const { ipcRenderer } = require('electron');
 const { showTradeContent } = require('./trade');
 const { showPackageContent } = require('./capsule_container');
-const { caseContentRewrite } = require('./newUnlockedCase');
+const { showCaseContent } = require('./newUnlockedCase');
 const { showStickerCapContent } = require('./stickerCapsule');
+const { showCraftedContent } = require('./crafted');
+const { showDropContent} = require('./drops');
+const { showOperationContent } = require('./operationDrops');
+const { showPurchaseContent } = require('./storePurchase');
+const path = require('path');
+const fs = require('fs');
 
+const tabContainer = document.getElementById('tab-container');
+const contentContainer = document.getElementById('content-container');
+const tabStatsContainer = document.getElementById('tab-stats')
+const fileSelector = document.getElementById('file-selector');
+const selectedFile = document.getElementById('selected-file');
+const userIdElement = document.getElementById('user-id');
+const dumpDateElement = document.getElementById('dump-date');
+
+let selectedFileName = '';
 let existingData = {};
 let currentTab = null;
+
+const groupPatterns = {
+  'Unlocked': ['Unlocked a'],
+  'Earned': ['Earned a', 'Earned'],
+  'Market': ['You listed an item on the Community Market', 'You purchased an item on the Community Market', 'You canceled a listing on the Community Market', 'Listed on the Steam Community Market', 'Received from the Community Market'],
+  'Misc.': ['Received by entering product code', 'Received a gift', 'You deleted', 'Leveled up a challenge coin']
+};
 
 const form = document.querySelector('form');
 form.addEventListener('submit', (event) => {
@@ -15,31 +37,56 @@ form.addEventListener('submit', (event) => {
   ipcRenderer.send('set-cookie', userInput);
 });
 
-const dropArea = document.getElementById('drop-area');
-
-dropArea.addEventListener('dragover', (event) => {
-  event.preventDefault();
-  event.stopPropagation();
+ipcRenderer.on('json-files', (event, jsonFiles) => {
+  if (jsonFiles.length > 0) {
+    fileSelector.style.display = 'inline-block';
+    fileSelector.innerHTML = '<option value="">Select JSON Dump</option>';
+    jsonFiles.forEach(file => {
+      const option = document.createElement('option');
+      option.value = file;
+      option.textContent = file;
+      if (file === selectedFileName) {
+        option.selected = true;
+      }
+      fileSelector.appendChild(option);
+    });
+  } else {
+    fileSelector.style.display = 'none';
+  }
 });
 
-dropArea.addEventListener('drop', (event) => {
-  event.preventDefault();
-  event.stopPropagation();
+fileSelector.addEventListener('change', (event) => {
+  contentContainer.innerHTML = '';
+  tabStatsContainer.innerHTML = '';
+  tabContainer.innerHTML = '';
+  existingData = {};
 
-  const file = event.dataTransfer.files[0];
-  if (file && file.type === 'application/json') {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const jsonData = JSON.parse(reader.result);
-      ipcRenderer.send('json-file-dropped', jsonData);
-    };
-    reader.readAsText(file);
+  selectedFileName = event.target.value;
+  selectedFile.textContent = selectedFileName;
+  console.log(selectedFileName);
+  if (selectedFileName) {
+    const filePath = path.join(__dirname, './dump', selectedFileName);
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        console.error('Error reading JSON file:', err);
+        return;
+      }
+      try {
+        const jsonData = JSON.parse(data);
+        const { userId, dumpDate} = jsonData.dumpInfo;
+        userIdElement.textContent = `UserID: ${userId}`;
+        dumpDateElement.textContent = `Last Dump Update: ${dumpDate}`;
+        ipcRenderer.send('process-dump', jsonData);
+      } catch (error) {
+        console.error('Error parsing JSON file:', error);
+      }
+    });
+  } else {
+    console.log('none');
   }
 });
 
 ipcRenderer.on('scrape-response', (event, item) => {
-  console.log(item);
-  const userId = document.getElementById('userId');
   userId.innerHTML = item;
 });
 
@@ -53,49 +100,38 @@ document.getElementById('stopScraping').addEventListener('click', () => {
 
 ipcRenderer.on('scraped-data', (event, newData) => {
   newData.forEach((entry) => {
-    const { date, timestamp, plusItems, minusItems, tradeName, description } = entry;
+    const { d, t, plusItems, minusItems, tradeName, description } = entry;
     if (!existingData[description]) {
       existingData[description] = [];
     }
-    existingData[description].push({ date, timestamp, plusItems, minusItems, tradeName });
+    existingData[description].push({ d, t, plusItems, minusItems, tradeName });
   });
 
-  const tabContainer = document.getElementById('tab-container');
-
-  tabContainer.innerHTML = '';
-
-  Object.keys(existingData).forEach((description) => {
-    const tabButton = document.createElement('button');
-    tabButton.textContent = description;
-    tabButton.addEventListener('click', () => {
-      currentTab = description;
-      showTabContent(description);
-    });
-    tabContainer.appendChild(tabButton);
-  });
+  updateTabs();
+});
 
   function showTabContent(description) {
-    const contentContainer = document.getElementById('content-container');
-    const tabStatsContainer = document.getElementById('tab-stats')
     contentContainer.innerHTML = '';
     tabStatsContainer.innerHTML = '';
     const entries = existingData[description];
-    if (description === 'Unlocked a case') {
-      caseContentRewrite(description, entries, contentContainer, tabStatsContainer);
-    } else if (description === 'You traded with') {
-      showTradeContent(description, entries, contentContainer);
-    } else if (description === 'Unlocked a sticker capsule') {
-      showStickerCapContent(description, entries, contentContainer, tabStatsContainer);
-    } else if (description === 'Unlocked a container') {
-      showPackageContent(description, entries, contentContainer, tabStatsContainer);
-    } else {
+    
+    if (description === 'Unlocked a case') {showCaseContent(description, entries, contentContainer, tabStatsContainer)} 
+    else if (description === 'You traded with') {showTradeContent(description, entries, contentContainer, tabStatsContainer)} 
+    else if (description === 'Unlocked a sticker capsule') {showStickerCapContent(description, entries, contentContainer, tabStatsContainer)} 
+    else if (description === 'Unlocked a package') {showPackageContent(description, entries, contentContainer, tabStatsContainer)} 
+    else if (description === 'Trade Up') {showCraftedContent(description, entries, contentContainer, tabStatsContainer)} 
+    else if (description === 'Mission reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
+    else if (description === 'Purchased from the store'){showPurchaseContent(description, entries, contentContainer, tabStatsContainer)}
+    else if (['Earned a weapon drop', 'Earned a case drop', 'Earned a graffiti drop'].includes(description)) 
+      {showDropContent(description, entries, contentContainer, tabStatsContainer)} 
+    else {
       entries.forEach((entry) => {
-        const { date, timestamp, plusItems, minusItems, tradeName } = entry;
+        const { d, t, plusItems, minusItems, tradeName } = entry;
         const entryElement = document.createElement('div');
         entryElement.innerHTML = `
-          <p>Date: ${date}</p>
-          <p>Timestamp: ${timestamp}</p>
-          ${tradeName ? `<p>Trade Name: ${tradeName}</p>` : ''}
+          <p>Date: ${d}</p>
+          <p>Time: ${t}</p>
+          ${tradeName ? `<p>${tradeName}</p>` : ''}
           ${plusItems.length > 0 ? `
             <p>Given to Inventory:</p>
             <ul>
@@ -114,10 +150,83 @@ ipcRenderer.on('scraped-data', (event, newData) => {
     });
   }
   }
+
+  function updateTabs() {
+    const groupedTabs = {};
+  
+    Object.keys(existingData).forEach((description) => {
+      let groupName = description;
+      
+      for (const [group, patterns] of Object.entries(groupPatterns)) {
+        if (patterns.some(pattern => description.startsWith(pattern))) {
+          groupName = group;
+          break;
+        }
+      }
+  
+      if (!groupedTabs[groupName]) {
+        groupedTabs[groupName] = [];
+      }
+      groupedTabs[groupName].push(description);
+    });
+  
+    tabContainer.innerHTML = '';
+  
+    const sortedGroupNames = Object.keys(groupedTabs).sort((a, b) => {
+      const aIsGrouped = Object.keys(groupPatterns).includes(a);
+      const bIsGrouped = Object.keys(groupPatterns).includes(b);
+      if (aIsGrouped && !bIsGrouped) return -1;
+      if (!aIsGrouped && bIsGrouped) return 1;
+      return 0;
+    });
+  
+    sortedGroupNames.forEach((groupName) => {
+      const descriptions = groupedTabs[groupName];
+      if (descriptions.length === 1) {
+        const tabButton = document.createElement('button');
+        tabButton.textContent = descriptions[0];
+        tabButton.addEventListener('click', () => {
+          currentTab = descriptions[0];
+          showTabContent(descriptions[0]);
+        });
+        tabContainer.appendChild(tabButton);
+      } else {
+        const dropdownContainer = document.createElement('div');
+        dropdownContainer.classList.add('dropdown');
+  
+        const dropdownButton = document.createElement('button');
+        dropdownButton.textContent = groupName;
+        dropdownButton.classList.add('dropdown-button');
+        dropdownContainer.appendChild(dropdownButton);
+  
+        const dropdownContent = document.createElement('div');
+        dropdownContent.classList.add('dropdown-content');
+        descriptions.forEach(description => {
+          const tabButton = document.createElement('button');
+          tabButton.textContent = description;
+          tabButton.addEventListener('click', () => {
+            currentTab = description;
+            showTabContent(description);
+          });
+          dropdownContent.appendChild(tabButton);
+        });
+        dropdownContainer.appendChild(dropdownContent);
+  
+        tabContainer.appendChild(dropdownContainer);
+      }
+    });
+  
+    if (currentTab && existingData[currentTab]) {
+      showTabContent(currentTab);
+    } else if (Object.keys(existingData).length > 0) {
+      currentTab = Object.keys(existingData)[0];
+      showTabContent(currentTab);
+    }
+  }
+
   if (currentTab && existingData[currentTab]) {
     showTabContent(currentTab);
   } else if (Object.keys(existingData).length > 0) {
     currentTab = Object.keys(existingData)[0];
     showTabContent(currentTab);
   }
-});

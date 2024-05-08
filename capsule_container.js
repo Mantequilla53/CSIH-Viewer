@@ -1,19 +1,19 @@
 function showPackageContent(description, entries, contentContainer, tabStatsContainer) {
   const itemTypeCounts = {
-    'Consumer Grade (Light Gray)': 0,
-    'Industrial Grade (Light Blue)': 0,
-    'Mil-Spec (Blue)': 0,
-    'Restricted (Purple)': 0,
-    'Classified (Pink)': 0,
-    'Covert (Red)': 0
+    'Consumer Grade': 0,
+    'Industrial Grade': 0,
+    'Mil-Spec': 0,
+    'Restricted': 0,
+    'Classified': 0,
+    'Covert': 0
   };
   const expectedPercentages = {
-    'Consumer Grade (Light Gray)': 80,
-    'Industrial Grade (Light Blue)': 16,
-    'Mil-Spec (Blue)': 3.2,
-    'Restricted (Purple)': 0.64,
-    'Classified (Pink)': 0.128,
-    'Covert (Red)': 0.0256
+    'Consumer Grade': 80,
+    'Industrial Grade': 16,
+    'Mil-Spec': 3.2,
+    'Restricted': 0.64,
+    'Classified': 0.128,
+    'Covert': 0.0256
   };
   const itemQualityCounts = {
     'Factory New': 0,
@@ -49,74 +49,72 @@ function showPackageContent(description, entries, contentContainer, tabStatsCont
 
   const tabContentElement = document.createElement('div');
   tabContentElement.innerHTML = `
-  <style>
-  th, td {
-    padding: 10px;
-    text-align: middle;
-  }
-  .container {
-    display: flex;
-    justify-content: space-between;
-  }
-  .table-container {
-    flex: 1;
-    margin-right: 20px;
-  }
-  .item-type-counts,
-  .item-quality-counts {
-    margin-bottom: 20px
-  }
-  .minus-items {
-    flex: 1;
-  }
-  </style>
-
-    <h3>${description}</h3>
+    <link rel="stylesheet" href="case.css">
     <div class="container">
+      <div class="sidebar">
+        <h4>Cases Unboxed:</h4>
+        <ul>
+        <li>
+          <label>
+            <input type="checkbox" id="check-all" checked>All Cases
+          </label>
+        </li>
+        ${Object.entries(minusItemsCount)
+          .map(([item, count]) => `
+            <li>
+              <label title="${item}">
+                <input type="checkbox" class="item-checkbox" value="${item}" checked>
+                ${item.startsWith('Operation') ? item.slice(9) : item} (${count})
+              </label>
+            </li>
+          `)
+          .join('')}
+      </ul>
+      </div>
+      <div class="content">
       <div class="table-container">
-        <div class="item-type-counts">
-          <h4>Item Type Counts:</h4>
-          <table>
+        <div class="item-type-container">
+          <table class="item-type-table">
             <thead>
               <tr>
                 <th>Item Type</th>
                 <th>Count</th>
-                <th>Percentage</th>
-                <th>Expected Percentage</th>
+                <th>Pct %</th>
+                <th>Expected</th>
               </tr>
             </thead>
             <tbody>
-              ${Object.entries(itemTypeCounts)
-                .map(([itemType, count]) => {
-                  const percentage = ((count / totalCount) * 100).toFixed(3);
-                  const expectedPercentage = expectedPercentages[itemType];
-                  return `
-                    <tr>
-                      <td>
-                        <label>
-                          <input type="checkbox" class="item-type-checkbox" value="${itemType}" checked> ${itemType}
-                        </label>
-                      </td>
-                      <td>${count}/${totalCount}</td>
-                      <td>${percentage}%</td>
-                      <td>${expectedPercentage}%</td>
-                    </tr>
-                  `;
-                })
-                .join('')}
+            ${Object.entries(itemTypeCounts)
+              .map(([itemType, count]) => {
+                const percentage = ((count / totalCount) * 100).toFixed(3);
+                const expectedPercentage = expectedPercentages[itemType];
+                const itemColor = extractItemColor(itemType);
+                return `
+                  <tr>
+                    <td>
+                      <label>
+                        <input type="checkbox" class="item-type-checkbox" value="${itemType}" checked>
+                          <span style="display: inline-block; width: 10px; height: 10px; background-color: ${itemColor}; margin-right: 5px;"></span> ${itemType}
+                        <span style="display: inline-block; width: 10px; height: 10px; background-color: ${itemColor}; margin-left: 5px;"></span>
+                      </label>
+                    </td>
+                    <td>${count}/${totalCount}</td>
+                    <td>${percentage}%</td>
+                    <td>${expectedPercentage}%</td>
+                  </tr>
+                `;
+              })
+              .join('')}
             </tbody>
           </table>
         </div>
-        <p>*total count may be off for Patch Packs/Pin Capsules/Graffiti Boxes</p>
-        <p>^Will not be displayed in entry list</p>
-        <div class="item-quality-counts">
-          <h4>Item Quality Counts:</h4>
-          <table>
+        <div class="item-quality-container">
+          <table class="item-quality-table">
             <thead>
               <tr>
                 <th>Item Quality</th>
                 <th>Count</th>
-                <th>Percentage</th>
+                <th>Pct %</th>
               </tr>
             </thead>
             <tbody>
@@ -136,25 +134,10 @@ function showPackageContent(description, entries, contentContainer, tabStatsCont
           </table>
         </div>
       </div>
-      <div class="minus-items">
-        <h4>Cases Unboxed:</h4>
-        <label>
-          <input type="checkbox" id="check-all" checked>All Cases
-        </label>
-        ${Object.entries(minusItemsCount)
-          .map(([item, count]) => `
-            <li>
-              <label>
-                <input type="checkbox" class="item-checkbox" value="${item}" checked> ${item} (${count})
-              </label>
-            </li>
-          `)
-          .join('')}
-      </div>
+      <div id="content-container"></div>
     </div>
-    <p class="totalCount">Total Count: ${totalCount}</p>
-    <hr>
-  `;
+  </div>
+    `;
   tabStatsContainer.appendChild(tabContentElement);
 
   const itemTypeCheckboxes = tabContentElement.querySelectorAll('.item-type-checkbox');
@@ -188,12 +171,12 @@ function showPackageContent(description, entries, contentContainer, tabStatsCont
         .map((checkbox) => checkbox.value);
     
       const updatedItemTypeCounts = {
-        'Consumer Grade (Light Gray)': 0,
-        'Industrial Grade (Light Blue)': 0,
-        'Mil-Spec (Blue)': 0,
-        'Restricted (Purple)': 0,
-        'Classified (Pink)': 0,
-        'Covert (Red)': 0
+        'Consumer Grade': 0,
+        'Industrial Grade': 0,
+        'Mil-Spec': 0,
+        'Restricted': 0,
+        'Classified': 0,
+        'Covert': 0
       };
       const updatedItemQualityCounts = {
         'Factory New': 0,
@@ -203,88 +186,128 @@ function showPackageContent(description, entries, contentContainer, tabStatsCont
         'Battle-Scarred': 0
       };
       let updatedTotalCount = 0;
-    
-      contentContainer.innerHTML = '';
-    
-      entries.forEach((entry) => {
-        const { date, timestamp, plusItems, minusItems } = entry;
-    
-        const matchedMinusItems = minusItems.filter((minusItem) =>
-          checkedItems.includes(minusItem.market_name)
-        );
-    
-        const filteredPlusItems = plusItems.filter((plusItem) =>
-          selectedItemTypes.includes(plusItem.itemType)
-        );
-    
-        if (matchedMinusItems.length > 0) {
-          plusItems.forEach((plusItem) => {
-            const itemType = plusItem.itemType;
-            if (updatedItemTypeCounts.hasOwnProperty(itemType)) {
-              updatedItemTypeCounts[itemType]++;
-            }
-            const itemQuality = extractItemQuality(plusItem.market_name);
-            if (updatedItemQualityCounts.hasOwnProperty(itemQuality)) {
-              updatedItemQualityCounts[itemQuality]++;
-            }
-          });
-    
-          updatedTotalCount += matchedMinusItems.length;
-    
-          if (filteredPlusItems.length > 0) {
-            const entryElement = document.createElement('div');
-            entryElement.innerHTML = `
-              <p>Date: ${date}</p>
-              <p>Timestamp: ${timestamp}</p>
-              <p>Given to Inventory:</p>
-              <ul>
-                ${filteredPlusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
-              </ul>
-              ${matchedMinusItems.length > 0 ? `
-                <p>Taken from Inventory:</p>
-                <ul>
-                  ${matchedMinusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
-                </ul>
-              ` : ''}
-              <hr>
-            `;
-            contentContainer.appendChild(entryElement);
+      const contentContainerElement = tabContentElement.querySelector('#content-container');
+      contentContainerElement.innerHTML = '';
+  
+      contentContainerElement.innerHTML = `
+      <div class="card-container"></div>
+    `;
+    const cardContainer = contentContainerElement.querySelector('.card-container');
+  
+    entries.forEach((entry) => {
+      const { d, t, plusItems, minusItems } = entry;
+  
+      const matchedMinusItems = minusItems.filter((minusItem) =>
+        checkedItems.includes(minusItem.market_name)
+      );
+  
+      const filteredPlusItems = plusItems.filter((plusItem) =>
+        selectedItemTypes.includes(plusItem.itemType)
+      );
+  
+      if (matchedMinusItems.length > 0) {
+        plusItems.forEach((plusItem) => {
+          const itemType = plusItem.itemType;
+          if (updatedItemTypeCounts.hasOwnProperty(itemType)) {
+            updatedItemTypeCounts[itemType]++;
           }
+          const itemQuality = extractItemQuality(plusItem.market_name);
+          if (updatedItemQualityCounts.hasOwnProperty(itemQuality)) {
+            updatedItemQualityCounts[itemQuality]++;
+          }
+        });
+  
+        updatedTotalCount += matchedMinusItems.length;
+  
+        if (filteredPlusItems.length > 0) {
+          const cardElement = document.createElement('div');
+          cardElement.classList.add('card');
+      
+          const itemColor = extractItemColor(filteredPlusItems[0].itemType);
+          cardElement.style.setProperty('--item-color', itemColor);
+      
+          cardElement.innerHTML = `
+    <div class="card-header">
+      <span class="date-time">${d} ${t}</span>
+    </div>
+    <div class="weapon-given">
+      <ul class="no-bullet">
+        ${filteredPlusItems.map(item => {
+          return `<li>
+            <img src="images/${item.itemName}.png" width="120" height="92.4">
+            <span>${formatItemName(item.market_name)}</span>
+          </li>`;
+        }).join('')}
+      </ul>
+    </div>
+    ${matchedMinusItems.length > 0 ? `
+      <div class="card-footer">
+        <div class="case-unboxed">
+          <span class="item-name">${matchedMinusItems[0].market_name.startsWith('Operation') ? matchedMinusItems[0].market_name.slice(9) : matchedMinusItems[0].market_name}</span>
+          <img src="images/${matchedMinusItems[0].itemName}.png" alt="${matchedMinusItems[0].market_name}">
+        </div>
+      </div>
+    ` : ''}
+  `;
+  
+  cardContainer.appendChild(cardElement);
         }
-      });
-    
-      // Update the item type table
-      const itemTypeTableBody = tabContentElement.querySelector('.item-type-counts tbody');
-      itemTypeTableBody.querySelectorAll('tr').forEach((row) => {
-        const itemType = row.querySelector('.item-type-checkbox').value;
-        const count = updatedItemTypeCounts[itemType];
-        const percentage = ((count / updatedTotalCount) * 100).toFixed(3);
-        const expectedPercentage = expectedPercentages[itemType];
-    
-        row.querySelector('td:nth-child(2)').textContent = `${count}/${updatedTotalCount}`;
-        row.querySelector('td:nth-child(3)').textContent = `${percentage}%`;
-        row.querySelector('td:nth-child(4)').textContent = `${expectedPercentage}%`;
-      });
-    
-      // Update the item quality table
-      const itemQualityTableBody = tabContentElement.querySelector('.item-quality-counts tbody');
-      itemQualityTableBody.querySelectorAll('tr').forEach((row) => {
-        const itemQuality = row.querySelector('td:first-child').textContent;
-        const count = updatedItemQualityCounts[itemQuality];
-        const percentage = ((count / updatedTotalCount) * 100).toFixed(3);
-    
-        row.querySelector('td:nth-child(2)').textContent = `${count}/${updatedTotalCount}`;
-        row.querySelector('td:nth-child(3)').textContent = `${percentage}%`;
-      });
-    
-      const totalCountElement = tabContentElement.querySelector('.totalCount');
-      totalCountElement.textContent = `Total Count: ${updatedTotalCount}`;
+      }
+    });
+  
+    // Update the item type table
+    const itemTypeTableBody = tabContentElement.querySelector('.item-type-table tbody');
+    itemTypeTableBody.querySelectorAll('tr').forEach((row) => {
+      const itemType = row.querySelector('.item-type-checkbox').value;
+      const count = updatedItemTypeCounts[itemType];
+      const percentage = ((count / updatedTotalCount) * 100).toFixed(3);
+      const expectedPercentage = expectedPercentages[itemType];
+  
+      row.querySelector('td:nth-child(2)').textContent = `${count}/${updatedTotalCount}`;
+      row.querySelector('td:nth-child(3)').textContent = `${percentage}%`;
+      row.querySelector('td:nth-child(4)').textContent = `${expectedPercentage}%`;
+    });
+  
+    // Update the item quality table
+    const itemQualityTableBody = tabContentElement.querySelector('.item-quality-table tbody');
+    itemQualityTableBody.querySelectorAll('tr').forEach((row) => {
+      const itemQuality = row.querySelector('td:first-child').textContent;
+      const count = updatedItemQualityCounts[itemQuality];
+      const percentage = ((count / updatedTotalCount) * 100).toFixed(3);
+  
+      row.querySelector('td:nth-child(2)').textContent = `${count}/${updatedTotalCount}`;
+      row.querySelector('td:nth-child(3)').textContent = `${percentage}%`;
+    });
+  
+    const totalCountElement = tabContentElement.querySelector('.totalCount');
+    totalCountElement.textContent = `Total Count: ${updatedTotalCount}`;
+  }
+  }
+  function extractItemQuality(marketName) {
+    const matches = marketName.match(/\(([^)]+)\)/);
+    return matches ? matches[1] : 'Unknown';
+  }
+  
+  function extractItemColor(itemType) {
+    const colorMap = {
+      'Consumer Grade': 'rgb(176, 195, 217)',
+      'Industrial Grade': 'rgb(94, 152, 217)',
+      'Mil-Spec': 'rgb(75, 105, 255)',
+      'Restricted': 'rgb(136, 71, 255)',
+      'Classified': 'rgb(211, 44, 230)',
+      'Covert': 'rgb(235, 75, 75)',
+      'Extraordinary': 'rgb(255, 215, 0)'
+    };
+    return colorMap[itemType] || 'white';
+  }
+  
+  function formatItemName(itemName) {
+    const parts = itemName.split('|');
+    if (parts.length > 1) {
+      return `${parts[0]}<br>${parts[1].trim()}`;
     }
-}
-function extractItemQuality(marketName) {
-  const matches = marketName.match(/\(([^)]+)\)/);
-  return matches ? matches[1] : 'Unknown';
-}
+    return itemName;
+  }
 
 module.exports = {
   showPackageContent

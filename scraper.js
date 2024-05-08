@@ -1,161 +1,227 @@
-const { userInfo } = require('node:os');
-const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
 const fs = require('fs');
+const path = require('path');
+const axios = require('axios');
+const crypto = require('crypto');
 
-const keywordMap = {
-  'Mil-Spec': 'Mil-Spec (Blue)',
-  'Consumer Grade': 'Consumer Grade (Gray)',
-  'Industrial Grade': 'Industrial Grade (Light Blue)',
-  'Restricted': 'Restricted (Purple)',
-  'Classified': 'Classified (Pink)',
-  '★': 'Extraordinary (Knife/Glove)',
-  'Covert': 'Covert (Red)'
-};
-//Used to clean up weapon quality(probably a better way to do this)
 function trimItemType(itemType) {
-  const keywords = Object.keys(keywordMap);
-  if (keywords.some(keyword => itemType.includes(keyword))) {
-    for (const keyword in keywordMap) {
-      if (itemType.includes(keyword)) {
-        return keywordMap[keyword];
-      }
+  if (itemType.includes('★')) {
+    return 'Extraordinary';
+  }
+  const keywords = ['Consumer Grade', 'Industrial Grade', 'Mil-Spec', 'Restricted', 'Classified', 'Covert'];
+  for (const keyword of keywords) {
+    if (itemType.includes(keyword)) {
+      return keyword;
     }
   }
   return itemType;
 }
 
-async function saveJson(scrapeData) {
-  let existingData = [];
-  if (fs.existsSync('testdump.json')) {
-    const fileContent = fs.readFileSync('testdump.json', 'utf-8');
-    existingData = JSON.parse(fileContent);
+async function imageDwnld(iconUrl) {
+  if (!iconUrl || iconUrl.trim() === '') {
+    console.error('Error: iconUrl is blank.');
+    return;
   }
-  const updateJson = [...existingData, scrapeData]
-  fs.writeFileSync('testdump.json', JSON.stringify(updateJson, null));
-  console.log('new data saved');
+
+  const imageUrlBuild = `https://community.cloudflare.steamstatic.com/economy/image/${iconUrl}/96fx96f?allow_animated=1`;
+  const compressedUrl = crypto.createHash('md5').update(iconUrl).digest('hex');
+  const directoryPath = './images';
+
+  if (!fs.existsSync(directoryPath)) {
+    fs.mkdirSync(directoryPath);
+  }
+
+  const filePath = path.join(directoryPath, `${compressedUrl}.png`);
+  if (fs.existsSync(filePath)) {
+    return iconUrl;
+  }
+
+  try {
+    const response = await axios.get(imageUrlBuild, { responseType: 'stream' });
+    const writer = fs.createWriteStream(filePath);
+    response.data.pipe(writer);
+
+    await new Promise((resolve, reject) => {
+      writer.on('finish', resolve);
+      writer.on('error', reject);
+    });
+
+    return iconUrl;
+  } catch (error) {
+    console.error(`Error downloading image ${compressedUrl}:`, error);
+    return null;
+  }
 }
 
-async function scrapeUInfo(url, cookie) {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.setExtraHTTPHeaders({
-    'Cookie': cookie,
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-    'Accept-Charset': 'UTF-8',
-    'Accept-Language': 'en-US;q=0.7,en;q=0.3'
-  });
+async function saveJson(scrapeData, scrapedDataFilePath) {
+  let existingJson = {
+    dumpInfo: {},
+    scrapedData: []
+  };
+
+  if (fs.existsSync(scrapedDataFilePath)) {
+    const fileContent = fs.readFileSync(scrapedDataFilePath, 'utf-8');
+    existingJson = JSON.parse(fileContent);
+  }
+
+  existingJson.scrapedData.push(scrapeData);
+
+  fs.writeFileSync(scrapedDataFilePath, JSON.stringify(existingJson, null));
+}
+
+const HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+  'Accept-Language': 'en-US;q=0.7,en;q=0.3',
+  'Referer': 'https://steamcommunity.com/my/'
+}
+
+async function scrapeUInfo(cookie) {
   try {
-    await page.goto(url);
-    const userId = await (await page.waitForSelector('a.persona_level_btn', { timeout: 5000 })).evaluate(el => el.href.slice(0, -6));
-    return userId;
+    const response = await axios.get('https://steamcommunity.com/my', {
+      headers: {
+        ...HEADERS,
+        'Cookie': cookie
+      },
+      maxRedirects: 0, // Disable automatic following of redirects
+      validateStatus: function (status) {
+        return status >= 200 && status < 303; // Allow status codes from 200 to 302
+      }
+    });
+
+    return response.headers.location;
   } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  } finally {
-    await browser.close();
+    if (error.response && error.response.status === 302) {
+      const redirectedUrl = error.response.headers.location;
+      return redirectedUrl;
+    } else {
+      console.error('Error:', error);
+      throw error;
+    }
   }
 }
 
 async function scrapeIH(userId, cookie, s, time, time_frac) {
-  const sessionIdPair = cookie.split('; ').find(pair => pair.startsWith('sessionid='));
-  const sessionId = sessionIdPair ? sessionIdPair.split('=')[1] : null;
+  const sessionId = cookie.match(/sessionid=([^;]+)/i)?.[1] || null;
   const ih_url = `${userId}inventoryhistory/?ajax=1&cursor%5Btime%5D=${time}&cursor%5Btime_frac%5D=${time_frac}&cursor%5Bs%5D=${s}&sessionid=${sessionId}&app%5B%5D=730`;
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.setExtraHTTPHeaders({
-    'Cookie': cookie,
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-    'Accept-Language': 'en-US;q=0.7,en;q=0.3',
-    'Referer': 'https://steamcommunity.com/id/my'
-  });
-  try {{
-    await page.goto(ih_url, { waitUntil: 'networkidle0'});
-    console.log(ih_url);
-    const preTag = await page.evaluate(() => document.querySelector('pre').textContent);
-    const jsonData = JSON.parse(preTag);
-    const cursorFound = jsonData.cursor !== undefined;
-    const cursor = jsonData.cursor;
-    console.log(cursor);
-    console.log(cursorFound);
 
-    const htmlData = jsonData.html;
-    const cleanhtmlData = htmlData.replace(/[\t\n\r]/g, '');
-    
-    const $ = cheerio.load(cleanhtmlData);
-    const tradeRows = $('.tradehistoryrow');
-    const scrapeData = [];
-    
-    tradeRows.each((index, element) => {
-      const dateElement = $(element).find('.tradehistory_date');
-      const date = dateElement.contents().first().text().trim();
-      const timestamp = dateElement.find('.tradehistory_timestamp').text().trim();
-      let description = $(element).find('.tradehistory_event_description').text().trim();
-      let tradeName = '';
-      //allows all trades to be combined in 1 tab
-      if (description.startsWith('You traded with')) {
-        tradeName = description.replace('You traded with ', '').trim();
-        description = 'You traded with';
+  try {
+    const response = await axios.get(ih_url, {
+      headers: {
+        ...HEADERS,
+        'Cookie': cookie
       }
-      //splits cases / sticker capsules, leaves packages as containers
-      if (description.startsWith('Unlocked a container')) {
-        const tradeHistoryItem = $(element).find('.tradehistory_items').text();
-        if (tradeHistoryItem && tradeHistoryItem.toLowerCase().includes('case')) {
-          description = 'Unlocked a case';
-        } else if (tradeHistoryItem && tradeHistoryItem.toLowerCase().includes('sticker |')) {
-          description = 'Unlocked a sticker capsule';
-    }
-      }
-      const plusItems = [];
-      const minusItems = [];
-      $(element).find('.tradehistory_items').each((i, itemsElement) => {
-        const plusMinus = $(itemsElement).find('.tradehistory_items_plusminus').text().trim();
-        const items = $(itemsElement).find('.history_item').map((i, el) => {
-          const itemName = $(el).find('.history_item_name').text().trim();
-          //will pass anything opened with a key to not affect the count of total unboxed
-          if (!((description === 'Unlocked a sticker capsule' || description === 'Unlocked a case') && itemName.toLowerCase().match(/\bkey\b/))) {
-            const appid = $(el).data('appid');
-            const classId = $(el).data('classid');
-            const instanceId = $(el).data('instanceid');
-            const jsonId = `${classId}_${instanceId}`;
-            const itemDescription = jsonData.descriptions?.[appid]?.[jsonId] ?? ''
-            if (itemDescription){
-              const itemType = jsonData.descriptions[appid][jsonId]['type'];
-              const trimmedIT = trimItemType(itemType)
-              return {
-                market_name: itemDescription.market_name,
-                itemType: trimmedIT
-              };
-            } else {
-              console.log('item description not found')
-              return null;
-            }
-          };
-        })
-        if (plusMinus === '+') {
-          plusItems.push(...items);
-        } else if (plusMinus === '-') {
-          minusItems.push(...items);
-        }
-      });
-      
-      scrapeData.push({
-        date,
-        timestamp,
-        description,
-        tradeName,
-        plusItems,
-        minusItems
-      });
     });
-    await saveJson(scrapeData);
-    return { scrapeData, cursor, cursorFound};
-  };
+
+    const jsonData = response.data;
+
+    if (jsonData && jsonData.success) {
+      const cursorFound = jsonData.cursor !== undefined;
+      const cursor = jsonData.cursor;
+      console.log(cursor, cursorFound);
+
+      const htmlData = jsonData.html;
+      const cleanhtmlData = htmlData.replace(/[\t\n\r]/g, '');
+
+      const $ = cheerio.load(cleanhtmlData);
+      const tradeRows = $('.tradehistoryrow');
+      const scrapeData = [];
+
+      const descriptionMap = {
+        'You traded with': (description) => ['You traded with', 'Your trade with'].some(phrase => description.startsWith(phrase)),
+        'Unlocked a case': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('case'),
+        'Unlocked a sticker capsule': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('sticker |'),
+        'Unlocked a package': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('package'),
+        'Trade Up': (description) => description === 'Crafted',
+        'Earned a case drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && tradeHistoryItem.toLowerCase().includes('case'),
+        'Earned a graffiti drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && tradeHistoryItem.toLowerCase().includes('sealed graffiti'),
+        'Earned a weapon drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && !(tradeHistoryItem.toLowerCase().includes('case' || 'sealed graffiti')),
+        'Sticker applied/removed': (description) => ['Sticker applied', 'Sticker removed'].includes(description),
+        'Name Tag applied/removed': (description) => ['Name Tag applied', 'Name Tag removed'].includes(description)
+      };
+      const imageUrls = [];
+      tradeRows.each((index, element) => {
+        const dateElement = $(element).find('.tradehistory_date');
+        const d = dateElement.contents().first().text().trim();
+        const t = dateElement.find('.tradehistory_timestamp').text().trim();
+        let description = $(element).find('.tradehistory_event_description').text().trim();
+        let tradeName = '';
+
+        const tradeHistoryItem = $(element).find('.tradehistory_items').text();
+
+        for (const [mappedDescription, condition] of Object.entries(descriptionMap)) {
+          if (condition(description, tradeHistoryItem)) {
+            if (mappedDescription === 'You traded with') {
+              tradeName = description.replace(/^(You traded with|Your trade with)\s*/, '').trim();
+            } else if (mappedDescription === 'Sticker applied/removed' || mappedDescription === 'Name Tag applied/removed') {
+              tradeName = description;
+            }
+            description = mappedDescription;
+            break;
+          }
+        }
+        if (description === 'Traded') {
+          tradeName = 'Missing Trade Name';
+          description = 'You traded with';
+        } else if (description === 'Moved to Storage Unit') {
+          return;
+        }
+        
+        const plusItems = [];
+        const minusItems = [];
+        $(element).find('.tradehistory_items').each((i, itemsElement) => {
+          const plusMinus = $(itemsElement).find('.tradehistory_items_plusminus').text().trim();
+          const items = $(itemsElement).find('.history_item').map((i, el) => {
+            const itemName = $(el).find('.history_item_name').text().trim();
+            //will pass anything opened with a key to not affect the count of total unboxed
+            if (!(['Unlocked a sticker capsule', 'Unlocked a case'].includes(description) && itemName.toLowerCase().match(/\bkey\b/))) {
+              const { appid, classid, instanceid } = $(el).data();
+              const jsonId = `${classid}_${instanceid}`;
+              const itemDescription = jsonData.descriptions?.[appid]?.[jsonId] ?? '';
+              if (itemDescription){
+                const itemType = jsonData.descriptions[appid][jsonId]['type'];
+                const trimmedIT = trimItemType(itemType);
+                const itemUrl = jsonData.descriptions[appid][jsonId]['icon_url'];
+                if (appid === 730) {
+                  imageUrls.push(itemUrl);
+                }
+                return {
+                  market_name: itemDescription.market_name,
+                  itemType: trimmedIT,
+                  itemName: crypto.createHash('md5').update(itemUrl).digest('hex')
+                };
+              } else {
+                console.log('item description not found');
+                return null;
+              }
+            }
+          }).get();
+
+          if (plusMinus === '+') {
+            plusItems.push(...items);
+          } else if (plusMinus === '-') {
+            minusItems.push(...items);
+          }
+        });
+
+        scrapeData.push({
+          d,
+          t,
+          description,
+          tradeName,
+          plusItems,
+          minusItems
+        });
+      });
+      for (const imageUrl of imageUrls) {
+        await imageDwnld(imageUrl);
+      }
+      return { scrapeData, cursor, cursorFound };
+    } else {
+      console.log('Failed to scrape JSON data');
+    }
   } catch (error) {
     console.error('Error:', error);
     throw error;
-  } finally {
-    await browser.close();
-  }};
-
-module.exports = { scrapeUInfo, scrapeIH };
+  }
+}
+  module.exports = { scrapeUInfo, scrapeIH, saveJson };

@@ -3,9 +3,95 @@
 <head>
   <title>test</title>
   <style>
-    #stopScraping {
-      display: none;
-    }
+     body {
+    background-color: #222831;
+    color: #EEEEEE;
+  }
+
+  #stopScraping {
+    display: none;
+  }
+
+  #tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#tab-container > * {
+  margin: 0;
+}
+
+#tab-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #393e46;
+  color: #eeeeee;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#tab-container button:hover {
+  background-color: #4a4f57;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #393e46;
+  color: #eeeeee;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-button::after {
+  content: "\25BC";
+  margin-left: 5px;
+}
+
+.dropdown-button:hover {
+  background-color: #4a4f57;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #393e46;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  border-radius: 5px;
+}
+
+.dropdown-content button {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #393e46;
+  color: #eeeeee;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: left;
+}
+
+.dropdown-content button:hover {
+  background-color: #4a4f57;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
   </style>
 </head>
 <body>
@@ -13,15 +99,20 @@
   <div id="userId">
   </div>
   <form>
-    <label for="input-field">Enter your cookies:</label><br>
-    <input type="text" id="input-field" name="input-field"><br>
+    <label for="input-field">Enter your cookies:</label>
+    <input type="text" id="input-field" name="input-field">
     <button type="submit">Submit</button>
   </form>
   <button id="stopScraping">Stop Scraping</button>
-  <div id="drop-area">
-    <p>Drag and drop a JSON file here</p>
+  <form>
+    <select id="file-selector"></select>
+    <span id="selected-file"></span>
+  </form>
+  <div>
+    <span id="user-id"></span><br/>
+    <span id="dump-date"></span><br/>
   </div>
-  <h2>Scraped Data</h2> 
+  <br>
   <div id="tab-container"></div>
   <div id="tab-stats"></div>
   <div id="content-container"></div>

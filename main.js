@@ -5,32 +5,44 @@ const { userInfo } = require('os');
 const { start } = require('repl');
 const fs = require('fs');
 
-/*changes
--coupons to be removed from purchased from store tab(maybe more tabs)
-*/
-const url = 'https://steamcommunity.com/my';
 let s = 0;
 let time = 0;
 let time_frac = 0;
 let cookie;
 
+function getJsonFiles() {
+  const dumpDirectory = path.join(__dirname, './dump');
+
+  if (!fs.existsSync(dumpDirectory)) {
+    fs.mkdirSync(dumpDirectory);
+  }
+  
+  const files = fs.readdirSync(dumpDirectory);
+  const jsonFiles = files.filter(file => path.extname(file) === '.json');
+  return jsonFiles;
+}
+
 async function createWindow() {
   const mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
+      webSecurity: true,
     }
   });
-
 mainWindow.loadFile(path.join(__dirname, 'renderer.html'));
+
+mainWindow.webContents.on('did-finish-load', () => {
+  const jsonFiles = getJsonFiles();
+  mainWindow.webContents.send('json-files', jsonFiles);
+});
 
 function sendSData(data) {
   mainWindow.webContents.send('scraped-data', data);
 }
 
-ipcMain.on('json-file-dropped', (event, jsonData) => {
-  const processedData = processJsonData(jsonData);
-  console.log(processedData)
+ipcMain.on('process-dump', (event, jsonData) => {
+  const processedData = processJsonData(jsonData.scrapedData);
   sendSData(processedData);
 });
 
@@ -39,9 +51,9 @@ function processJsonData(jsonData) {
 
   jsonData.forEach((group) => {
     group.forEach((entry) => {
-      const { date, timestamp, description, tradeName, plusItems, minusItems } = entry;
-      if (date && timestamp && description) {
-        processedData.push({ date, timestamp, description, tradeName, plusItems, minusItems });
+      const { d, t, description, tradeName, plusItems, minusItems } = entry;
+      if (d && t && description) {
+        processedData.push({ d, t, description, tradeName, plusItems, minusItems });
       }
     });
   });
@@ -49,9 +61,10 @@ function processJsonData(jsonData) {
   return processedData;
 }
 
-const handleScrapedData = async (cookie) => {
+const handleScrapedData = async (cookie, scrapedDataFilePath) => {
   try {
-    const { scrapeData, cursor, cursorFound } = await scraper.scrapeIH( userId, cookie, s, time, time_frac);
+    const { scrapeData, cursor, cursorFound } = await scraper.scrapeIH( userId, cookie, s, time, time_frac, scrapedDataFilePath);
+    await scraper.saveJson(scrapeData, scrapedDataFilePath);
     sendSData(scrapeData);
     if (cursorFound) {
       s = cursor.s;
@@ -69,12 +82,23 @@ const handleScrapedData = async (cookie) => {
 ipcMain.on('set-cookie', async (event, receivedCookie) => {
   try {
     cookie = receivedCookie;
-    userId = await scraper.scrapeUInfo(url, receivedCookie);
+    userId = await scraper.scrapeUInfo(receivedCookie);
     event.reply('scrape-response', userId);
+    const dumpDateInfo = generateFilePath();
+    const scrapedDataFilePath = `./dump/${dumpDateInfo}.json`;
+    const jsonDumpData = {
+      dumpInfo: {
+        userId: userId,
+        dumpDate: dumpDateInfo
+      },
+      scrapedData: []
+    };
+    fs.writeFileSync(scrapedDataFilePath, JSON.stringify(jsonDumpData, null));
     const startScraping = () => {
       scrapeInterval = setInterval(async () => {
         try {
-          const cursorFound = await handleScrapedData(cookie);
+          
+          const cursorFound = await handleScrapedData(cookie, scrapedDataFilePath);
           if (!cursorFound) {
             clearInterval(scrapeInterval);
             console.log('Scraping completed. No more cursor found.');
@@ -82,7 +106,7 @@ ipcMain.on('set-cookie', async (event, receivedCookie) => {
         } catch (error) {
           console.error('Error in scrape interval:', error);
         }
-      }, 4000);
+      }, 5000);
     };
   startScraping();
   event.reply('scrape-started');
@@ -96,6 +120,18 @@ ipcMain.on('set-cookie', async (event, receivedCookie) => {
   }
 });
 }
+
+const generateFilePath = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+
+  const filePath = `${day}-${month}-${year}_${hours}-${minutes}`;
+  return filePath;
+};
 
 app.whenReady().then(() => {
   createWindow();

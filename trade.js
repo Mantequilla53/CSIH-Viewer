@@ -1,4 +1,4 @@
-function showTradeContent(description, entries, contentContainer) {
+function showTradeContent(description, entries, contentContainer, tabStatsContainer) {
     const tradeNameCounts = {};
     
       entries.forEach((entry) => {
@@ -29,7 +29,7 @@ function showTradeContent(description, entries, contentContainer) {
         <div id="selected-trade-name"></div>
         <div id="trade-name-entries"></div>
       `;
-      contentContainer.appendChild(tabContentElement);
+      tabStatsContainer.appendChild(tabContentElement);
       const tradeNameSelect = tabContentElement.querySelector('#trade-name-select');
       const unselectButton = tabContentElement.querySelector('#unselect-button');
       const selectedTradeNameContainer = tabContentElement.querySelector('#selected-trade-name');
@@ -64,11 +64,11 @@ function showTradeContent(description, entries, contentContainer) {
     
         const tradeNameEntries = tradeNameCounts[tradeName];
         tradeNameEntries.forEach((entry) => {
-          const { date, timestamp, plusItems, minusItems } = entry;
+          const { d, t, plusItems, minusItems } = entry;
           const entryElement = document.createElement('div');
           entryElement.innerHTML = `
-            <p>Date: ${date}</p>
-            <p>Timestamp: ${timestamp}</p>
+            <p>Date: ${d}</p>
+            <p>Timestamp: ${t}</p>
             ${plusItems.length > 0 ? `
               <p>Given to Inventory:</p>
               <ul>
@@ -90,11 +90,11 @@ function showTradeContent(description, entries, contentContainer) {
         selectedTradeNameContainer.innerHTML = '';
         tradeNameEntriesContainer.innerHTML = '';
         entries.forEach((entry) => {
-          const { date, timestamp, plusItems, minusItems, tradeName } = entry;
+          const { d, t, plusItems, minusItems, tradeName } = entry;
           const entryElement = document.createElement('div');
           entryElement.innerHTML = `
-            <p>Date: ${date}</p>
-            <p>Timestamp: ${timestamp}</p>
+            <p>Date: ${d}</p>
+            <p>Timestamp: ${t}</p>
             <p>Trade Name: ${tradeName}</p>
             ${
               plusItems.length > 0
