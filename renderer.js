@@ -1,4 +1,7 @@
 const { ipcRenderer } = require('electron');
+const path = require('path');
+const fs = require('fs');
+
 const { showTradeContent } = require('./trade');
 const { showPackageContent } = require('./capsule_container');
 const { showCaseContent } = require('./newUnlockedCase');
@@ -7,16 +10,16 @@ const { showCraftedContent } = require('./crafted');
 const { showDropContent} = require('./drops');
 const { showOperationContent } = require('./operationDrops');
 const { showPurchaseContent } = require('./storePurchase');
-const path = require('path');
-const fs = require('fs');
 
-const tabContainer = document.getElementById('tab-container');
-const contentContainer = document.getElementById('content-container');
-const tabStatsContainer = document.getElementById('tab-stats')
-const fileSelector = document.getElementById('file-selector');
-const selectedFile = document.getElementById('selected-file');
-const userIdElement = document.getElementById('user-id');
-const dumpDateElement = document.getElementById('dump-date');
+const $ = (id) => document.getElementById(id);
+const tabContainer = $('tab-container');
+const contentContainer = $('content-container');
+const tabStatsContainer = $('tab-stats');
+const fileSelector = $('file-selector');
+const user_id = $('dump-user-id');
+const dump_date = $('dump-date');
+const userId = $('userId');
+
 
 let selectedFileName = '';
 let existingData = {};
@@ -26,7 +29,7 @@ const groupPatterns = {
   'Unlocked': ['Unlocked a'],
   'Earned': ['Earned a', 'Earned'],
   'Market': ['You listed an item on the Community Market', 'You purchased an item on the Community Market', 'You canceled a listing on the Community Market', 'Listed on the Steam Community Market', 'Received from the Community Market'],
-  'Misc.': ['Received by entering product code', 'Received a gift', 'You deleted', 'Leveled up a challenge coin']
+  'Misc.': ['Received by entering product code', 'Received a gift', 'You deleted', 'Leveled up a challenge coin', 'Swapped StatTrak™ values']
 };
 
 const form = document.querySelector('form');
@@ -59,10 +62,13 @@ fileSelector.addEventListener('change', (event) => {
   contentContainer.innerHTML = '';
   tabStatsContainer.innerHTML = '';
   tabContainer.innerHTML = '';
+  user_id.innerHTML = '';
+  dump_date.innerHTML = '';
+
   existingData = {};
 
   selectedFileName = event.target.value;
-  selectedFile.textContent = selectedFileName;
+  $('selected-file').textContent = selectedFileName;
   console.log(selectedFileName);
   if (selectedFileName) {
     const filePath = path.join(__dirname, './dump', selectedFileName);
@@ -74,8 +80,8 @@ fileSelector.addEventListener('change', (event) => {
       try {
         const jsonData = JSON.parse(data);
         const { userId, dumpDate} = jsonData.dumpInfo;
-        userIdElement.textContent = `UserID: ${userId}`;
-        dumpDateElement.textContent = `Last Dump Update: ${dumpDate}`;
+        user_id.textContent = `UserID: ${userId}`;
+        dump_date.textContent = `Last Dump Update: ${dumpDate}`;
         ipcRenderer.send('process-dump', jsonData);
       } catch (error) {
         console.error('Error parsing JSON file:', error);
@@ -91,10 +97,10 @@ ipcRenderer.on('scrape-response', (event, item) => {
 });
 
 ipcRenderer.on('scrape-started', () => {
-  document.getElementById('stopScraping').style.display = 'block';
+  $('stopScraping').style.display = 'block';
 });
 
-document.getElementById('stopScraping').addEventListener('click', () => {
+$('stopScraping').addEventListener('click', () => {
   ipcRenderer.send('stop-scraping');
 });
 
@@ -110,123 +116,116 @@ ipcRenderer.on('scraped-data', (event, newData) => {
   updateTabs();
 });
 
-  function showTabContent(description) {
-    contentContainer.innerHTML = '';
-    tabStatsContainer.innerHTML = '';
-    const entries = existingData[description];
+function showTabContent(description) {
+  contentContainer.innerHTML = '';
+  tabStatsContainer.innerHTML = '';
+  const entries = existingData[description];
     
-    if (description === 'Unlocked a case') {showCaseContent(description, entries, contentContainer, tabStatsContainer)} 
-    else if (description === 'You traded with') {showTradeContent(description, entries, contentContainer, tabStatsContainer)} 
-    else if (description === 'Unlocked a sticker capsule') {showStickerCapContent(description, entries, contentContainer, tabStatsContainer)} 
-    else if (description === 'Unlocked a package') {showPackageContent(description, entries, contentContainer, tabStatsContainer)} 
-    else if (description === 'Trade Up') {showCraftedContent(description, entries, contentContainer, tabStatsContainer)} 
-    else if (description === 'Mission reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
-    else if (description === 'Purchased from the store'){showPurchaseContent(description, entries, contentContainer, tabStatsContainer)}
-    else if (['Earned a weapon drop', 'Earned a case drop', 'Earned a graffiti drop'].includes(description)) 
-      {showDropContent(description, entries, contentContainer, tabStatsContainer)} 
-    else {
-      entries.forEach((entry) => {
-        const { d, t, plusItems, minusItems, tradeName } = entry;
-        const entryElement = document.createElement('div');
-        entryElement.innerHTML = `
-          <p>Date: ${d}</p>
-          <p>Time: ${t}</p>
-          ${tradeName ? `<p>${tradeName}</p>` : ''}
-          ${plusItems.length > 0 ? `
-            <p>Given to Inventory:</p>
-            <ul>
-              ${plusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
-            </ul>
-          ` : ''}
-          ${minusItems.length > 0 ? `
-            <p>Taken from Inventory:</p>
-            <ul>
-              ${minusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
-            </ul>
-          ` : ''} 
-          <hr>
-          `;
-        contentContainer.appendChild(entryElement);
+  if (description === 'Unlocked a case') {showCaseContent(description, entries, contentContainer, tabStatsContainer)} 
+  else if (description === 'You traded with') {showTradeContent(description, entries, contentContainer, tabStatsContainer)} 
+  else if (description === 'Unlocked a sticker capsule') {showStickerCapContent(description, entries, contentContainer, tabStatsContainer)} 
+  else if (description === 'Unlocked a package') {showPackageContent(description, entries, contentContainer, tabStatsContainer)} 
+  else if (description === 'Trade Up') {showCraftedContent(description, entries, contentContainer, tabStatsContainer)} 
+  else if (description === 'Mission reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (description === 'Purchased from the store'){showPurchaseContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (['Earned a weapon drop', 'Earned a case drop', 'Earned a graffiti drop'].includes(description)) 
+    {showDropContent(description, entries, contentContainer, tabStatsContainer)} 
+  else {
+    entries.forEach((entry) => {
+      const { d, t, plusItems, minusItems, tradeName } = entry;
+      const entryElement = document.createElement('div');
+      entryElement.innerHTML = `
+        <p>Date: ${d}</p>
+        <p>Time: ${t}</p>
+        ${tradeName ? `<p>${tradeName}</p>` : ''}
+        ${plusItems.length > 0 ? `
+          <p>Given to Inventory:</p>
+          <ul>
+            ${plusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
+          </ul>
+        ` : ''}
+        ${minusItems.length > 0 ? `
+          <p>Taken from Inventory:</p>
+          <ul>
+            ${minusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
+          </ul>
+        ` : ''} 
+        <hr>
+        `;
+      contentContainer.appendChild(entryElement);
     });
   }
-  }
+}
 
-  function updateTabs() {
-    const groupedTabs = {};
+function updateTabs() {
+  const groupedTabs = {};
   
-    Object.keys(existingData).forEach((description) => {
-      let groupName = description;
+  Object.keys(existingData).forEach((description) => {
+    let groupName = description;
       
-      for (const [group, patterns] of Object.entries(groupPatterns)) {
-        if (patterns.some(pattern => description.startsWith(pattern))) {
-          groupName = group;
-          break;
-        }
+    for (const [group, patterns] of Object.entries(groupPatterns)) {
+      if (patterns.some(pattern => description.startsWith(pattern))) {
+        groupName = group;
+        break;
       }
-  
-      if (!groupedTabs[groupName]) {
-        groupedTabs[groupName] = [];
-      }
-      groupedTabs[groupName].push(description);
-    });
-  
-    tabContainer.innerHTML = '';
-  
-    const sortedGroupNames = Object.keys(groupedTabs).sort((a, b) => {
-      const aIsGrouped = Object.keys(groupPatterns).includes(a);
-      const bIsGrouped = Object.keys(groupPatterns).includes(b);
-      if (aIsGrouped && !bIsGrouped) return -1;
-      if (!aIsGrouped && bIsGrouped) return 1;
-      return 0;
-    });
-  
-    sortedGroupNames.forEach((groupName) => {
-      const descriptions = groupedTabs[groupName];
-      if (descriptions.length === 1) {
-        const tabButton = document.createElement('button');
-        tabButton.textContent = descriptions[0];
-        tabButton.addEventListener('click', () => {
-          currentTab = descriptions[0];
-          showTabContent(descriptions[0]);
-        });
-        tabContainer.appendChild(tabButton);
-      } else {
-        const dropdownContainer = document.createElement('div');
-        dropdownContainer.classList.add('dropdown');
-  
-        const dropdownButton = document.createElement('button');
-        dropdownButton.textContent = groupName;
-        dropdownButton.classList.add('dropdown-button');
-        dropdownContainer.appendChild(dropdownButton);
-  
-        const dropdownContent = document.createElement('div');
-        dropdownContent.classList.add('dropdown-content');
-        descriptions.forEach(description => {
-          const tabButton = document.createElement('button');
-          tabButton.textContent = description;
-          tabButton.addEventListener('click', () => {
-            currentTab = description;
-            showTabContent(description);
-          });
-          dropdownContent.appendChild(tabButton);
-        });
-        dropdownContainer.appendChild(dropdownContent);
-  
-        tabContainer.appendChild(dropdownContainer);
-      }
-    });
-  
-    if (currentTab && existingData[currentTab]) {
-      showTabContent(currentTab);
-    } else if (Object.keys(existingData).length > 0) {
-      currentTab = Object.keys(existingData)[0];
-      showTabContent(currentTab);
     }
-  }
-
+  
+    if (!groupedTabs[groupName]) {
+      groupedTabs[groupName] = [];
+    }
+    groupedTabs[groupName].push(description);
+  });
+  
+  tabContainer.innerHTML = '';
+  
+  const sortedGroupNames = Object.keys(groupedTabs).sort((a, b) => {
+    const aIsGrouped = Object.keys(groupPatterns).includes(a);
+    const bIsGrouped = Object.keys(groupPatterns).includes(b);
+    if (aIsGrouped && !bIsGrouped) return -1;
+    if (!aIsGrouped && bIsGrouped) return 1;
+    return 0;
+  });
+  
+  sortedGroupNames.forEach((groupName) => {
+    const descriptions = groupedTabs[groupName];
+    if (descriptions.length === 1) {
+      const tabButton = document.createElement('button');
+      tabButton.textContent = descriptions[0];
+      tabButton.addEventListener('click', () => {
+        currentTab = descriptions[0];
+        showTabContent(descriptions[0]);
+      });
+      tabContainer.appendChild(tabButton);
+    } else {
+      const dropdownContainer = document.createElement('div');
+      dropdownContainer.classList.add('dropdown');
+  
+      const dropdownButton = document.createElement('button');
+      dropdownButton.textContent = groupName;
+      dropdownButton.classList.add('dropdown-button');
+      dropdownContainer.appendChild(dropdownButton);
+  
+      const dropdownContent = document.createElement('div');
+      dropdownContent.classList.add('dropdown-content');
+      descriptions.forEach(description => {
+        const tabButton = document.createElement('button');
+        tabButton.textContent = description;
+        tabButton.addEventListener('click', () => {
+          currentTab = description;
+          showTabContent(description);
+        });
+        dropdownContent.appendChild(tabButton);
+      });
+      dropdownContainer.appendChild(dropdownContent);
+  
+      tabContainer.appendChild(dropdownContainer);
+    }
+  });
+  
   if (currentTab && existingData[currentTab]) {
     showTabContent(currentTab);
   } else if (Object.keys(existingData).length > 0) {
     currentTab = Object.keys(existingData)[0];
     showTabContent(currentTab);
   }
+}

@@ -127,7 +127,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
       const scrapeData = [];
 
       const descriptionMap = {
-        'You traded with': (description) => ['You traded with', 'Your trade with'].some(phrase => description.startsWith(phrase)),
+        'You traded with': (description) => ['You traded with', 'Your trade with', 'Your held trade with'].some(phrase => description.startsWith(phrase)),
         'Unlocked a case': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('case'),
         'Unlocked a sticker capsule': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('sticker |'),
         'Unlocked a package': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('package'),
@@ -151,7 +151,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
         for (const [mappedDescription, condition] of Object.entries(descriptionMap)) {
           if (condition(description, tradeHistoryItem)) {
             if (mappedDescription === 'You traded with') {
-              tradeName = description.replace(/^(You traded with|Your trade with)\s*/, '').trim();
+              tradeName = description.replace(/^(You traded with|Your trade with|Your held trade with)\s*/, '').trim();
             } else if (mappedDescription === 'Sticker applied/removed' || mappedDescription === 'Name Tag applied/removed') {
               tradeName = description;
             }

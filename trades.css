@@ -1,0 +1,53 @@
+.trade-entry {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+  
+  .entry-header {
+    margin-bottom: 10px;
+  }
+  
+  .entry-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .item-section {
+    flex: 1;
+  }
+  
+  .half-width {
+    width: 50%;
+  }
+  
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 10px;
+  }
+  
+  .item-card {
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .green-card {
+    background-color: #e6ffe6;
+    border: 1px solid #00cc00;
+  }
+  
+  .red-card {
+    background-color: #ffe6e6;
+    border: 1px solid #cc0000;
+  }
+  
+  .item-entry {
+    background-color: #393E46;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 5px;
+  }

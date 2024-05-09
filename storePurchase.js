@@ -57,9 +57,13 @@ function showPurchaseContent(description, entries, contentContainer, tabStatsCon
                     ${[...plusItemsCount.entries()].map(([name, count]) => {
                         const item = filteredPlusItems.find(item => item.market_name === name);
                         return `
-                    <div class="item-card">
-                        <img src="images/${item.itemName}.png" width="120" height="92.4">
-                        <p>${name} - - Count: ${count}</p>
+                    <div class="item">
+                        <div class="item-image">
+                            <img src="images/${item.itemName}.png" width="120" height="92.4">
+                        </div>
+                        <div class="item-name">
+                            <p>${name} - - Count: ${count}</p>
+                        </div>
                     </div>
                     `;
                 }).join('')}
@@ -67,9 +71,13 @@ function showPurchaseContent(description, entries, contentContainer, tabStatsCon
              ` : `
             <div class="item-grid">
                 ${plusItems.map(item => `
-                <div class="item-card">
+                <div class="item">
+                    <div class="item-image">
                     <img src="images/${item.itemName}.png" width="120" height="92.4">
+                    </div>
+                    <div class="item-name">
                     <p>${item.market_name}</p>
+                    </div>
                 </div>
                 `).join('')}
             </div>

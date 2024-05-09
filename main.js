@@ -1,14 +1,12 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const scraper = require('./scraper');
-const { userInfo } = require('os');
-const { start } = require('repl');
 const fs = require('fs');
 
+//find out if there is a way to have a default value for the initial scrape
 let s = 0;
 let time = 0;
 let time_frac = 0;
-let cookie;
 
 function getJsonFiles() {
   const dumpDirectory = path.join(__dirname, './dump');
@@ -38,17 +36,19 @@ mainWindow.webContents.on('did-finish-load', () => {
 });
 
 function sendSData(data) {
+  //difference between how I'm doing it and ipc sending the scraped-data
   mainWindow.webContents.send('scraped-data', data);
 }
 
 ipcMain.on('process-dump', (event, jsonData) => {
+  //combine processJsonData to this as this is the only thing using that function
   const processedData = processJsonData(jsonData.scrapedData);
   sendSData(processedData);
 });
 
 function processJsonData(jsonData) {
   const processedData = [];
-
+  //find out difference between jsonData and the groups
   jsonData.forEach((group) => {
     group.forEach((entry) => {
       const { d, t, description, tradeName, plusItems, minusItems } = entry;
@@ -67,9 +67,7 @@ const handleScrapedData = async (cookie, scrapedDataFilePath) => {
     await scraper.saveJson(scrapeData, scrapedDataFilePath);
     sendSData(scrapeData);
     if (cursorFound) {
-      s = cursor.s;
-      time = cursor.time;
-      time_frac = cursor.time_frac;
+      ({ s, time, time_frac } = cursor);
     } else {
       console.log('scrape done');
     }
@@ -79,10 +77,9 @@ const handleScrapedData = async (cookie, scrapedDataFilePath) => {
   }
 };
   
-ipcMain.on('set-cookie', async (event, receivedCookie) => {
+ipcMain.on('set-cookie', async (event, cookie) => {
   try {
-    cookie = receivedCookie;
-    userId = await scraper.scrapeUInfo(receivedCookie);
+    userId = await scraper.scrapeUInfo(cookie);
     event.reply('scrape-response', userId);
     const dumpDateInfo = generateFilePath();
     const scrapedDataFilePath = `./dump/${dumpDateInfo}.json`;
