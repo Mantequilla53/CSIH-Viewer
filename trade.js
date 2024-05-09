@@ -27,6 +27,9 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
       </select>
       <button id="unselect-button" style="display: none;">Unselect</button>
     </div>
+    <div>
+      <input type="text" id="search-input" placeholder="Search items...">
+    </div>
     <div id="selected-trade-name"></div>
     <div id="trade-name-entries"></div>
   `;
@@ -35,20 +38,28 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
   const unselectButton = tabContentElement.querySelector('#unselect-button');
   const selectedTradeNameContainer = tabContentElement.querySelector('#selected-trade-name');
   const tradeNameEntriesContainer = tabContentElement.querySelector('#trade-name-entries');
+  const searchInput = tabContentElement.querySelector('#search-input');
 
   const entriesPerPage = 100; // Number of entries to load per page
   let currentPage = 1;
   let selectedTradeName = null;
   let isLoading = false;
 
-  function renderTrades() {
-    const filteredEntries = selectedTradeName
-      ? tradeNameCounts[selectedTradeName]
-      : entries;
+  function searchEntries(query) {
+    return entries.filter((entry) => {
+      const { plusItems, minusItems } = entry;
+      return plusItems.some((item) => item.market_name.toLowerCase().includes(query.toLowerCase()))
+        || minusItems.some((item) => item.market_name.toLowerCase().includes(query.toLowerCase()));
+    });
+  }
 
-      const startIndex = (currentPage - 1) * entriesPerPage;
-      const endIndex = startIndex + entriesPerPage;
-      const entriesToRender = filteredEntries.slice(startIndex, endIndex);
+  function renderTrades() {
+    const searchQuery = searchInput.value.trim().toLowerCase();
+    const filteredEntries = searchQuery ? searchEntries(searchQuery) : (selectedTradeName ? tradeNameCounts[selectedTradeName] : entries);
+
+    const startIndex = (currentPage - 1) * entriesPerPage;
+    const endIndex = startIndex + entriesPerPage;
+    const entriesToRender = filteredEntries.slice(startIndex, endIndex);
 
     entriesToRender.forEach((entry) => {
       const { d, t, plusItems, minusItems, tradeName } = entry;
@@ -87,7 +98,7 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
         <div class="item-card green-card">
           <div class="item-grid">
             ${Object.values(groupedPlusItems).map((item) => `
-              <div class="item-entry">
+              <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
                 <img src="images/${item.itemName}.png" width="120" height="92.4">
                 <p>${item.market_name}</p>
                 <p>${item.itemType}</p>
@@ -103,7 +114,7 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
         <div class="item-card red-card">
           <div class="item-grid">
             ${Object.values(groupedMinusItems).map((item) => `
-              <div class="item-entry">
+              <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
                 <img src="images/${item.itemName}.png" width="120" height="92.4">
                 <p>${item.market_name}</p>
                 <p>${item.itemType}</p>
@@ -172,7 +183,30 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
 
   tradeNameEntriesContainer.addEventListener('scroll', handleScroll);
 
+  searchInput.addEventListener('input', () => {
+    currentPage = 1;
+    tradeNameEntriesContainer.innerHTML = '';
+    renderTrades();
+  });
+
   renderTrades();
+}
+
+function extractItemColor(itemType) {
+  const colorMap = {
+    'Consumer Grade': 'rgb(176, 195, 217)',
+    'Industrial Grade': 'rgb(94, 152, 217)',
+    'Mil-Spec': 'rgb(75, 105, 255)',
+    'Restricted': 'rgb(136, 71, 255)',
+    'Classified': 'rgb(211, 44, 230)',
+    'Covert': 'rgb(235, 75, 75)',
+    'Extraordinary': 'rgb(255, 215, 0)',
+    'High Grade Sticker': 'rgb(75, 105, 255)',
+    'Remarkable Sticker': 'rgb(136, 71, 255)',
+    'Exotic Sticker': 'rgb(211, 44, 230)',
+    'Extraordinary Sticker': 'rgb(235, 75, 75)'
+  };
+  return colorMap[itemType] || 'white';
 }
 
 module.exports = {
