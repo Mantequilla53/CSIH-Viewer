@@ -29,7 +29,7 @@ const groupPatterns = {
   'Unlocked': ['Unlocked a'],
   'Earned': ['Earned a', 'Earned'],
   'Market': ['You listed an item on the Community Market', 'You purchased an item on the Community Market', 'You canceled a listing on the Community Market', 'Listed on the Steam Community Market', 'Received from the Community Market'],
-  'Misc.': ['Received by entering product code', 'Received a gift', 'You deleted', 'Leveled up a challenge coin', 'Swapped StatTrak™ values']
+  'Misc.': ['Received by entering product code', 'Received a gift', 'You deleted', 'Leveled up a challenge coin', 'Swapped StatTrak™ values', 'Unsealed']
 };
 
 const form = document.querySelector('form');

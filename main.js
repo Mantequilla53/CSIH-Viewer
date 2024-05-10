@@ -41,15 +41,10 @@ function sendSData(data) {
 }
 
 ipcMain.on('process-dump', (event, jsonData) => {
-  //combine processJsonData to this as this is the only thing using that function
-  const processedData = processJsonData(jsonData.scrapedData);
-  sendSData(processedData);
-});
-
-function processJsonData(jsonData) {
   const processedData = [];
-  //find out difference between jsonData and the groups
-  jsonData.forEach((group) => {
+  
+  const scrapedData = jsonData.scrapedData
+  scrapedData.forEach((group) => {
     group.forEach((entry) => {
       const { d, t, description, tradeName, plusItems, minusItems } = entry;
       if (d && t && description) {
@@ -57,9 +52,9 @@ function processJsonData(jsonData) {
       }
     });
   });
-
-  return processedData;
-}
+  
+  sendSData(processedData);
+});
 
 const handleScrapedData = async (cookie, scrapedDataFilePath) => {
   try {

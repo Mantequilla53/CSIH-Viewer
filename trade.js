@@ -34,19 +34,22 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
     <div id="trade-name-entries"></div>
   `;
   tabStatsContainer.appendChild(tabContentElement);
-  const tradeNameSelect = tabContentElement.querySelector('#trade-name-select');
-  const unselectButton = tabContentElement.querySelector('#unselect-button');
-  const selectedTradeNameContainer = tabContentElement.querySelector('#selected-trade-name');
-  const tradeNameEntriesContainer = tabContentElement.querySelector('#trade-name-entries');
-  const searchInput = tabContentElement.querySelector('#search-input');
+
+  const $ = (id) => tabContentElement.querySelector(id);
+  const tradeNameSelect = $('#trade-name-select');
+  const unselectButton = $('#unselect-button');
+  const selectedTradeNameContainer = $('#selected-trade-name');
+  const tradeNameEntriesContainer = $('#trade-name-entries');
+  const searchInput = $('#search-input');
 
   const entriesPerPage = 100; // Number of entries to load per page
   let currentPage = 1;
   let selectedTradeName = null;
   let isLoading = false;
 
-  function searchEntries(query) {
-    return entries.filter((entry) => {
+  function searchEntries(query, tradeName) {
+    const filteredEntries = tradeName ? tradeNameCounts[tradeName] : entries;
+    return filteredEntries.filter((entry) => {
       const { plusItems, minusItems } = entry;
       return plusItems.some((item) => item.market_name.toLowerCase().includes(query.toLowerCase()))
         || minusItems.some((item) => item.market_name.toLowerCase().includes(query.toLowerCase()));
@@ -55,7 +58,7 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
 
   function renderTrades() {
     const searchQuery = searchInput.value.trim().toLowerCase();
-    const filteredEntries = searchQuery ? searchEntries(searchQuery) : (selectedTradeName ? tradeNameCounts[selectedTradeName] : entries);
+    const filteredEntries = searchQuery ? searchEntries(searchQuery, selectedTradeName) : (selectedTradeName ? tradeNameCounts[selectedTradeName] : entries);
 
     const startIndex = (currentPage - 1) * entriesPerPage;
     const endIndex = startIndex + entriesPerPage;
@@ -64,26 +67,8 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
     entriesToRender.forEach((entry) => {
       const { d, t, plusItems, minusItems, tradeName } = entry;
       
-      const groupedPlusItems = plusItems.reduce((acc, item) => {
-        const key = `${item.market_name}-${item.itemType}`;
-        if (acc[key]) {
-          acc[key].count++;
-        } else {
-          acc[key] = { ...item, count: 1 };
-        }
-        return acc;
-      }, {});
-  
-      // Group minusItems by market_name and itemType
-      const groupedMinusItems = minusItems.reduce((acc, item) => {
-        const key = `${item.market_name}-${item.itemType}`;
-        if (acc[key]) {
-          acc[key].count++;
-        } else {
-          acc[key] = { ...item, count: 1 };
-        }
-        return acc;
-      }, {});
+      const groupedPlusItems = groupItems(plusItems);
+      const groupedMinusItems = groupItems(minusItems);
       
       const entryElement = document.createElement('div');
     entryElement.classList.add('trade-entry');
@@ -99,10 +84,11 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
           <div class="item-grid">
             ${Object.values(groupedPlusItems).map((item) => `
               <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
-                <img src="images/${item.itemName}.png" width="120" height="92.4">
+                <div class="item-image-container">
+                  <img src="images/${item.itemName}.png" width="120" height="92.4">
+                </div>
                 <p>${item.market_name}</p>
-                <p>${item.itemType}</p>
-                ${item.count > 1 ? `<p>Count: ${item.count}</p>` : ''}
+                ${item.count > 1 ? `<p class="item-count">${item.count}</p>` : ''}
               </div>
             `).join('')}
           </div>
@@ -114,12 +100,13 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
         <div class="item-card red-card">
           <div class="item-grid">
             ${Object.values(groupedMinusItems).map((item) => `
-              <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
-                <img src="images/${item.itemName}.png" width="120" height="92.4">
-                <p>${item.market_name}</p>
-                <p>${item.itemType}</p>
-                ${item.count > 1 ? `<p>Count: ${item.count}</p>` : ''}
-              </div>
+            <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
+            <div class="item-image-container">
+              <img src="images/${item.itemName}.png" width="120" height="92.4">
+            </div>
+            <p>${item.market_name}</p>
+            ${item.count > 1 ? `<p class="item-count">${item.count}</p>` : ''}
+          </div>
             `).join('')}
           </div>
         </div>
@@ -144,10 +131,18 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
   }
 
   function loadMoreEntries() {
-    isLoading = true;
-    currentPage++;
-    renderTrades();
-    isLoading = false;
+    const searchQuery = searchInput.value.trim().toLowerCase();
+    const filteredEntries = searchQuery ? searchEntries(searchQuery, selectedTradeName) : (selectedTradeName ? tradeNameCounts[selectedTradeName] : entries);
+  
+    const startIndex = (currentPage - 1) * entriesPerPage;
+    const endIndex = startIndex + entriesPerPage;
+  
+    if (endIndex < filteredEntries.length) {
+      isLoading = true;
+      currentPage++;
+      renderTrades();
+      isLoading = false;
+    }
   }
 
   function handleScroll() {
@@ -161,6 +156,7 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
     selectedTradeName = event.target.value;
     currentPage = 1;
     tradeNameEntriesContainer.innerHTML = '';
+    //searchInput.value = ''; Clear the search input when changing trade name
     if (selectedTradeName) {
       selectedTradeNameContainer.textContent = `Selected Trade Name: ${selectedTradeName}`;
       unselectButton.style.display = 'inline-block';
@@ -190,6 +186,18 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
   });
 
   renderTrades();
+}
+
+function groupItems(items) {
+  return items.reduce((acc, item) => {
+    const key = `${item.market_name}-${item.itemType}`;
+    if (acc[key]) {
+      acc[key].count++;
+    } else {
+      acc[key] = { ...item, count: 1 };
+    }
+    return acc;
+  }, {});
 }
 
 function extractItemColor(itemType) {
