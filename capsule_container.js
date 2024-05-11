@@ -135,7 +135,7 @@ function showPackageContent(description, entries, contentContainer, tabStatsCont
         </div>
       </div>
       <div id="content-container"></div>
-    </div>
+      </div>
   </div>
     `;
   tabStatsContainer.appendChild(tabContentElement);
@@ -186,6 +186,7 @@ function showPackageContent(description, entries, contentContainer, tabStatsCont
         'Battle-Scarred': 0
       };
       let updatedTotalCount = 0;
+
       const contentContainerElement = tabContentElement.querySelector('#content-container');
       contentContainerElement.innerHTML = '';
   
@@ -243,7 +244,7 @@ function showPackageContent(description, entries, contentContainer, tabStatsCont
     ${matchedMinusItems.length > 0 ? `
       <div class="card-footer">
         <div class="case-unboxed">
-          <span class="item-name">${matchedMinusItems[0].market_name.startsWith('Operation') ? matchedMinusItems[0].market_name.slice(9) : matchedMinusItems[0].market_name}</span>
+          <span class="item-name">${matchedMinusItems[0].market_name}</span>
           <img src="images/${matchedMinusItems[0].itemName}.png" alt="${matchedMinusItems[0].market_name}">
         </div>
       </div>
@@ -301,12 +302,12 @@ function showPackageContent(description, entries, contentContainer, tabStatsCont
     return colorMap[itemType] || 'white';
   }
   
-  function formatItemName(itemName) {
-    const parts = itemName.split('|');
+  function formatItemName(newName) {
+    const parts = newName.split('|');
     if (parts.length > 1) {
       return `${parts[0]}<br>${parts[1].trim()}`;
     }
-    return itemName;
+    return newName;
   }
 
 module.exports = {

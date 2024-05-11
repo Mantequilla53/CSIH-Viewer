@@ -10,6 +10,8 @@ const { showCraftedContent } = require('./crafted');
 const { showDropContent} = require('./drops');
 const { showOperationContent } = require('./operationDrops');
 const { showPurchaseContent } = require('./storePurchase');
+const { showContainerContent } = require('./container');
+const { showStickerARContent } = require('./sticker_ar');
 
 const $ = (id) => document.getElementById(id);
 const tabContainer = $('tab-container');
@@ -104,7 +106,8 @@ $('stopScraping').addEventListener('click', () => {
   ipcRenderer.send('stop-scraping');
 });
 
-ipcRenderer.on('scraped-data', (event, newData) => {
+ipcRenderer.on('scraped-data', (event, newDataString) => {
+  const newData = JSON.parse(newDataString);
   newData.forEach((entry) => {
     const { d, t, plusItems, minusItems, tradeName, description } = entry;
     if (!existingData[description]) {
@@ -128,6 +131,8 @@ function showTabContent(description) {
   else if (description === 'Trade Up') {showCraftedContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Mission reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Purchased from the store'){showPurchaseContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (description === 'Unlocked a container'){showContainerContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (description === 'Sticker applied/removed'){showStickerARContent(description, entries, contentContainer, tabStatsContainer)}
   else if (['Earned a weapon drop', 'Earned a case drop', 'Earned a graffiti drop'].includes(description)) 
     {showDropContent(description, entries, contentContainer, tabStatsContainer)} 
   else {

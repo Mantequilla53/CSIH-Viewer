@@ -204,15 +204,30 @@ function extractItemColor(itemType) {
   const colorMap = {
     'Consumer Grade': 'rgb(176, 195, 217)',
     'Industrial Grade': 'rgb(94, 152, 217)',
+    //blue
     'Mil-Spec': 'rgb(75, 105, 255)',
-    'Restricted': 'rgb(136, 71, 255)',
-    'Classified': 'rgb(211, 44, 230)',
-    'Covert': 'rgb(235, 75, 75)',
-    'Extraordinary': 'rgb(255, 215, 0)',
+    'High Grade Patch': 'rgb(75, 105, 255)',
+    'High Grade Collectible': 'rgb(75, 105, 255)',
+    'High Grade Graffiti': 'rgb(75, 105, 255)',
     'High Grade Sticker': 'rgb(75, 105, 255)',
+    //purple
+    'Restricted': 'rgb(136, 71, 255)',
+    'Remarkable Patch': 'rgb(136, 71, 255)',
+    'Remarkable Collectible': 'rgb(136, 71, 255)',
+    'Remarkable Graffiti': 'rgb(136, 71, 255)',
     'Remarkable Sticker': 'rgb(136, 71, 255)',
+    //pink
+    'Classified': 'rgb(211, 44, 230)',
+    'Exotic Patch': 'rgb(211, 44, 230)',
+    'Exotic Collectible': 'rgb(211, 44, 230)',
+    'Exotic Graffiti': 'rgb(211, 44, 230)',
     'Exotic Sticker': 'rgb(211, 44, 230)',
-    'Extraordinary Sticker': 'rgb(235, 75, 75)'
+    //red
+    'Covert': 'rgb(235, 75, 75)',
+    'Extraordinary Collectible': 'rgb(235, 75, 75)',
+    'Extraordinary Sticker': 'rgb(235, 75, 75)',
+    //yellow
+    'Extraordinary': 'rgb(255, 215, 0)'
   };
   return colorMap[itemType] || 'white';
 }

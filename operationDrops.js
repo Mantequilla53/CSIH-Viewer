@@ -24,7 +24,6 @@ function showOperationContent(description, entries, contentContainer, tabStatsCo
     const { d } = entry;
     const entryDate = new Date(d);
 
-    // Iterate through the operationMap instead of the operations array
     for (const [operationName, { startDate, endDate }] of operationMap) {
       if (entryDate >= startDate && entryDate <= endDate) {
         groupedEntries[operationName].push(entry);
@@ -32,11 +31,7 @@ function showOperationContent(description, entries, contentContainer, tabStatsCo
       }
     }
   });
-  const tabContentElement = document.createElement('div');
-  tabContentElement.innerHTML = `
-    <link rel="stylesheet" href="op.css">
-    `;
-  tabStatsContainer.appendChild(tabContentElement);
+  tabStatsContainer.innerHTML = `<link rel="stylesheet" href="op.css">`;
 
   operations.forEach((operation) => {
     const operationName = operation.name;
@@ -94,7 +89,6 @@ function lazyLoadImages() {
         image.setAttribute('src', src);
         image.onerror = () => {
           console.error('Error loading image:', src);
-          // Handle the error, e.g., display a default image or remove the image element
         };
         image.onload = () => {
           image.classList.remove('lazy-image');

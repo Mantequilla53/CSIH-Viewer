@@ -17,14 +17,18 @@ function trimItemType(itemType) {
   return itemType;
 }
 
-async function imageDwnld(iconUrl) {
-  if (!iconUrl || iconUrl.trim() === '') {
-    console.error('Error: iconUrl is blank.');
-    return;
+async function imageDwnld(urlOrIconUrl, isBuildUrl = true) {
+  let imgUrl = urlOrIconUrl;
+  const compressedUrl = crypto.createHash('md5').update(imgUrl).digest('hex');
+  if (isBuildUrl) {
+    if (!urlOrIconUrl || urlOrIconUrl.trim() === '') {
+      console.error('Error: iconUrl is blank.');
+      return;
+    }
+    
+    imgUrl = `https://community.cloudflare.steamstatic.com/economy/image/${urlOrIconUrl}/96fx96f?allow_animated=1`;
   }
 
-  const imageUrlBuild = `https://community.cloudflare.steamstatic.com/economy/image/${iconUrl}/96fx96f?allow_animated=1`;
-  const compressedUrl = crypto.createHash('md5').update(iconUrl).digest('hex');
   const directoryPath = './images';
 
   if (!fs.existsSync(directoryPath)) {
@@ -33,11 +37,11 @@ async function imageDwnld(iconUrl) {
 
   const filePath = path.join(directoryPath, `${compressedUrl}.png`);
   if (fs.existsSync(filePath)) {
-    return iconUrl;
+    return `${compressedUrl}`;
   }
 
   try {
-    const response = await axios.get(imageUrlBuild, { responseType: 'stream' });
+    const response = await axios.get(imgUrl, { responseType: 'stream' });
     const writer = fs.createWriteStream(filePath);
     response.data.pipe(writer);
 
@@ -46,7 +50,7 @@ async function imageDwnld(iconUrl) {
       writer.on('error', reject);
     });
 
-    return iconUrl;
+    return `${compressedUrl}`;
   } catch (error) {
     console.error(`Error downloading image ${compressedUrl}:`, error);
     return null;
@@ -98,6 +102,28 @@ async function scrapeUInfo(cookie) {
       throw error;
     }
   }
+}
+
+async function parseStickerInfo(stickerInfo) {
+  const $ = cheerio.load(stickerInfo);
+  const imgTags = $('img');
+  const stickerNames = $('div').text().trim().replace('Sticker: ', '').split(', ');
+
+  const stickers = [];
+
+  for (let i = 0; i < imgTags.length; i++) {
+    const img = imgTags[i];
+    const imgSrc = $(img).attr('src');
+    const newImgName = await imageDwnld(imgSrc, false);
+    if (newImgName) {
+      const stickerName = stickerNames[i];
+      stickers.push({
+        name: stickerName,
+        imgSrc: newImgName
+      });
+    }
+  }
+  return stickers;
 }
 
 async function scrapeIH(userId, cookie, s, time, time_frac) {
@@ -168,12 +194,14 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
         
         const plusItems = [];
         const minusItems = [];
-        $(element).find('.tradehistory_items').each((i, itemsElement) => {
+        $(element).find('.tradehistory_items').each(async (i, itemsElement) => {
           const plusMinus = $(itemsElement).find('.tradehistory_items_plusminus').text().trim();
-          const items = $(itemsElement).find('.history_item').map((i, el) => {
+          const items = await Promise.all($(itemsElement).find('.history_item').map(async (i, el) => {
             const itemName = $(el).find('.history_item_name').text().trim();
             //will pass anything opened with a key to not affect the count of total unboxed
-            if (!(['Unlocked a sticker capsule', 'Unlocked a case'].includes(description) && itemName.toLowerCase().match(/\bkey\b/))) {
+            if (['Unlocked a sticker capsule', 'Unlocked a case'].includes(description) && itemName.toLowerCase().match(/\bkey\b/)) {
+              return null;
+            }
               const { appid, classid, instanceid } = $(el).data();
               const jsonId = `${classid}_${instanceid}`;
               const itemDescription = jsonData.descriptions?.[appid]?.[jsonId] ?? '';
@@ -181,28 +209,40 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                 const itemType = jsonData.descriptions[appid][jsonId]['type'];
                 const trimmedIT = trimItemType(itemType);
                 const itemUrl = jsonData.descriptions[appid][jsonId]['icon_url'];
+                //grab sticker_info if it exists might be a better way to do this
+                let stickers = [];
+                const descriptions = jsonData.descriptions[appid][jsonId]['descriptions'];
+                if (descriptions) {
+                  const stickerInfoValue = descriptions.find(desc => desc.value.includes('sticker_info'));
+                  if (stickerInfoValue) {
+                    stickers = await parseStickerInfo(stickerInfoValue.value);
+                  }
+                }
+                
                 if (appid === 730) {
                   imageUrls.push(itemUrl);
                 }
                 return {
                   market_name: itemDescription.market_name,
                   itemType: trimmedIT,
-                  itemName: crypto.createHash('md5').update(itemUrl).digest('hex')
+                  itemName: crypto.createHash('md5').update(itemUrl).digest('hex'),
+                  stickers: stickers
                 };
               } else {
                 console.log('item description not found');
                 return null;
               }
-            }
-          }).get();
+          }).get());
+          
+          const filteredItems = items.filter(item => item !== null);
 
           if (plusMinus === '+') {
-            plusItems.push(...items);
+            plusItems.push(...filteredItems);
           } else if (plusMinus === '-') {
-            minusItems.push(...items);
+            minusItems.push(...filteredItems);
           }
         });
-
+      
         scrapeData.push({
           d,
           t,

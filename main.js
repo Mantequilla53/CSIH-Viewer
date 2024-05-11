@@ -37,7 +37,9 @@ mainWindow.webContents.on('did-finish-load', () => {
 
 function sendSData(data) {
   //difference between how I'm doing it and ipc sending the scraped-data
-  mainWindow.webContents.send('scraped-data', data);
+  //needs fixed
+  const newData = JSON.stringify(data)
+  mainWindow.webContents.send('scraped-data', newData);
 }
 
 ipcMain.on('process-dump', (event, jsonData) => {
