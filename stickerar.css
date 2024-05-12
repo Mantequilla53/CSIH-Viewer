@@ -1,8 +1,15 @@
-.card-container {
+#content-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     grid-gap: 15px;
     margin: 20px;
+}
+.filter-options {
+    margin-bottom: 10px;
+}
+
+.filter-options label {
+    margin-right: 10px;
 }
 .entry-card {
     background-color: #393E46;
@@ -68,14 +75,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     border: 2px solid #EEEEEE;
     border-radius: 5px;
-    width: 220px; /* Add a fixed width */
+    width: 210px; /* Add a fixed width */
     margin: 0 auto; /* Center the container horizontally */
 }
 .item-image img {
-    width: 120px;
+    width: 125px;
     height: auto;
 }
 .item p {
@@ -90,6 +97,7 @@
 }
 .sticker-list {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     max-width: 100%;
     min-height: 50px;
