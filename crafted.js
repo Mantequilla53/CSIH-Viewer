@@ -69,30 +69,30 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
                   </div>
                 </div>
               ` : ''}
-              <div class="taken-items-container">
-                ${minusItems.map(item => `
-                  <div class="card taken-item">
-                    <div class="card-color" style="background-color: ${takenColor}"></div>
-                    <div class="card-image-container">
-                      <img src="images/${item.itemName}.png">
-                      ${item.stickers && item.stickers.length > 0 ? `
-                        <div class="item-separator"></div>
-                        <div class="stickers-section">
-                          ${item.stickers.map(sticker => `
-                            <img class="sticker-image" src="images/${sticker.imgSrc}.png">
-                          `).join('')}
-                        </div>
-                      ` : ''}
-                    </div>  
-                    <p>${item.market_name}</p>
-                  </div>
-                `).join('')}
-              </div>
+                <div class="taken-items-container">
+                  ${minusItems.map(item => `
+                    <div class="card taken-item">
+                      <div class="card-color" style="background-color: ${takenColor}"></div>
+                        <div class="card-image-container">
+                          <img src="images/${item.itemName}.png">
+                          ${item.stickers && item.stickers.length > 0 ? `
+                          <div class="item-separator"></div>
+                            <div class="stickers-section">
+                              ${item.stickers.map(sticker => `
+                                <img class="sticker-image" src="images/${sticker.imgSrc}.png">
+                              `).join('')}
+                            </div>
+                          ` : ''}
+                        </div>  
+                      <p>${item.market_name}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              <div class="new-content"></div>
             </div>
-            <div class="new-content"></div>
           <button class="generate-button">
             <span>Generate Possible Outputs</span>
-            <i class="fas fa-chevron-down"></i>
+            <i class="arrow-icon"></i>
           </button>
         `;
         contentContainer.appendChild(entryElement);
@@ -101,12 +101,13 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
         const dropContent = entryElement.querySelector('.new-content');
         generateButton.addEventListener('click', () => {
           dropContent.classList.toggle('show');
+          generateButton.classList.toggle('active');
           if (dropContent.classList.contains('show')) {
             const outputText = possibleOutputs(minusItems);
             dropContent.textContent = outputText;
           } else {
             dropContent.textContent = '';
-          }
+          }     
         });
       }
     });
@@ -115,7 +116,8 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
 }
 
 function possibleOutputs(minusItems) {
-  return 'Coming soon';
+  return 'Coming Soon';
+  //return minusItems.market_name;
 }
 
 function extractItemColor(itemType) {
