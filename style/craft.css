@@ -15,23 +15,22 @@
   border-radius: 5px;
   border: 2px solid #EEEEEE;
   background-color: #2e3238;
-  padding: 15px;
+  overflow: hidden;
 }
 .entry-header {
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-left: 15px;
   font-size: 18px;
 }
 .card-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
 }
 .card {
-  padding: 10px;
+  padding: 5px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
   position: relative;
   background-color: #393E46;
 }
@@ -49,24 +48,37 @@
   align-items: center;
   gap: 10px;
   width: 200px;
-  margin-bottom: 20px;
 }
 .given-item img {
   width: 100px;
   height: auto;
 }
 .taken-item {
-  width: 120px;
+  width: 150px;
 }
 .taken-items-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+  margin: 20px;
+}
+.card-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid #EEEEEE;
+  margin-top: 6px;
 }
 .taken-item img {
-  width: 100px;
+  width: 120px;
   height: auto;
+}
+.item-separator {
+  width: 90%;
+  height: 1px;
+  background-color: #EEEEEE;  
 }
 .stickers-section {
   display: flex;
@@ -74,8 +86,37 @@
   gap: 5px;
   margin-top: 5px;
 }
-
 .sticker-image {
-  width: 20px;
-  height: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+  max-width: 35px;
+  max-height: 35px;
+}
+.generate-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  background-color: transparent;
+  color: #EEEEEE;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.generate-button:hover {
+  background-color: #4a4f57;
+}
+.new-content {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 10px;
+  background-color: #393E46;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.new-content.show {
+  max-height: none;
+  padding: 10px;
 }
