@@ -79,27 +79,35 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
         </div>
       `;
       contentContainer.appendChild(entryElement);
+      
       function renderItemSection(groupedItems, cardClass) {
         if (Object.values(groupedItems).length === 0) {
           return '';
         }
 
         return `
-          <div class="item-section ${Object.values(groupedPlusItems).length > 0 && Object.values(groupedMinusItems).length > 0 ? 'half-width' : ''}">
-            <div class="item-card ${cardClass}">
-              <div class="item-grid">
-                ${Object.values(groupedItems).map((item) => `
-                  <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
-                    <div class="item-image-container">
-                      <img src="images/${item.itemName}.png" width="120" height="92.4">
-                    </div>
-                    <p>${item.market_name} ${item.count > 1 ? `(count ${item.count})` : ''}</p>
+    <div class="item-section ${Object.values(groupedPlusItems).length > 0 && Object.values(groupedMinusItems).length > 0 ? 'half-width' : ''}">
+      <div class="item-card ${cardClass}">
+        <div class="item-grid">
+          ${Object.values(groupedItems).map((item) => `
+            <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
+              <div class="item-image-container">
+                <img src="images/${item.itemName}.png" width="120" height="92.4">
+                ${item.stickers && item.stickers.length > 0 ? `
+                  <div class="sticker-images">
+                    ${item.stickers.map((sticker) => `
+                      <img src="images/${sticker.imgSrc}.png" width="40" height="30.8">
+                    `).join('')}
                   </div>
-                `).join('')}
+                ` : ''}
               </div>
+              <p>${item.market_name} ${item.count > 1 ? `(count ${item.count})` : ''}</p>
             </div>
-          </div>
-        `;
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
       }
   });
     if (entriesToRender.length > 0) {

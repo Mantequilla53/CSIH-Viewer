@@ -4,6 +4,9 @@
   border: 2px solid #EEEEEE;
   padding: 10px;
 }
+#content-container {
+  margin: 20px;
+}
 .trade-entry {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -73,14 +76,20 @@
   justify-content: center;
   align-items: center;
 }
+.item-image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-.item-count {
-  position: absolute;
-  bottom: 0px;
-  right: 5px;
-  background-color: #222831;
-  color: white;
-  padding: 2px 5px;
-  border-radius: 10px;
-  font-size: 15px;
+.sticker-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.sticker-images img {
+  margin: 0 2px;
 }
