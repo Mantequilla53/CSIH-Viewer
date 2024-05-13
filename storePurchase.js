@@ -2,7 +2,7 @@ function showPurchaseContent(description, entries, contentContainer, tabStatsCon
     const cardsContainer = document.createElement('div');
     cardsContainer.classList.add('card-grid');
 
-    tabStatsContainer.innerHTML = `<link rel="stylesheet" href="op.css">
+    tabStatsContainer.innerHTML = `<link rel="stylesheet" href="style/op.css">
     <h2>${description}</h2>`;
 
 

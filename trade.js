@@ -12,7 +12,7 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
 
   const tabContentElement = document.createElement('div');
   tabContentElement.innerHTML = `
-  <link rel="stylesheet" href="trades.css">  
+  <link rel="stylesheet" href="style/trades.css">  
   <h3>${description}</h3>
     <div>
       <select id="trade-name-select">

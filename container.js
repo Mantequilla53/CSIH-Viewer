@@ -1,6 +1,6 @@
 function showContainerContent(description, entries, contentContainer, tabStatsContainer) {
     //used to display patches, pins and graffiti boxes
-    tabStatsContainer.innerHTML = `<link rel="stylesheet" href="case.css">
+    tabStatsContainer.innerHTML = `<link rel="stylesheet" href="style/case.css">
     <h2>${description}</h2>`;
     
     contentContainer.innerHTML = `<div class="card-container"></div>`;

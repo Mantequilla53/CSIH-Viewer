@@ -1,0 +1,81 @@
+#tab-stats {
+  margin: 20px;
+  border-radius: 5px;
+  border: 2px solid #EEEEEE;
+  padding: 10px;
+}
+#content-container {
+  margin: 20px;
+}
+.trade-up-type-checkbox {
+  margin-left: 20px;
+}
+.entry {
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 2px solid #EEEEEE;
+  background-color: #2e3238;
+  padding: 15px;
+}
+.entry-header {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.card {
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+  background-color: #393E46;
+}
+.card-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 7px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.given-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 200px;
+  margin-bottom: 20px;
+}
+.given-item img {
+  width: 100px;
+  height: auto;
+}
+.taken-item {
+  width: 120px;
+}
+.taken-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.taken-item img {
+  width: 100px;
+  height: auto;
+}
+.stickers-section {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.sticker-image {
+  width: 20px;
+  height: 20px;
+}

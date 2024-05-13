@@ -47,7 +47,7 @@ function showCaseContent(description, entries, contentContainer, tabStatsContain
 
   const tabContentElement = document.createElement('div');
   tabContentElement.innerHTML = `
-    <link rel="stylesheet" href="case.css">
+    <link rel="stylesheet" href="style/case.css">
     <div class="container">
       <div class="sidebar">
         <h4>Cases Unboxed:</h4>

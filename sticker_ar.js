@@ -1,5 +1,5 @@
 function showStickerARContent(description, entries, contentContainer, tabStatsContainer) {
-	tabStatsContainer.innerHTML = `<link rel="stylesheet" href="stickerar.css">
+	tabStatsContainer.innerHTML = `<link rel="stylesheet" href="style/stickerar_new.css">
   <h2>${description}</h2>
   <div class="filter-options">
     <label>
@@ -11,63 +11,49 @@ function showStickerARContent(description, entries, contentContainer, tabStatsCo
       Sticker Removed
     </label>
   </div>`;
-	const filterOptions = document.querySelector('.filter-options');
 
 	function updateCards() {
-		const selectedTradeNames = [...filterOptions.querySelectorAll('input[type="checkbox"]:checked')].map(checkbox => checkbox.value);
+		const selectedTradeNames = [...tabStatsContainer.querySelectorAll('input[type="checkbox"]:checked')].map(checkbox => checkbox.value);
 		contentContainer.innerHTML = '';
 		entries.forEach((entry) => {
-			const { d, t, plusItems, minusItems, tradeName } = entry;
-			if (selectedTradeNames.includes(tradeName)) {
-				const cardElement = document.createElement('div');
-				cardElement.classList.add('entry-card');
+			if (selectedTradeNames.includes(entry.tradeName)) {
+				const { d, t, plusItems, minusItems, tradeName } = entry;
+        const cardElement = document.createElement('div');
 
 				const tradeNameClass = tradeName.toLowerCase().replace(' ', '-');
-        cardElement.classList.add(tradeNameClass);
+        cardElement.classList.add('card', tradeNameClass);
 
-				let itemColor = 'white';
-				let itemsToDisplay = plusItems.length > 0 ? plusItems : minusItems;
-
-				if (itemsToDisplay.length > 0 && itemsToDisplay[0].itemType) {
-					itemColor = plusItems.map(item => extractItemColor(item.itemType));
-				}
-				cardElement.style.setProperty('--item-color', itemColor);
+				const itemToDisplay = plusItems.length ? plusItems : minusItems;
+        const itemColor = itemToDisplay[0]?.itemType ? extractItemColor(itemToDisplay[0].itemType) : 'white';
+        cardElement.style.setProperty('--item-color', itemColor);
 
 				cardElement.innerHTML = `
-          <div class="card-content">
-              <div class="card-header">
-                  <span>${d} ${t}</span>
-              </div>
-              ${itemsToDisplay.length > 0 ? `
-                  <div class="item-list">
-                      ${itemsToDisplay.map(item => `
-                          <div class="item">
-                              <div class="item-image-container">
-                                  <div class="item-image">
-                                      <img src="./images/${item.itemName}.png" alt="${item.market_name}">
-                                  </div>
-                                  <div class="item-separator"></div>
-                                  <div class="sticker-list">
-                                      ${item.stickers.length > 0 ? item.stickers.map(sticker => `
-                                          <div class="sticker">
-                                              <img src="./images/${sticker.imgSrc}.png" alt="${sticker.name}">
-                                          </div>
-                                      `).join('') : '<p>No Stickers</p>'}
-                                  </div>
-                              </div>
-                              <p>${item.market_name}</p>
-                          </div>
-                      `).join('')}
-                  </div>
-              ` : ''}
+          <div class="card-header">
+            <span>${d} ${t}</span>
           </div>
-          ${findStickerChange(tradeName, entry.plusItems, entry.minusItems)}
-      `;
+          <div class="card-content">
+            <div class="item-image-container">
+              <div class="item-image">
+                <img src="./images/${itemToDisplay[0].itemName}.png" alt="${itemToDisplay[0].market_name}">
+              </div>
+              <div class="item-separator"></div>
+              <div class="sticker-list">
+                ${itemToDisplay[0].stickers.length > 0 ? itemToDisplay[0].stickers.map(sticker => `
+                  <div class="sticker">  
+                    <img src="./images/${sticker.imgSrc}.png" alt="${sticker.name}">
+                  </div>
+                `).join('') : '<p>No Stickers</p>'}
+              </div>
+            </div>
+            <p>${itemToDisplay[0].market_name}</p>
+          </div>
+          ${findStickerChange(tradeName, plusItems, minusItems)}
+        `;
 				contentContainer.appendChild(cardElement);
 			}
 		});
 	}
-	filterOptions.addEventListener('change', updateCards);
+	document.querySelector('.filter-options').addEventListener('change', updateCards);
 
 	updateCards();
 }

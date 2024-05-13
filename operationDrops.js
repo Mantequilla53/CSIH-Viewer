@@ -31,7 +31,7 @@ function showOperationContent(description, entries, contentContainer, tabStatsCo
       }
     }
   });
-  tabStatsContainer.innerHTML = `<link rel="stylesheet" href="op.css">`;
+  tabStatsContainer.innerHTML = `<link rel="stylesheet" href="style/op.css">`;
 
   operations.forEach((operation) => {
     const operationName = operation.name;

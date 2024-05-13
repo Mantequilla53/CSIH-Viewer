@@ -1,83 +1,24 @@
 function showCraftedContent(description, entries, contentContainer, tabStatsContainer) {
-    const tradeUpTypeCount = {
-        'Industrial Grade': 0,
-        'Mil-Spec': 0,
-        'Restricted': 0,
-        'Classified': 0,
-        'Covert': 0 
-    }
-    let totalTradeUp = 0;
+  const tradeUpTypeCount = {
+    'Industrial Grade': 0,
+    'Mil-Spec': 0,
+    'Restricted': 0,
+    'Classified': 0,
+    'Covert': 0 
+  }
+  let totalTradeUp = 0;
 
-    entries.forEach((entry) => {
-        const { plusItems } = entry;
-        plusItems.forEach((item) => {
-            const tradeUpType = item.itemType;
-            if (tradeUpTypeCount.hasOwnProperty(tradeUpType)){
-                tradeUpTypeCount[tradeUpType]++;
-            }
-        });
+  entries.forEach((entry) => {
+    const { plusItems } = entry;
+    plusItems.forEach((item) => {
+      const tradeUpType = item.itemType;
+      if (tradeUpTypeCount.hasOwnProperty(tradeUpType)){
+        tradeUpTypeCount[tradeUpType]++;
+      }
     });
-    const tabContentElement = document.createElement('div');
-    tabContentElement.innerHTML = `
-    <style>
-    .trade-up-type-checkbox {
-      margin-left: 20px;
-    }
-    .entry {
-      margin-bottom: 20px;
-      padding: 10px;
-      border-radius: 4px;
-    }
-
-    .entry-header {
-      margin-bottom: 10px;
-    }
-
-    .card-container {
-      display: flex;
-      align-items: flex-start;
-      position: relative;
-    }
-
-    .card {
-      padding: 10px;
-      border-radius: 4px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 120px;
-      position: relative;
-    }
-    
-    .card-color {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 7px;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-    }
-
-    .given-item, .taken-item {
-      background-color: #393E46;
-    }
-
-    .taken-items-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .card p {
-      margin: 0;
-    }
-    .separator {
-      width: 1px;
-      background-color: #ccc;
-      margin: 0 10px;
-      align-self: stretch;
-    }
-    </style>
+  });
+  tabStatsContainer.innerHTML = `
+    <link rel="stylesheet" href="style/craft.css">
     <h3>Trade-Up</h3>
     <div>
       ${Object.entries(tradeUpTypeCount)
@@ -87,20 +28,18 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
           <label>
             <input type="checkbox" class="trade-up-type-checkbox" value="${type}" checked>
             <span style="display: inline-block; width: 10px; height: 10px; background-color: ${itemColor}; margin-right: 5px;"></span> ${type}: ${count}
-
           </label>
         `})
         .join('')}
-    </div>`;
-    tabStatsContainer.appendChild(tabContentElement);
+    </div>
+  `;
     
-    const tradeUpTypeCheckboxes = tabContentElement.querySelectorAll('.trade-up-type-checkbox');
-    tradeUpTypeCheckboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', updateContentContainer);
-    });
+  const tradeUpTypeCheckboxes = tabStatsContainer.querySelectorAll('.trade-up-type-checkbox');
+  tradeUpTypeCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', updateContentContainer);
+  });
 
-    updateContentContainer();
-    function updateContentContainer() {
+  function updateContentContainer() {
     const selectedTradeUpTypes = Array.from(tradeUpTypeCheckboxes)
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
@@ -113,33 +52,44 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
         const entryElement = document.createElement('div');
         entryElement.classList.add('entry');
         entryElement.innerHTML = `
-          <div class="entry-header">
-            <p>${d} ${t}</p>
-          </div>
-          <div class="card-container">
-            ${plusItems.length > 0 ? `
-              <div class="card given-item">
-                <div class="card-color" style="background-color: ${extractItemColor(plusItems[0].itemType)}"></div>
-                <img src="images/${plusItems[0].itemName}.PNG" width="120" height="92.4">
-                <p>${plusItems[0].market_name}</p>
-              </div>
-            ` : ''}
-            <div class="separator"></div>
-            <div class="taken-items-container">
-              ${minusItems.map(item => `
-                <div class="card taken-item">
-                  <div class="card-color" style="background-color: ${extractItemColor(item.itemType)}"></div>
-                  <img src="images/${item.itemName}.PNG" width="120" height="92.4">
-                  <p>${item.market_name}</p>
-                </div>
+  <div class="entry-header">
+    <span>${d} ${t}</span>
+  </div>
+  <div class="card-container">
+    ${plusItems.length > 0 ? `
+      <div class="card given-item">
+        <div class="card-color" style="background-color: ${extractItemColor(plusItems[0].itemType)}"></div>
+        <div class="given-item-image">
+          <img src="images/${plusItems[0].itemName}.png">
+        </div>
+        <div class="given-item-text">
+          <p>${plusItems[0].market_name}</p>
+        </div>
+      </div>
+    ` : ''}
+    <div class="taken-items-container">
+      ${minusItems.map(item => `
+        <div class="card taken-item">
+          <div class="card-color" style="background-color: ${extractItemColor(item.itemType)}"></div>
+          <img src="images/${item.itemName}.png">
+          <p>${item.market_name}</p>
+          ${item.stickers && item.stickers.length > 0 ? `
+            <div class="stickers-section">
+              ${item.stickers.map(sticker => `
+                <img class="sticker-image" src="images/${sticker.imgSrc}.png">
               `).join('')}
             </div>
-          </div>
-        `;
+          ` : ''}
+        </div>
+      `).join('')}
+    </div>
+  </div>
+`;
         contentContainer.appendChild(entryElement);
       }
     });
   }
+  updateContentContainer();
 }
 
 function extractItemColor(itemType) {
