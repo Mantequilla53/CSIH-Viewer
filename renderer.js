@@ -11,7 +11,7 @@ const { showDropContent} = require('./drops');
 const { showOperationContent } = require('./operationDrops');
 const { showPurchaseContent } = require('./storePurchase');
 const { showContainerContent } = require('./container');
-const { showStickerARContent } = require('./sticker_ar');
+const { showARContent } = require('./combined_ar');
 
 const $ = (id) => document.getElementById(id);
 const tabContainer = $('tab-container');
@@ -132,7 +132,8 @@ function showTabContent(description) {
   else if (description === 'Mission reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Purchased from the store'){showPurchaseContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Unlocked a container'){showContainerContent(description, entries, contentContainer, tabStatsContainer)}
-  else if (description === 'Sticker applied/removed'){showStickerARContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (description === 'Sticker applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Sticker')}
+  else if (description === 'Name Tag applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Name Tag')}
   else if (['Earned a weapon drop', 'Earned a case drop', 'Earned a graffiti drop'].includes(description)) 
     {showDropContent(description, entries, contentContainer, tabStatsContainer)} 
   else {
@@ -146,13 +147,13 @@ function showTabContent(description) {
         ${plusItems.length > 0 ? `
           <p>Given to Inventory:</p>
           <ul>
-            ${plusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
+            ${plusItems.map(item => `<li>${item.market_name} - - ${item.itemType}${item.tag_name ? ` - - ${item.tag_name}` : ''}</li>`).join('')}
           </ul>
         ` : ''}
         ${minusItems.length > 0 ? `
           <p>Taken from Inventory:</p>
           <ul>
-            ${minusItems.map(item => `<li>${item.market_name} - - ${item.itemType}</li>`).join('')}
+            ${minusItems.map(item => `<li>${item.market_name} - - ${item.itemType}${item.tag_name ? ` - - ${item.tag_name}` : ''}</li>`).join('')}
           </ul>
         ` : ''} 
         <hr>

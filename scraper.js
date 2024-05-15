@@ -18,6 +18,10 @@ function trimItemType(itemType) {
 }
 
 async function imageDwnld(urlOrIconUrl, isBuildUrl = true) {
+  const directoryPath = './images';
+  if (!fs.existsSync(directoryPath)) {
+    fs.mkdirSync(directoryPath);
+  }
   let imgUrl = urlOrIconUrl;
   const compressedUrl = crypto.createHash('md5').update(imgUrl).digest('hex');
   if (isBuildUrl) {
@@ -25,14 +29,7 @@ async function imageDwnld(urlOrIconUrl, isBuildUrl = true) {
       console.error('Error: iconUrl is blank.');
       return;
     }
-    
-    imgUrl = `https://community.cloudflare.steamstatic.com/economy/image/${urlOrIconUrl}/96fx96f?allow_animated=1`;
-  }
-
-  const directoryPath = './images';
-
-  if (!fs.existsSync(directoryPath)) {
-    fs.mkdirSync(directoryPath);
+    imgUrl = `https://community.cloudflare.steamstatic.com/economy/image/${urlOrIconUrl}/150fx150f?allow_animated=1`;
   }
 
   const filePath = path.join(directoryPath, `${compressedUrl}.png`);
@@ -49,6 +46,16 @@ async function imageDwnld(urlOrIconUrl, isBuildUrl = true) {
       writer.on('finish', resolve);
       writer.on('error', reject);
     });
+
+    if (!isBuildUrl) {
+      const sharp = require('sharp');
+      const resizedFilePath = path.join(directoryPath, `${compressedUrl}_resized.png`);
+      await sharp(filePath)
+        .resize(50, 50)
+        .toFile(resizedFilePath);
+      await fs.promises.unlink(filePath);
+      await fs.promises.rename(resizedFilePath, filePath);
+    }
 
     return `${compressedUrl}`;
   } catch (error) {
@@ -86,9 +93,9 @@ async function scrapeUInfo(cookie) {
         ...HEADERS,
         'Cookie': cookie
       },
-      maxRedirects: 0, // Disable automatic following of redirects
+      maxRedirects: 0,
       validateStatus: function (status) {
-        return status >= 200 && status < 303; // Allow status codes from 200 to 302
+        return status >= 200 && status < 303;
       }
     });
 
@@ -114,12 +121,11 @@ async function parseStickerInfo(stickerInfo) {
   for (let i = 0; i < imgTags.length; i++) {
     const img = imgTags[i];
     const imgSrc = $(img).attr('src');
-    const newImgName = await imageDwnld(imgSrc, false);
-    if (newImgName) {
+    if (imgSrc) {
       const stickerName = stickerNames[i];
       stickers.push({
         name: stickerName,
-        imgSrc: newImgName
+        imgSrc: imgSrc
       });
     }
   }
@@ -172,6 +178,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
         let description = $(element).find('.tradehistory_event_description').text().trim();
         let tradeName = '';
 
+        if (description !== 'Moved to Storage Unit') {
         const tradeHistoryItem = $(element).find('.tradehistory_items').text();
 
         for (const [mappedDescription, condition] of Object.entries(descriptionMap)) {
@@ -188,8 +195,6 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
         if (description === 'Traded') {
           tradeName = 'Missing Trade Name';
           description = 'You traded with';
-        } else if (description === 'Moved to Storage Unit') {
-          return;
         }
         
         const plusItems = [];
@@ -211,19 +216,30 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                 const itemUrl = jsonData.descriptions[appid][jsonId]['icon_url'];
                 //grab sticker_info if it exists might be a better way to do this
                 let stickers = [];
+                let nametag = '';
                 const descriptions = jsonData.descriptions[appid][jsonId]['descriptions'];
                 if (descriptions) {
                   const stickerInfoValue = descriptions.find(desc => desc.value.includes('sticker_info'));
+                  const nameTagDesc = descriptions.find(desc => desc.value.includes('Name Tag:'));
+                  if (nameTagDesc) {
+                    nametag = nameTagDesc.value.split('Name Tag: ')[1].trim();
+                  }
                   if (stickerInfoValue) {
-                    stickers = await parseStickerInfo(stickerInfoValue.value);
+                    const parsedStickers = await parseStickerInfo(stickerInfoValue.value);
+                    stickers = parsedStickers.map(sticker => ({
+                      name: sticker.name,
+                      imgSrc: crypto.createHash('md5').update(sticker.imgSrc).digest('hex')
+                    }));
+                    imageUrls.push(...parsedStickers.map(sticker => ({ url: sticker.imgSrc, isBuildUrl: false })));
                   }
                 }
                 
                 if (appid === 730) {
-                  imageUrls.push(itemUrl);
+                  imageUrls.push({ url: itemUrl, isBuildUrl: true });
                 }
                 return {
                   market_name: itemDescription.market_name,
+                  tag_name: nametag,
                   itemType: trimmedIT,
                   itemName: crypto.createHash('md5').update(itemUrl).digest('hex'),
                   stickers: stickers
@@ -251,9 +267,10 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
           plusItems,
           minusItems
         });
+      }
       });
-      for (const imageUrl of imageUrls) {
-        await imageDwnld(imageUrl);
+      for (const { url, isBuildUrl } of imageUrls) {
+        await imageDwnld(url, isBuildUrl);
       }
       return { scrapeData, cursor, cursorFound };
     } else {

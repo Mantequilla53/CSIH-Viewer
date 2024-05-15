@@ -88,24 +88,24 @@ ipcMain.on('set-cookie', async (event, cookie) => {
       scrapedData: []
     };
     fs.writeFileSync(scrapedDataFilePath, JSON.stringify(jsonDumpData, null));
-    const startScraping = () => {
-      scrapeInterval = setInterval(async () => {
+    const startScraping = async () => {
+      let cursorFound = true;
+      while (cursorFound) {
         try {
-          
-          const cursorFound = await handleScrapedData(cookie, scrapedDataFilePath);
-          if (!cursorFound) {
-            clearInterval(scrapeInterval);
+          cursorFound = await handleScrapedData(cookie, scrapedDataFilePath);
+          if (cursorFound) {
+            await new Promise(resolve => setTimeout(resolve, 5000)); // Wait for 5 seconds
+          } else {
             console.log('Scraping completed. No more cursor found.');
           }
         } catch (error) {
-          console.error('Error in scrape interval:', error);
+          console.error('Error in scrape loop:', error);
         }
-      }, 5000);
+      }
     };
   startScraping();
   event.reply('scrape-started');
   ipcMain.on('stop-scraping', () => {
-    clearInterval(scrapeInterval);
     cursorFound = false;
     console.log('Scraping stopped by user.');
   });

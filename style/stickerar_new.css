@@ -84,6 +84,12 @@
 .sticker-removed .card-footer {
     border-color: red;
 }
+.name-tag-applied .card-footer {
+    border-color: green;
+}
+.name-tag-removed .card-footer {
+    border-color: red;
+}
 .sticker-image {
     max-width: 65px;
     max-height: 65px;

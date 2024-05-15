@@ -184,7 +184,8 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
 
 function groupItems(items) {
   return items.reduce((acc, item) => {
-    const key = `${item.market_name}-${item.itemType}`;
+    const stickerNames = item.stickers ? item.stickers.map(sticker => sticker.name).join('-') : '';
+    const key = `${item.market_name}-${stickerNames}`;
     if (acc[key]) {
       acc[key].count++;
     } else {
