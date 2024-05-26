@@ -38,10 +38,8 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
   const selectedTradeNameContainer = $('#selected-trade-name');
   const searchInput = $('#search-input');
 
-  const entriesPerPage = 100; // Number of entries to load per page
-  let currentPage = 1;
   let selectedTradeName = null;
-  let isLoading = false;
+
 
   function searchEntries(query, tradeName) {
     const filteredEntries = tradeName ? tradeNameCounts[tradeName] : entries;
@@ -56,11 +54,7 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
     const searchQuery = searchInput.value.trim().toLowerCase();
     const filteredEntries = searchQuery ? searchEntries(searchQuery, selectedTradeName) : (selectedTradeName ? tradeNameCounts[selectedTradeName] : entries);
 
-    const startIndex = (currentPage - 1) * entriesPerPage;
-    const endIndex = startIndex + entriesPerPage;
-    const entriesToRender = filteredEntries.slice(startIndex, endIndex);
-
-    entriesToRender.forEach((entry) => {
+    filteredEntries.forEach((entry) => {
       const { d, t, plusItems, minusItems, tradeName } = entry;
       
       const groupedPlusItems = groupItems(plusItems);
@@ -71,7 +65,9 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
       entryElement.innerHTML = `
         <div class="entry-header">
           <p>${d} ${t}</p>
-          ${selectedTradeName ? '' : `<p>Trade Name: ${tradeName}</p>`}
+          ${selectedTradeName
+            ? `<span class="trade-name">${tradeName}</span>`
+            : `<span class="trade-name">Trade Name: ${tradeName}</span>`}
         </div>
         <div class="entry-content">
           ${renderItemSection(groupedPlusItems, 'green-card')}
@@ -84,71 +80,42 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
         if (Object.values(groupedItems).length === 0) {
           return '';
         }
-
+      
         return `
-    <div class="item-section ${Object.values(groupedPlusItems).length > 0 && Object.values(groupedMinusItems).length > 0 ? 'half-width' : ''}">
-      <div class="item-card ${cardClass}">
-        <div class="item-grid">
-          ${Object.values(groupedItems).map((item) => `
-            <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
-              <div class="item-image-container">
-                <img src="images/${item.itemName}.png" width="120" height="92.4">
-                ${item.stickers && item.stickers.length > 0 ? `
-                  <div class="sticker-images">
-                    ${item.stickers.map((sticker) => `
-                      <img src="images/${sticker.imgSrc}.png" width="40" height="30.8">
-                    `).join('')}
+          <div class="item-section ${Object.values(groupedPlusItems).length > 0 && Object.values(groupedMinusItems).length > 0 ? 'half-width' : ''}">
+            <div class="item-card ${cardClass}">
+              <div class="item-grid">
+                ${Object.values(groupedItems).map((item) => `
+                  <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
+                    <div class="item-image-container">
+                      <div class="item-image-wrapper">
+                        <img src="images/${item.itemName}.png" width="120" height="92.4">
+                      </div>
+                      ${item.tag_name ? `
+                        <div class="tag-indicator" title="${item.tag_name}"></div>
+                      ` : ''}
+                      ${item.stickers && item.stickers.length > 0 ? `
+                        <div class="sticker-separator"></div>
+                        <div class="sticker-images">
+                          ${item.stickers.map((sticker) => `
+                            <img src="images/${sticker.imgSrc}.png" width="40" height="30.8">
+                          `).join('')}
+                        </div>
+                      ` : ''}
+                    </div>
+                    <p>${item.market_name} ${item.count > 1 ? `(count ${item.count})` : ''}</p>
                   </div>
-                ` : ''}
+                `).join('')}
               </div>
-              <p>${item.market_name} ${item.count > 1 ? `(count ${item.count})` : ''}</p>
             </div>
-          `).join('')}
-        </div>
-      </div>
-    </div>
-  `;
+          </div>
+        `;
       }
-  });
-    if (entriesToRender.length > 0) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && !isLoading) {
-            loadMoreEntries();
-          }
-        },
-        { threshold: 1 }
-      );
-      observer.observe(contentContainer.lastElementChild);
-    }
-  
-  }
-
-  function loadMoreEntries() {
-    const searchQuery = searchInput.value.trim().toLowerCase();
-    const filteredEntries = searchQuery ? searchEntries(searchQuery, selectedTradeName) : (selectedTradeName ? tradeNameCounts[selectedTradeName] : entries);
-  
-    const startIndex = (currentPage - 1) * entriesPerPage;
-    const endIndex = startIndex + entriesPerPage;
-  
-    if (endIndex < filteredEntries.length) {
-      isLoading = true;
-      currentPage++;
-      renderTrades();
-      isLoading = false;
-    }
-  }
-
-  function handleScroll() {
-    const { scrollTop, clientHeight, scrollHeight } = contentContainer;
-    if (scrollTop + clientHeight >= scrollHeight - 20) {
-      loadMoreEntries();
-    }
+  }); 
   }
 
   tradeNameSelect.addEventListener('change', (event) => {
     selectedTradeName = event.target.value;
-    currentPage = 1;
     contentContainer.innerHTML = '';
     //searchInput.value = ''; Clear the search input when changing trade name
     if (selectedTradeName) {
@@ -166,15 +133,11 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
     tradeNameSelect.value = '';
     unselectButton.style.display = 'none';
     selectedTradeName = null;
-    currentPage = 1;
     contentContainer.innerHTML = '';
     renderTrades();
   });
 
-  contentContainer.addEventListener('scroll', handleScroll);
-
   searchInput.addEventListener('input', () => {
-    currentPage = 1;
     contentContainer.innerHTML = '';
     renderTrades();
   });
@@ -185,7 +148,7 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
 function groupItems(items) {
   return items.reduce((acc, item) => {
     const stickerNames = item.stickers ? item.stickers.map(sticker => sticker.name).join('-') : '';
-    const key = `${item.market_name}-${stickerNames}`;
+    const key = `${item.market_name}-${stickerNames}-${item.tag_name || ''}`;
     if (acc[key]) {
       acc[key].count++;
     } else {

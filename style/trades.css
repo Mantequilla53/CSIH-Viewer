@@ -8,57 +8,54 @@
   margin: 20px;
 }
 .trade-entry {
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 4px;
   margin-bottom: 20px;
-  padding: 10px;
+  background-color: #2e3238;
 }
-
 .entry-header {
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin-left: 10px;
 }
-
+.entry-header .trade-name {
+  text-align: center;
+  flex-grow: 1;
+}
 .entry-content {
   display: flex;
   justify-content: space-between;
   gap: 20px;
 }
-
 .item-section {
+  margin: 10px;
   flex: 1;
 }
-
 .half-width {
   width: 50%;
 }
-
 .item-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 10px;
 }
-
 .item-card {
   border-radius: 4px;
   padding: 10px;
-  margin-bottom: 10px;
 }
-
 .green-card {
   border: 2px solid #00cc00;
 }
-
 .red-card {
   border: 2px solid #cc0000;
 }
-
 .item-entry {
   background-color: #393E46;
   border-radius: 10px;
   padding: 10px;
   position: relative;
 }
-
 .item-entry::before {
   content: '';
   position: absolute;
@@ -70,26 +67,52 @@
   border-top-right-radius: 10px;
   background-color: var(--item-color, white);
 }
-
 .item-image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.item-image-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 5px;
 }
-
+.item-image-wrapper {
+  margin-bottom: 5px;
+}
+.item-image-wrapper img {
+  display: block;
+}
+.tag-indicator {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.tag-indicator:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  padding: 5px;
+  background-color: #000;
+  color: #fff;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.sticker-separator {
+  width: 90%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 5px 0;
+}
 .sticker-images {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5px;
-}
-
-.sticker-images img {
-  margin: 0 2px;
 }

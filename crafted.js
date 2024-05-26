@@ -66,6 +66,7 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
                   </div>
                   <div class="given-item-text">
                     <p>${plusItems[0].market_name}</p>
+                    <p>${plusItems[0].itemSetName}</p>
                   </div>
                 </div>
               ` : ''}
@@ -85,6 +86,7 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
                           ` : ''}
                         </div>  
                       <p>${item.market_name}</p>
+                      <p>${item.itemSetName}</p>
                     </div>
                   `).join('')}
                 </div>

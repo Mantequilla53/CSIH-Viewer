@@ -134,7 +134,7 @@ function showTabContent(description) {
   else if (description === 'Unlocked a container'){showContainerContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Sticker applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Sticker')}
   else if (description === 'Name Tag applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Name Tag')}
-  else if (['Earned a weapon drop', 'Earned a case drop', 'Earned a graffiti drop'].includes(description)) 
+  else if (['Earned a weapon drop', 'Earned a case drop', 'Earned a graffiti drop', 'Earned a souvenir drop'].includes(description)) 
     {showDropContent(description, entries, contentContainer, tabStatsContainer)} 
   else {
     entries.forEach((entry) => {

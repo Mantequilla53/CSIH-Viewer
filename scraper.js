@@ -198,29 +198,32 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
         }
         
         const plusItems = [];
-        const minusItems = [];
-        $(element).find('.tradehistory_items').each(async (i, itemsElement) => {
-          const plusMinus = $(itemsElement).find('.tradehistory_items_plusminus').text().trim();
-          const items = await Promise.all($(itemsElement).find('.history_item').map(async (i, el) => {
-            const itemName = $(el).find('.history_item_name').text().trim();
-            //will pass anything opened with a key to not affect the count of total unboxed
-            if (['Unlocked a sticker capsule', 'Unlocked a case'].includes(description) && itemName.toLowerCase().match(/\bkey\b/)) {
-              return null;
-            }
+          const minusItems = [];
+          $(element).find('.tradehistory_items').each(async (i, itemsElement) => {
+            const plusMinus = $(itemsElement).find('.tradehistory_items_plusminus').text().trim();
+            const items = await Promise.all($(itemsElement).find('.history_item').map(async (i, el) => {
+              const itemName = $(el).find('.history_item_name').text().trim();
+              if (['Unlocked a sticker capsule', 'Unlocked a case'].includes(description) && itemName.toLowerCase().match(/\bkey\b/)) {
+                return null;
+              }
               const { appid, classid, instanceid } = $(el).data();
               const jsonId = `${classid}_${instanceid}`;
               const itemDescription = jsonData.descriptions?.[appid]?.[jsonId] ?? '';
-              if (itemDescription){
+              if (itemDescription) {
                 const itemType = jsonData.descriptions[appid][jsonId]['type'];
                 const trimmedIT = trimItemType(itemType);
                 const itemUrl = jsonData.descriptions[appid][jsonId]['icon_url'];
-                //grab sticker_info if it exists might be a better way to do this
+
                 let stickers = [];
                 let nametag = '';
+                let itemSetName = '';
+
                 const descriptions = jsonData.descriptions[appid][jsonId]['descriptions'];
                 if (descriptions) {
                   const stickerInfoValue = descriptions.find(desc => desc.value.includes('sticker_info'));
                   const nameTagDesc = descriptions.find(desc => desc.value.includes('Name Tag:'));
+                  const itemSetDesc = descriptions.find(desc => desc.app_data && desc.app_data.is_itemset_name === 1);
+
                   if (nameTagDesc) {
                     nametag = nameTagDesc.value.split('Name Tag: ')[1].trim();
                   }
@@ -232,8 +235,11 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                     }));
                     imageUrls.push(...parsedStickers.map(sticker => ({ url: sticker.imgSrc, isBuildUrl: false })));
                   }
+                  if (itemSetDesc) {
+                    itemSetName = itemSetDesc.value.trim();
+                  }
                 }
-                
+
                 if (appid === 730) {
                   imageUrls.push({ url: itemUrl, isBuildUrl: true });
                 }
@@ -242,13 +248,14 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                   tag_name: nametag,
                   itemType: trimmedIT,
                   itemName: crypto.createHash('md5').update(itemUrl).digest('hex'),
-                  stickers: stickers
+                  stickers: stickers,
+                  itemSetName: itemSetName
                 };
               } else {
                 console.log('item description not found');
                 return null;
               }
-          }).get());
+            }).get());
           
           const filteredItems = items.filter(item => item !== null);
 
