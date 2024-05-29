@@ -161,15 +161,11 @@ function possibleOutputs(inputType, minusItems, givenColor) {
 
   outputItems.forEach(item => {
     const collection = item.collections[0].name;
-    const collectionCount = collectionCounts[collection] || 0;
-    const outputItemsInCollection = outputItems.filter(outputItem => outputItem.collections[0].name === collection);
-    const ballots = collectionCount * outputItemsInCollection.length;
+    const ballots = collectionCounts[collection] || 0;
     outputBallots[item.name] = ballots;
 
     console.log('Item:', item.name);
     console.log('Collection:', collection);
-    console.log('Collection Count:', collectionCount);
-    console.log('Output Items in Collection:', outputItemsInCollection);
     console.log('Ballots:', ballots);
     console.log('---');
   });
