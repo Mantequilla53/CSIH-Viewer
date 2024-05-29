@@ -123,63 +123,41 @@ generateButton.addEventListener('click', () => {
 }
 
 function possibleOutputs(inputType, minusItems, givenColor) {
+  const itemTypes = ['Consumer Grade', 'Industrial Grade', 'Mil-Spec', 'Restricted', 'Classified', 'Covert'];
   const itemSetNames = [...new Set(minusItems.map(item => item.itemSetName))];
   const outputFilePath = path.join(__dirname, 'output.json');
-  const outputFileContent = fs.readFileSync(outputFilePath, 'utf8');
-  const collectionData = JSON.parse(outputFileContent);
-
-  const outputItems = [];
-
-  itemSetNames.forEach(setName => {
+  const collectionData = JSON.parse(fs.readFileSync(outputFilePath, 'utf8'));
+  
+  const outputItems = itemSetNames.reduce((items, setName) => {
     const collection = collectionData[setName];
     if (collection) {
-      const inputTypeIndex = getItemTypeIndex(inputType);
-      const outputType = getItemTypeByIndex(inputTypeIndex + 1);
+      const inputTypeIndex = itemTypes.indexOf(inputType);
+      const outputType = itemTypes[inputTypeIndex + 1] || 'Covert';
       const outputItemsInCollection = collection[outputType];
       if (outputItemsInCollection) {
-        outputItems.push(...outputItemsInCollection);
+        items.push(...outputItemsInCollection);
       }
     }
-  });
-
-  console.log('Output Items:', outputItems);
-
-  if (outputItems.length === 0) {
-    return '<p>No possible outputs found.</p>';
-  }
-
-  const collectionCounts = {};
-
-  minusItems.forEach(item => {
+    return items;
+  }, []);
+  
+  const collectionCounts = minusItems.reduce((counts, item) => {
     const collection = item.itemSetName;
-    collectionCounts[collection] = (collectionCounts[collection] || 0) + 1;
-  });
-
-  console.log('Collection Counts:', collectionCounts);
-
-  const outputBallots = {};
-
-  outputItems.forEach(item => {
+    counts[collection] = (counts[collection] || 0) + 1;
+    return counts;
+  }, {});
+  
+  const outputBallots = outputItems.reduce((ballots, item) => {
     const collection = item.collections[0].name;
-    const ballots = collectionCounts[collection] || 0;
-    outputBallots[item.name] = ballots;
-
-    console.log('Item:', item.name);
-    console.log('Collection:', collection);
-    console.log('Ballots:', ballots);
-    console.log('---');
-  });
-
-  console.log('Output Ballots:', outputBallots);
-
+    ballots[item.name] = collectionCounts[collection] || 0;
+    return ballots;
+  }, {});
+  
   const totalBallots = Object.values(outputBallots).reduce((sum, ballots) => sum + ballots, 0);
-
-  console.log('Total Ballots:', totalBallots);
-
+  
   const outputCards = outputItems.map(item => {
     const itemBallots = outputBallots[item.name] || 0;
     const odds = totalBallots > 0 ? ((itemBallots / totalBallots) * 100).toFixed(2) : '0.00';
-
     return `
       <div class="card output-item">
         <div class="card-color" style="background-color: ${givenColor}"></div>
@@ -187,24 +165,15 @@ function possibleOutputs(inputType, minusItems, givenColor) {
           <img src="${item.image}">
         </div>
         <p>${item.name}</p>
-        <p>${item.collections[0].name}</p>
+        <img class="collection-image" src="${item.collections[0].image}">
         <p>Odds: ${odds}%</p>
       </div>
     `;
   }).join('');
-
+  
   return `<div class="output-items-container">${outputCards}</div>`;
 }
 
-function getItemTypeIndex(itemType) {
-  const itemTypes = ['Consumer Grade', 'Industrial Grade', 'Mil-Spec', 'Restricted', 'Classified', 'Covert'];
-  return itemTypes.indexOf(itemType);
-}
-
-function getItemTypeByIndex(index) {
-  const itemTypes = ['Consumer Grade', 'Industrial Grade', 'Mil-Spec Grade', 'Restricted', 'Classified', 'Covert'];
-  return itemTypes[index] || 'Covert';
-}
 function extractItemColor(itemType) {
   const colorMap = {
     'Consumer Grade': 'rgb(176, 195, 217)',

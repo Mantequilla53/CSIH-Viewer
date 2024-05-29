@@ -139,7 +139,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "XM1014 | VariCamo Blue",
         "description": "The XM1014 is a powerful fully automatic shotgun that justifies its heftier price tag with the ability to paint a room with lead fast. It has been painted using a VariCamo patterned hydrographic.\\n\\n<i>Rebuilding only comes in the wake of destruction</i>",
@@ -153,7 +153,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_hy_varicamo_blue_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Detour",
@@ -168,7 +168,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_hy_ssg08_marker_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Nitro",
@@ -183,7 +183,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_so_orange_accents2_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -284,7 +284,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "AUG | Copperhead",
         "description": "Powerful and accurate, the AUG scoped assault rifle compensates for its long reload times with low spread and a high rate of fire. It has been painted using a copperhead snakeskin-patterned hydrographic.",
@@ -298,7 +298,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_hy_copperhead_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "AWP | Snake Camo",
@@ -313,7 +313,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_awp_sp_snake_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | Copper",
@@ -328,7 +328,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_aq_copper_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -489,7 +489,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Five-SeveN | Nitro",
         "description": "Highly accurate and armor-piercing, the pricy Five-Seven is a slow-loader that compensates with a generous 20-round magazine and forgiving recoil. It has individual parts spray-painted black and tangerine orange.\\n\\n<i>Rona is as good as she thinks she is... she's just not old enough to realize she shouldn't point it out to everyone - Felix Riley, Commanding Officer</i>",
@@ -503,7 +503,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_so_orange_accents_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Fade",
@@ -518,7 +518,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_aa_fade_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP7 | Full Stop",
@@ -533,7 +533,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_hy_varicamo_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Whiteout",
@@ -548,7 +548,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_so_whiteout_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Emerald",
@@ -563,7 +563,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_an_emerald_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -632,7 +632,7 @@
     ]
   },
   "The Arms Deal Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "AUG | Wings",
         "description": "Powerful and accurate, the AUG scoped assault rifle compensates for its long reload times with low spread and a high rate of fire. It has been decorated with dry-transfer decals of eagle feathers.\\n\\n<i>An eagle looks majestic until it's clawing your eyes out</i>",
@@ -646,7 +646,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_hy_feathers_aug_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP7 | Skulls",
@@ -661,7 +661,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_hy_skulls_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Ultraviolet",
@@ -676,7 +676,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_so_purple_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -946,7 +946,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "P90 | Teardown",
         "description": "Easily recognizable for its unique bullpup design, the P90 is a great weapon to shoot on the move due to its high-capacity magazine and low recoil. It has been spray-painted freehand using mesh fabric as a stencil.",
@@ -960,7 +960,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_sp_mesh_hot_and_cold_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Anodized Navy",
@@ -975,7 +975,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_an_navy_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "USP-S | Night Ops",
@@ -990,7 +990,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_hy_varicamo_night_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -1012,7 +1012,7 @@
     ]
   },
   "The Bravo Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Black Limba",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. This memento from Agency has a dark patina and grips of black limba wood.\\n\\n<i>Where classic construction meets modern aesthetics</i>",
@@ -1026,7 +1026,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_cu_season_elites_bravo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "G3SG1 | Demeter",
@@ -1041,7 +1041,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_g3sg1_hy_bluepolygon_bravo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Shattered",
@@ -1056,7 +1056,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_hy_crumple_bravo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "UMP-45 | Bone Pile",
@@ -1071,7 +1071,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_sp_skull_diagram_bravo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Tempest",
@@ -1086,7 +1086,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_hy_seaside_bravo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Wave Spray",
@@ -1101,7 +1101,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_sp_spray_waves_bravo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -1247,7 +1247,7 @@
     ]
   },
   "The eSports 2013 Winter Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Five-SeveN | Nightshade",
         "description": "Highly accurate and armor-piercing, the pricy Five-Seven is a slow-loader that compensates with a generous 20-round magazine and forgiving recoil. It has been painted using a hydrographic with a floral pattern in the style of the Arts and Crafts movement.",
@@ -1261,7 +1261,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_hy_flowers_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "G3SG1 | Azure Zebra",
@@ -1276,7 +1276,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_g3sg1_sp_zebracam_blue_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Blue Titanium",
@@ -1291,7 +1291,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_an_titanium30v_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "PP-Bizon | Water Sigil",
@@ -1306,7 +1306,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_hy_water_crest_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Ghost Camo",
@@ -1321,7 +1321,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_sp_camo_wood_blue_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Steel Disruption",
@@ -1336,7 +1336,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_am_ddpatdense_silver_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -1437,7 +1437,7 @@
     ]
   },
   "The eSports 2014 Summer Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "MAC-10 | Ultraviolet",
         "description": "Essentially a box that bullets come out of, the MAC-10 SMG boasts a high rate of fire, with poor spread accuracy and high recoil as trade-offs. It has individual parts spray-painted solid colors in a black and purple color scheme.\\n\\n<i>Elegant design paired with brutal intent</i>",
@@ -1451,7 +1451,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_so_purple_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "XM1014 | Red Python",
@@ -1466,7 +1466,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_hy_snakeskin_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Negev | Bratatat",
@@ -1481,7 +1481,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_negev_cu_bratatat_negev_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Dark Water",
@@ -1496,7 +1496,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_am_zebra_dark_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "USP-S | Blood Tiger",
@@ -1511,7 +1511,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_hy_redtiger_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Hexane",
@@ -1526,7 +1526,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_hy_bluehex_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -1886,7 +1886,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Desert Eagle | Urban Rubble",
         "description": "As expensive as it is powerful, the Desert Eagle is an iconic pistol that is difficult to master but surprisingly accurate at long range. It has been painted using a VariCamo patterned hydrographic.\\n\\n<i>Rebuilding only comes in the wake of destruction</i>",
@@ -1900,7 +1900,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_deagle_hy_varicamo_urban_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | Amber Fade",
@@ -1915,7 +1915,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_aa_fade_metallic_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -1937,7 +1937,7 @@
     ]
   },
   "The Arms Deal 3 Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Panther",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. It has been painted in a black, grey and red color scheme.",
@@ -1951,7 +1951,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_so_panther_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Glock-18 | Blue Fissure",
@@ -1966,7 +1966,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_hy_craquelure_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P2000 | Red FragCam",
@@ -1981,7 +1981,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_hy_poly_camo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "USP-S | Stainless",
@@ -1996,7 +1996,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_aq_usp_stainless_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Crimson Web",
@@ -2011,7 +2011,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_hy_webs_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -2302,7 +2302,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Desert Eagle | Meteorite",
         "description": "As expensive as it is powerful, the Desert Eagle is an iconic pistol that is difficult to master but surprisingly accurate at long range. It has been painted with metallic paint and uses a crystallizing mask to create a pattern.\\n\\n<i>Everyone wants to make an impact</i>",
@@ -2316,7 +2316,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_deagle_am_crystallized_dark_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Tuxedo",
@@ -2331,7 +2331,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_so_orca_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Tuxedo",
@@ -2346,7 +2346,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_so_orca_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -2524,7 +2524,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "P2000 | Chainmail",
         "description": "Accurate and controllable, the German-made P2000 is a serviceable first-round pistol that works best against unarmored opponents. It has been painted with a semi-transparent hydrographic in a chainmail pattern over a silver base coat.\\n\\n<i>Of all the members of The Phoenix, none are more loyal to Valeria than her bodyguard Naomi</i>",
@@ -2538,7 +2538,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_am_chainmail_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Dark Age",
@@ -2553,7 +2553,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_am_metal_inlay_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -2763,7 +2763,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "XM1014 | Red Leather",
         "description": "The XM1014 is a powerful fully automatic shotgun that justifies its heftier price tag with the ability to paint a room with lead fast. Its stock and grip have been wrapped in red leather.\\n\\n<i>Pack your baags.  Let's go kill that sonofabitch... - The Oni and The Valkyrie Part 2</i>",
@@ -2777,7 +2777,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_cu_leather_xm1014_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | First Class",
@@ -2792,7 +2792,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_cu_green_leather_sawedoff_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "USP-S | Business Class",
@@ -2807,7 +2807,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_cu_luggage_usp-s_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -2861,7 +2861,7 @@
     ]
   },
   "The Breakout Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "UMP-45 | Labyrinth",
         "description": "The misunderstood middle child of the SMG family, the UMP45's small magazine is the only drawback to an otherwise versatile close-quarters automatic. It has been painted with subtle orange linework.",
@@ -2875,7 +2875,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_hy_lines_orange_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Negev | Desert-Strike",
@@ -2890,7 +2890,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_negev_cu_negev_titanstorm_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P2000 | Ivory",
@@ -2905,7 +2905,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_cu_p2000_ivory_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP7 | Urban Hazard",
@@ -2920,7 +2920,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_cu_mp7-commander_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Abyss",
@@ -2935,7 +2935,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_aq_leviathan_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -3081,7 +3081,7 @@
     ]
   },
   "The Chroma Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Glock-18 | Catacombs",
         "description": "The Glock 18 is a serviceable first-round pistol that works best against unarmored opponents and is capable of firing three-round bursts. It has been painted using a hydrographic of skulls over a silver metallic paint base.\\n\\n<i>Intimidation is the sincerest form of flattery</i>",
@@ -3095,7 +3095,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_cu_glock_deathtoll_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M249 | System Lock",
@@ -3110,7 +3110,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m249_cu_m249_sektor_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "XM1014 | Quicksilver",
@@ -3125,7 +3125,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_aq_xm1014_sigla_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Deadly Poison",
@@ -3140,7 +3140,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_cu_mp9_deadly_poison_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Grotto",
@@ -3155,7 +3155,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_aq_scar20_leak_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -3301,7 +3301,7 @@
     ]
   },
   "The Chroma 2 Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Desert Eagle | Bronze Deco",
         "description": "As expensive as it is powerful, the Desert Eagle is an iconic pistol that is difficult to master but surprisingly accurate at long range. It has been painted in an art deco pattern using metallic automotive paints.\\n\\n<i>Everyone's searching for silver and gold</i>",
@@ -3315,7 +3315,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_deagle_am_bronze_sparkle_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "AK-47 | Elite Build",
@@ -3330,7 +3330,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ak47_cu_ak47_mastery_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Negev | Man-o'-war",
@@ -3345,7 +3345,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_negev_am_negev_glory_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | Origami",
@@ -3360,7 +3360,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_cu_sawedoff_origami_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP7 | Armor Core",
@@ -3375,7 +3375,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_aq_mp7_ultramodern_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Valence",
@@ -3390,7 +3390,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_aq_p250_contour_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -3645,7 +3645,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Galil AR | Aqua Terrace",
         "description": "A less expensive option among the terrorist-exclusive assault rifles, the Galil AR is a serviceable weapon in medium to long-range combat. It has been painted with a geometric motif in metallic paints.\\n\\n<i>Serenity now...</i>",
@@ -3659,7 +3659,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_am_geometric_steps_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Counter Terrace",
@@ -3674,7 +3674,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_hy_geometric_steps_green_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Terrace",
@@ -3689,7 +3689,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_hy_geometric_steps_yellow_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -3790,7 +3790,7 @@
     ]
   },
   "The Revolver Case Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Desert Eagle | Corinthian",
         "description": "As expensive as it is powerful, the Desert Eagle is an iconic pistol that is difficult to master but surprisingly accurate at long range. It has been laser-etched and given a custom leather grip.\\n\\n<i>Protect. Hope. Trust. Persevere.</i>",
@@ -3804,7 +3804,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_deagle_aq_deagle_corinthian_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "AUG | Ricochet",
@@ -3819,7 +3819,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_am_aug_jumble_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | Yorick",
@@ -3834,7 +3834,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_gs_sawedoff_necromancer_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P2000 | Imperial",
@@ -3849,7 +3849,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_am_p2000_imperial_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Outbreak",
@@ -3864,7 +3864,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_hy_scar20_jungler_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "R8 Revolver | Crimson Web",
@@ -3879,7 +3879,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_revolver_hy_webs_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -4055,7 +4055,7 @@
     ]
   },
   "The Wildfire Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Cartel",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. It has been engraved with skeletons, flowers and serpents.\\n\\n<i>That's why Huxley is doing the heavy lifting, all we have to is nudge her forward... - The Serpent and The Truth Seeker, Part 2</i>",
@@ -4069,7 +4069,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_aq_dualberettas_cartel_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Lapis Gator",
@@ -4084,7 +4084,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_am_mac10_electricity_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "PP-Bizon | Photic Zone",
@@ -4099,7 +4099,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_cu_bizon_citizen_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Jambiya",
@@ -4114,7 +4114,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_gs_tec9_jambiya_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Necropos",
@@ -4129,7 +4129,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_cu_ssg08_necropos_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "USP-S | Lead Conduit",
@@ -4144,7 +4144,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_gs_usp_voltage_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -4305,7 +4305,7 @@
     ]
   },
   "The Gamma 2 Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Five-SeveN | Scumbria",
         "description": "Highly accurate and armor-piercing, the pricy Five-Seven is a slow-loader that compensates with a generous 20-round magazine and forgiving recoil. It has been discretely painted with stripes.\\n\\n<i>You can't leave him to die, Felix; you have to save him - The Daughter and the Paladin Part 1</i>",
@@ -4319,7 +4319,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_aq_five_seven_scumbria_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "G3SG1 | Ventilator",
@@ -4334,7 +4334,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_g3sg1_gs_g3sg1_ventilator_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Grim",
@@ -4349,7 +4349,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_cu_p90_grimm_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "UMP-45 | Briefing",
@@ -4364,7 +4364,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_cu_ump45_metritera_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "XM1014 | Slipstream",
@@ -4379,7 +4379,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_hy_xm1014_fractal_blue_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Negev | Dazzle",
@@ -4394,7 +4394,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_negev_hy_negev_dazzle_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Imprint",
@@ -4409,7 +4409,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_gs_cz75_tread_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -4570,7 +4570,7 @@
     ]
   },
   "The Spectrum Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Desert Eagle | Oxide Blaze",
         "description": "As expensive as it is powerful, the Desert Eagle is an iconic pistol that is difficult to master but surprisingly accurate at long range. A custom paint job has been applied with a rust-colored base and white detailing.\\n\\n<i>Nothing a little sandpaper can't fix</i>",
@@ -4584,7 +4584,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_deagle_cu_desert_eagle_corroden_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Five-SeveN | Capillary",
@@ -4599,7 +4599,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_cu_fiveseven_vein_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "PP-Bizon | Jungle Slipstream",
@@ -4614,7 +4614,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_hy_bizon_torn_green_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | Zander",
@@ -4629,7 +4629,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_aq_sawedoff_zander2_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP7 | Akoben",
@@ -4644,7 +4644,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_sp_mp7_tribal_yellow_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Ripple",
@@ -4659,7 +4659,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_am_p250_sputnik_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Blueprint",
@@ -4674,7 +4674,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_cu_blueprint_scar_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -4835,7 +4835,7 @@
     ]
   },
   "The Horizon Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Shred",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. It has been spray painted with white and blue streaks on a black base.\\n\\n<i>Sometimes the gnar shreds you</i>",
@@ -4849,7 +4849,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_sp_elites_winter_raider_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Glock-18 | Warhawk",
@@ -4864,7 +4864,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_gs_glock_thunder_dust_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "AUG | Amber Slipstream",
@@ -4879,7 +4879,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_hy_aug_torn_orange_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Traction",
@@ -4894,7 +4894,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_gs_p90_tread_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Snek-9",
@@ -4909,7 +4909,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_cu_tec9_snake_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Capillary",
@@ -4924,7 +4924,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_cu_mp9_vein_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "R8 Revolver | Survivalist",
@@ -4939,7 +4939,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_revolver_cu_r8_survivalist_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -5239,7 +5239,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "MAC-10 | Copper Borre",
         "description": "Essentially a box that bullets come out of, the MAC-10 SMG boasts a high rate of fire, with poor spread accuracy and high recoil as trade-offs. A Norse inspired pattern of gold interlocking rings has been applied.\\n\\n<i>We end the way we began; in the dirt</i>",
@@ -5253,7 +5253,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_am_knots_brown_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "XM1014 | Frost Borre",
@@ -5268,7 +5268,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_am_knots_silver_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Brass",
@@ -5283,7 +5283,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_aq_brass_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Emerald Quartz",
@@ -5298,7 +5298,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_am_crystallized_green_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -5523,7 +5523,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "M249 | Humidor",
         "description": "A strong open-area LMG, the M249 is the perfect choice for players willing to trade a slow fire rate for increased accuracy and a high ammo capacity. It has been spray-painted with a brown and purple vine and flower pattern.\\n\\n<i>\\\"What are they keeping in there?\\\"</i>",
@@ -5537,7 +5537,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m249_sp_moro_carving_burnt_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Music Box",
@@ -5552,7 +5552,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_am_mirage_flowers_metalic_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Desert Blossom",
@@ -5567,7 +5567,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_aa_desert_bloom_bright_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "USP-S | Purple DDPAT",
@@ -5582,7 +5582,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_am_ddpat_purple_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -5683,7 +5683,7 @@
     ]
   },
   "The Danger Zone Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Glock-18 | Oxide Blaze",
         "description": "The Glock 18 is a serviceable first-round pistol that works best against unarmored opponents and is capable of firing three-round bursts. A custom paint job has been applied with a rust-colored base and white detailing.\\n\\n<i>\\\"The subject claims this washed up on shore\\\"</i>",
@@ -5697,7 +5697,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_cu_glock18_corroden_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M4A4 | Magnesium",
@@ -5712,7 +5712,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_gs_m4a4_chopper_ghost_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | Black Sand",
@@ -5727,7 +5727,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_cu_sawedoff_black_sand_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Fubar",
@@ -5742,7 +5742,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_gs_tec9_fubar_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Modest Threat",
@@ -5757,7 +5757,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_gs_mp9_colony01_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Wood Fired",
@@ -5772,7 +5772,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_gs_nova_hunter_brute_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Danger Close",
@@ -5787,7 +5787,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_gs_sg553_over_heated_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -5948,7 +5948,7 @@
     ]
   },
   "The Prisma Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "AK-47 | Uncharted",
         "description": "Powerful and reliable, the AK-47 is one of the most popular assault rifles in the world. It is most deadly in short, controlled bursts of fire. A custom paint job of various tribal patterns has been applied.\\n\\n<i>We share the same canoe</i>",
@@ -5962,7 +5962,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ak47_cu_ak47_aztec_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "FAMAS | Crypsis",
@@ -5977,7 +5977,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_sp_famas_ghost_insects_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Akoben",
@@ -5992,7 +5992,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_sp_galil_akoben_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Whitefish",
@@ -6007,7 +6007,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_gs_mac10_fish_bait_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Off World",
@@ -6022,7 +6022,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_cu_p90_offworld_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP7 | Mischief",
@@ -6037,7 +6037,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_cu_mp7_racketeer_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Verdigris",
@@ -6052,7 +6052,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_aq_p250_verdigris_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -6213,7 +6213,7 @@
     ]
   },
   "The Prisma 2 Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Desert Eagle | Blue Ply",
         "description": "As expensive as it is powerful, the Desert Eagle is an iconic pistol that is difficult to master but surprisingly accurate at long range. It has been laminated and filled with an ash-colored grip and blue slide.\\n\\n<i>WARNING: This is a replica and has not been tested with live ammunition</i>",
@@ -6227,7 +6227,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_deagle_cu_deagle_replica_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "AUG | Tom Cat",
@@ -6242,7 +6242,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_gs_aug_thunderstorm_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "AWP | Capillary",
@@ -6257,7 +6257,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_awp_cu_awp_vein_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP5-SD | Desert Strike",
@@ -6272,7 +6272,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp5sd_cu_mp5_desert_strike_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Negev | Prototype",
@@ -6287,7 +6287,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_negev_cu_negev_prototype_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Distressed",
@@ -6302,7 +6302,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_cu_cz75_cerakote_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "R8 Revolver | Bone Forged",
@@ -6317,7 +6317,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_revolver_gs_r8_leviathan_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -6478,7 +6478,7 @@
     ]
   },
   "The Fracture Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "P90 | Freight",
         "description": "Easily recognizable for its unique bullpup design, the P90 is a great weapon to shoot on the move due to its high-capacity magazine and low recoil. Its custom paint job resembles a train car covered in graffiti.\\n\\n<i>Art is not vandalism</i>",
@@ -6492,7 +6492,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_gs_p90_container_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "PP-Bizon | Runic",
@@ -6507,7 +6507,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_gs_bizon_hellraider_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Negev | Ultralight",
@@ -6522,7 +6522,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_negev_cu_negev_ultralight_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P2000 | Gnarled",
@@ -6537,7 +6537,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_aq_p2000_lost_world_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Cassette",
@@ -6552,7 +6552,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_cu_p250_cassette_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Ol' Rusty",
@@ -6567,7 +6567,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_gs_sg553_rusty_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Mainframe 001",
@@ -6582,7 +6582,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_cu_ssg08_mainframe_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -6882,7 +6882,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "M4A4 | Global Offensive",
         "description": "More accurate but less damaging than its AK-47 counterpart, the M4A4 is the full-auto assault rifle of choice for CTs. It has been custom painted with a blue, yellow, and grey camoflauge.\\n\\n<i>\\\"We'll make first contact in Harz, Germany at 17:25 GMT+1...\\\"</i>",
@@ -6896,7 +6896,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_cu_csgo_camo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P2000 | Dispatch",
@@ -6911,7 +6911,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_am_numbers_red_blue_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Magna Carta",
@@ -6926,7 +6926,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_hy_authority_purple_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Threat Detected",
@@ -6941,7 +6941,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_am_intelligence_orange_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -7181,7 +7181,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Desert Eagle | Night Heist",
         "description": "As expensive as it is powerful, the Desert Eagle is an iconic pistol that is difficult to master but surprisingly accurate at long range. Its base has been painted with a purple anodized map pattern. It looks like someone has drawn on top of the map since it was first applied.\\n\\n<i>Planning is one thing, executing is another</i>",
@@ -7195,7 +7195,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_deagle_am_heist_plans_purple_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Tiger Pit",
@@ -7210,7 +7210,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_am_tigers_brown_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Negev | Phoenix Stencil",
@@ -7225,7 +7225,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_negev_hy_phoenix_tags_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Bengal Tiger",
@@ -7240,7 +7240,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_hy_p250_tiger_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -7341,7 +7341,7 @@
     ]
   },
   "The Snakebite Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Glock-18 | Clear Polymer",
         "description": "The Glock 18 is a serviceable first-round pistol that works best against unarmored opponents and is capable of firing three-round bursts. It has been painted with a tan slide and blue trigger. The frame is made of a clear polymer.\\n\\n<i>What you see is what you get</i>",
@@ -7355,7 +7355,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_gs_glock_polymer_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M249 | O.S.I.P.R.",
@@ -7370,7 +7370,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m249_gs_m249_combine_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "UMP-45 | Oscillator",
@@ -7385,7 +7385,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_am_ump45_electrowave_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Windblown",
@@ -7400,7 +7400,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_sp_nova_wind_dispersal_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Heavy Metal",
@@ -7415,7 +7415,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_gs_sg553_deathmetal_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Circaetus",
@@ -7430,7 +7430,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_cu_cz75_whirlwind_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "R8 Revolver | Junk Yard",
@@ -7445,7 +7445,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_revolver_gs_r8_rustking_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -7606,7 +7606,7 @@
     ]
   },
   "The 2021 Train Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Desert Eagle | Sputnik",
         "description": "As expensive as it is powerful, the Desert Eagle is an iconic pistol that is difficult to master but surprisingly accurate at long range. A space themed pattern consisting of stars and satellites has been applied.\\n\\n<i>Send and receive</i>",
@@ -7620,7 +7620,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_deagle_sp_spacerace_blue_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "AUG | Amber Fade",
@@ -7635,7 +7635,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_aa_fade_metallic_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "UMP-45 | Full Stop",
@@ -7650,7 +7650,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_hy_varicamo_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Safety Net",
@@ -7665,7 +7665,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_hy_mesh_safetyorange_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Spring Twilly",
@@ -7680,7 +7680,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_hy_trainarchitect_green_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M4A1-S | Fizzy POP",
@@ -7695,7 +7695,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_silencer_sp_technowar_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "R8 Revolver | Blaze",
@@ -7710,7 +7710,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_revolver_aa_flames_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -7936,7 +7936,7 @@
     ]
   },
   "The Operation Riptide Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Tread",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. Both Berettas have been hand etched using a wave pattern. The slides have been painted gold.\\n\\n<i>Fine details take the longest, add the most, and are noticed the least</i>",
@@ -7950,7 +7950,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_gs_dual_berettas_tread_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "AUG | Plague",
@@ -7965,7 +7965,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_gs_aug_plague_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "G3SG1 | Keeping Tabs",
@@ -7980,7 +7980,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_g3sg1_cu_g3sg1_tacticalmap_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "XM1014 | Watchdog",
@@ -7995,7 +7995,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_gs_xm1014_watchdog_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "PP-Bizon | Lumen",
@@ -8010,7 +8010,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_gs_bizon_flasher_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP7 | Guerrilla",
@@ -8025,7 +8025,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_cu_mp7_khaki_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "USP-S | Black Lotus",
@@ -8040,7 +8040,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_cu_usp_black_lotus_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -8265,7 +8265,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Anodized Navy",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. It has been painted with a chrome base coat and candied in transparent navy blue anodized effect paint.",
@@ -8279,7 +8279,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_an_navy_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Brass",
@@ -8294,7 +8294,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_aq_brass_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ]
   },
@@ -8468,7 +8468,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Glock-18 | Candy Apple",
         "description": "The Glock 18 is a serviceable first-round pistol that works best against unarmored opponents and is capable of firing three-round bursts. It has individual parts spray-painted solid colors in a red and black color scheme.\\n\\n<i>Great on cars, better on weapons</i>",
@@ -8482,7 +8482,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_so_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | Full Stop",
@@ -8497,7 +8497,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_hy_varicamo_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP7 | Anodized Navy",
@@ -8512,7 +8512,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_an_navy_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -8703,7 +8703,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Five-SeveN | Silver Quartz",
         "description": "Highly accurate and armor-piercing, the pricy Five-Seven is a slow-loader that compensates with a generous 20-round magazine and forgiving recoil. It has been painted with metallic paint and uses a crystallizing mask to create a pattern.\\n\\n<i>Everyone wants to make an impact</i>",
@@ -8717,7 +8717,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_am_crystallized_silver_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "FAMAS | Teardown",
@@ -8732,7 +8732,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_sp_mesh_hot_and_cold_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Acid Fade",
@@ -8747,7 +8747,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_aa_fade_grassland_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -8818,7 +8818,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "AK-47 | Black Laminate",
         "description": "Powerful and reliable, the AK-47 is one of the most popular assault rifles in the world. It is most deadly in short, controlled bursts of fire. It has been given a laminate stock.",
@@ -8832,7 +8832,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ak47_hy_ak47lam_bw_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Glacier Mesh",
@@ -8847,7 +8847,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_sp_mesh_glacier_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -8869,7 +8869,7 @@
     ]
   },
   "The Arms Deal 2 Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "FAMAS | Hexane",
         "description": "A cheap option for cash-strapped players, the FAMAS effectively fills the niche between more expensive rifles and the less-effective SMGs. It has been painted using a hexagon patterned hydrographic.",
@@ -8883,7 +8883,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_hy_bluehex_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Blue Titanium",
@@ -8898,7 +8898,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_an_titanium30v_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Hive",
@@ -8913,7 +8913,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_hy_redhex_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Crimson Web",
@@ -8928,7 +8928,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_hy_webs_darker_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M4A1-S | Blood Tiger",
@@ -8943,7 +8943,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_silencer_hy_redtiger_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -9059,7 +9059,7 @@
     ]
   },
   "The Winter Offensive Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Five-SeveN | Kami",
         "description": "Highly accurate and armor-piercing, the pricy Five-Seven is a slow-loader that compensates with a generous 20-round magazine and forgiving recoil. It has been painted using a hydrographic in a Japanese manga pattern.\\n\\n<i>Some ghosts won't stay buried</i>",
@@ -9073,7 +9073,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_hy_kami_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Sandstorm",
@@ -9088,7 +9088,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_cu_sandstorm_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M249 | Magma",
@@ -9103,7 +9103,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m249_aq_obsidian_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "PP-Bizon | Cobalt Halftone",
@@ -9118,7 +9118,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_am_turqoise_halftone_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -9264,7 +9264,7 @@
     ]
   },
   "The Huntsman Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Retribution",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. It has been custom painted in a military themed design.",
@@ -9284,7 +9284,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_cu_retribution_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Kami",
@@ -9299,7 +9299,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_hy_galil_kami_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Desert Warfare",
@@ -9320,7 +9320,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_cu_p90_scorpius_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Module",
@@ -9335,7 +9335,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_an_royalbleed_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Isaac",
@@ -9350,7 +9350,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_cu_tec9_asiimov_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P2000 | Pulse",
@@ -9365,7 +9365,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_cu_p2000_pulse_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Slashed",
@@ -9380,7 +9380,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_cu_ssg08_immortal_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Poison Dart",
@@ -9401,7 +9401,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_am_nitrogen_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Twist",
@@ -9416,7 +9416,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_am_gyrate_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -9728,7 +9728,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "UMP-45 | Minotaur's Labyrinth",
         "description": "The misunderstood middle child of the SMG family, the UMP45's small magazine is the only drawback to an otherwise versatile close-quarters automatic. It has been painted with a hydrographic of an isometric labyrinth.\\n\\n<i>There's no escape from me</i>",
@@ -9742,7 +9742,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_cu_labyrinth_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Pandora's Box",
@@ -9757,7 +9757,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_aa_pandora_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -9967,7 +9967,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Emerald",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. It has been painted with a chrome base coat and candied in transparent emerald anodized effect paint.\\n\\n<i>This is what the great Sebastien Hennequet has been reduced to? A nagging school marm?  What happened to you... - The Teacher and The Iconoclast Part 2</i>",
@@ -9981,7 +9981,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_an_emerald_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "G3SG1 | Violet Murano",
@@ -9996,7 +9996,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_g3sg1_am_murano_violet_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Baroque Red",
@@ -10011,7 +10011,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_am_veneto_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Orange Filigree",
@@ -10026,7 +10026,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_hy_ren_orange_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -10112,7 +10112,7 @@
     ]
   },
   "The Shadow Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Dualing Dragons",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. It has dragons laser-etched on the slide and barrel.\\n\\n<i>Marian was always cooler than Sylvia</i>",
@@ -10126,7 +10126,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_cu_dualberretta_dragons_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Glock-18 | Wraiths",
@@ -10141,7 +10141,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_gs_glock18_wrathys_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "FAMAS | Survivor Z",
@@ -10156,7 +10156,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_cu_famas_lenta_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Rangeen",
@@ -10171,7 +10171,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_cu_mac10_alekhya_duo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "XM1014 | Scumbria",
@@ -10186,7 +10186,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_aq_xm1014_scumbria_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Cobalt Core",
@@ -10201,7 +10201,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_cu_mag7_myrcene_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Green Marine",
@@ -10216,7 +10216,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_gs_scar20_peacemaker03_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -10362,7 +10362,7 @@
     ]
   },
   "The Chroma 3 Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Ventilators",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. These pistols have been elegantly painted in chrome.\\n\\n<i>A weapon for artists, by artists</i>",
@@ -10376,7 +10376,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_gs_dualberettas_ventilators_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "G3SG1 | Orange Crash",
@@ -10391,7 +10391,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_g3sg1_sp_g3sg1_militiaorange_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M249 | Spectre",
@@ -10406,7 +10406,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m249_cu_m249_spectre_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | Fubar",
@@ -10421,7 +10421,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_gs_sawedoff_fubar_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P2000 | Oceanic",
@@ -10436,7 +10436,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_hy_p2000_oceani_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Bioleak",
@@ -10451,7 +10451,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_am_mp9_bioleak_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Atlas",
@@ -10466,7 +10466,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_cu_sg553_atlas_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -10627,7 +10627,7 @@
     ]
   },
   "The Glove Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Glock-18 | Ironwork",
         "description": "The Glock 18 is a serviceable first-round pistol that works best against unarmored opponents and is capable of firing three-round bursts. The slide has been laser etched to depict ivy and thorns.\\n\\n<i>Left unchecked, any garden becomes a tangled mass of weeds</i>",
@@ -10641,7 +10641,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_aq_glock_dark-fall_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Black Sand",
@@ -10656,7 +10656,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_cu_galil_ar-camo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Sonar",
@@ -10671,7 +10671,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_am_mag7_malform_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P2000 | Turf",
@@ -10686,7 +10686,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_gs_p2000-sport_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP7 | Cirrus",
@@ -10701,7 +10701,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_gs_final_pooldeadv2_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Sand Scale",
@@ -10716,7 +10716,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_aa_hide-mp9_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Polymer",
@@ -10731,7 +10731,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_am_czv2_mf_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -10892,7 +10892,7 @@
     ]
   },
   "The Operation Hydra Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "FAMAS | Macabre",
         "description": "A cheap option for cash-strapped players, the FAMAS effectively fills the niche between more expensive rifles and the less-effective SMGs. It has been spray painted with a green design over a yellow undercoat.\\n\\n<i>A gruesome discovery</i>",
@@ -10906,7 +10906,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_sp_famas_macabre_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Aloha",
@@ -10921,7 +10921,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_am_mac10_aloha_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "UMP-45 | Metal Flowers",
@@ -10936,7 +10936,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_aq_ump45_flameflower_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Hard Water",
@@ -10951,7 +10951,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_am_mag7_caustic_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Cut Out",
@@ -10966,7 +10966,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_aq_tec9_chalk_pattern_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M4A1-S | Briefing",
@@ -10981,7 +10981,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_silencer_cu_m4a1s_metritera_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "USP-S | Blueprint",
@@ -10996,7 +10996,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_cu_usps_blueprint_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -11296,7 +11296,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "M4A4 | Converter",
         "description": "More accurate but less damaging than its AK-47 counterpart, the M4A4 is the full-auto assault rifle of choice for CTs. A red and black mesh hydrographic has been applied.\\n\\n<i>Not so harmful after all...</i>",
@@ -11310,7 +11310,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_hy_red_hex_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | Brake Light",
@@ -11325,7 +11325,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_aa_vertigo_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Hand Brake",
@@ -11340,7 +11340,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_gs_ssg08_checker_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "USP-S | Check Engine",
@@ -11355,7 +11355,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_sp_mesh_safetyred_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -11439,7 +11439,7 @@
     ]
   },
   "The Shattered Web Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Balance",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. A red rose has been painted on either grip over a black base and silver filigree.\\n\\n<i>In all things</i>",
@@ -11453,7 +11453,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_gs_dual_elites_rose_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "G3SG1 | Black Sand",
@@ -11468,7 +11468,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_g3sg1_cu_g3sg1_blacksand_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M249 | Warbird",
@@ -11483,7 +11483,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m249_gs_m249_warbird_veteran_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP5-SD | Acid Wash",
@@ -11498,7 +11498,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp5sd_gs_mp5_etch_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Plume",
@@ -11513,7 +11513,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_cu_nova_featherswing_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Torn",
@@ -11528,7 +11528,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_sp_scar20_striker_dust_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "R8 Revolver | Memento",
@@ -11543,7 +11543,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_revolver_gs_r8_memento_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -11704,7 +11704,7 @@
     ]
   },
   "The CS20 Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Elite 1.6",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. ELITE has been stamped on the side of these classic Dual Berettas.\\n\\n<i>Source material</i>",
@@ -11718,7 +11718,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_gs_dual_elites_classic_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Glock-18 | Sacrifice",
@@ -11733,7 +11733,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_cu_glock_hero_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "FAMAS | Decommissioned",
@@ -11748,7 +11748,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_cu_famas_nuke_tension_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Classic Crate",
@@ -11763,7 +11763,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_gs_mac10_dust_crate_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Popdog",
@@ -11778,7 +11778,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_gs_mag7_popdog_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Flash Out",
@@ -11793,7 +11793,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_cu_tec9_flash_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Assault",
@@ -11808,7 +11808,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_cu_scar_assault_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -11969,7 +11969,7 @@
     ]
   },
   "The Operation Broken Fang Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "G3SG1 | Digital Mesh",
         "description": "The pricy G3SG1 lowers movement speed considerably but compensates with a higher rate of fire than other sniper rifles. It has been painted with a custom red, white, and charcoal-colored DDPAT pattern.\\n\\n<i>Disruptingly intricate</i>",
@@ -11983,7 +11983,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_g3sg1_gs_g3sg1_disrupt_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Vandal",
@@ -11998,7 +11998,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_gs_galil_vandal_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M249 | Deep Relief",
@@ -12013,7 +12013,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m249_cu_m249_deep_relief_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Cocoa Rampage",
@@ -12028,7 +12028,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_hy_p90_dino_rampage_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP5-SD | Condition Zero",
@@ -12043,7 +12043,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp5sd_gs_mp5_conditionzero_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Contaminant",
@@ -12058,7 +12058,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_cu_p250_infect_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "CZ75-Auto | Vendetta",
@@ -12073,7 +12073,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_cz75a_gs_cz75_vendetta_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -12373,7 +12373,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "AK-47 | Green Laminate",
         "description": "Powerful and reliable, the AK-47 is one of the most popular assault rifles in the world. It is most deadly in short, controlled bursts of fire. An green laminate has been applied to this AK's stock, grip, and handguard.\\n\\n<i>It's the simple things</i>",
@@ -12387,7 +12387,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ak47_hy_ak47lam_green_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Schematic",
@@ -12402,7 +12402,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_hy_vertigogeo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Negev | Infrastructure",
@@ -12417,7 +12417,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_negev_hy_vertigospray_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Interlock",
@@ -12432,7 +12432,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_hy_vertigoillusion_yellow_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -12533,7 +12533,7 @@
     ]
   },
   "The Dreams & Nightmares Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Five-SeveN | Scrawl",
         "description": "Highly accurate and armor-piercing, the pricy Five-Seven is a slow-loader that compensates with a generous 20-round magazine and forgiving recoil. Custom designs have been hand-painted using bold strokes over a yellow and teal base.\\n\\n<i>The first and the last</i>",
@@ -12547,7 +12547,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_cu_fiveseven_alpha_omega_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Ensnared",
@@ -12562,7 +12562,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_cu_mac10_pixie_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP5-SD | Necro Jr.",
@@ -12577,7 +12577,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp5sd_gs_mp5_kid_necronomicon_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Foresight",
@@ -12592,7 +12592,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_cu_mag7_predictor_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | Spirit Board",
@@ -12607,7 +12607,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_cu_sawedoff_ouija_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P2000 | Lifted Spirits",
@@ -12622,7 +12622,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_cu_p2k_flying_dream_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Poultrygeist",
@@ -12637,7 +12637,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_sp_scar_chickenfight_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -12798,7 +12798,7 @@
     ]
   },
   "The Recoil Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Glock-18 | Winterized",
         "description": "The Glock 18 is a serviceable first-round pistol that works best against unarmored opponents and is capable of firing three-round bursts. It has been custom painted with a military camouflage in a winter colorway.\\n\\n<i>Freeze!</i>",
@@ -12812,7 +12812,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_gs_glock_elite_camo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "FAMAS | Meow 36",
@@ -12827,7 +12827,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_gs_famas_corp_meow_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Destroyer",
@@ -12842,7 +12842,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_cu_galil_destroyer_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M4A4 | Poly Mag",
@@ -12857,7 +12857,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_cu_m4a4_elite_tactical_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Monkeyflage",
@@ -12872,7 +12872,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_cu_mac10_monkeyflage_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "UMP-45 | Roadblock",
@@ -12887,7 +12887,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_gs_ump_roadblock_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Negev | Drop Me",
@@ -12902,7 +12902,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_negev_cu_negev_clear_sky_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -13063,7 +13063,7 @@
     ]
   },
   "The Kilowatt Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Dual Berettas | Hideout",
         "description": "Firing two large-mag Berettas at once will lower accuracy and increase load times. On the bright side, you'll get to fire two large-mag Berettas at once. It has been custom painted with a multicolored design.\\n\\n<i>Step right up, don't be shy</i>",
@@ -13077,7 +13077,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_elite_dual_berettas_lethal_grin_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Light Box",
@@ -13092,7 +13092,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_mac10_illusion_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "UMP-45 | Motorized",
@@ -13107,7 +13107,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_ump45_assembled_engine_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "XM1014 | Irezumi",
@@ -13122,7 +13122,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_xm1014_irezumi_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Slag",
@@ -13137,7 +13137,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_tec9_junkyard_engineering_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Dark Sigil",
@@ -13152,7 +13152,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_nova_drakkar_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SSG 08 | Dezastre",
@@ -13167,7 +13167,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ssg08_ssg08_dezastre_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -13377,7 +13377,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "AUG | Hot Rod",
         "description": "Powerful and accurate, the AUG scoped assault rifle compensates for its long reload times with low spread and a high rate of fire. It has been painted with a chrome base coat and candied in transparent red anodized effect paint.\\n\\n<i>Automatic. Systematic. Hydromatic.</i>",
@@ -13391,7 +13391,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_an_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Negev | Anodized Navy",
@@ -13406,7 +13406,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_negev_an_navy_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -13612,7 +13612,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "MAC-10 | Amber Fade",
         "description": "Essentially a box that bullets come out of, the MAC-10 SMG boasts a high rate of fire, with poor spread accuracy and high recoil as trade-offs. It has been painted by airbrushing transparent paints that fade together over a chrome base coat.\\n\\n<i>This isn't just a weapon, it's a conversation piece - Imogen, Arms Dealer In Training</i>",
@@ -13626,7 +13626,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_aa_fade_metallic_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "UMP-45 | Blaze",
@@ -13641,7 +13641,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_aa_flames_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Hot Rod",
@@ -13656,7 +13656,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_an_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -13847,7 +13847,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "PP-Bizon | Brass",
         "description": "The Bizon SMG is low-damage, but offers a uniquely designed high-capacity drum magazine that reloads quickly. Parts of the weapon have been replaced with brass.\\n\\n<i>Fool's gold</i>",
@@ -13861,7 +13861,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_aq_brass_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Damascus Steel",
@@ -13876,7 +13876,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_aq_damascus_sg553_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M4A1-S | VariCamo",
@@ -13891,7 +13891,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_silencer_hy_varicamo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -14009,7 +14009,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Tec-9 | Ossified",
         "description": "An ideal pistol for the Terrorist on the move, the Tec-9 is lethal in close quarters and features a high magazine capacity. It has been painted using a transparent lime green abstract hydrographic over a metallic base coat.",
@@ -14023,7 +14023,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_am_ossify_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ]
   },
@@ -14197,7 +14197,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "AUG | Anodized Navy",
         "description": "Powerful and accurate, the AUG scoped assault rifle compensates for its long reload times with low spread and a high rate of fire. This memento from Ali has been painted with a chrome base coat and candied in transparent navy anodized effect paint.\\n\\n<i>I already lost one man to Valeria's lies... I don't intend to lose anyone else - Felix Riley, Commanding Officer</i>",
@@ -14211,7 +14211,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_an_navy_bravo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "PP-Bizon | Rust Coat",
@@ -14226,7 +14226,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_aq_steel_bravo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Hazard",
@@ -14241,7 +14241,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_sp_hazard_bravo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -14370,7 +14370,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Glock-18 | Reactor",
         "description": "The Glock 18 is a serviceable first-round pistol that works best against unarmored opponents and is capable of firing three-round bursts. It has been painted with a pattern of nuclear hazard symbols using metallic paints.",
@@ -14384,7 +14384,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_am_nuclear_pattern1_glock_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Nuclear Garden",
@@ -14399,7 +14399,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_am_nuclear_skulls3_mac10_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "XM1014 | Bone Machine",
@@ -14414,7 +14414,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_am_nuclear_skulls1_xm1014_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Toxic",
@@ -14429,7 +14429,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_hy_nuclear_skulls5_tec9_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Setting Sun",
@@ -14444,7 +14444,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_hy_nuclear_pattern2_mp9_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -14481,7 +14481,7 @@
     ]
   },
   "The Vanguard Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Five-SeveN | Urban Hazard",
         "description": "Highly accurate and armor-piercing, the pricy Five-Seven is a slow-loader that compensates with a generous 20-round magazine and forgiving recoil. It has been custom painted with urban camo and red accents.\\n\\n<i>Every year, Booth gathers the worlds foremost designer gunsmiths to show off their latest designs</i>",
@@ -14495,7 +14495,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_cu_fiveseven_urban_hazard_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "G3SG1 | Murky",
@@ -14510,7 +14510,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_g3sg1_am_g3sg1_murky_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "UMP-45 | Delusion",
@@ -14525,7 +14525,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_sp_ump45_d-visions_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Firestarter",
@@ -14540,7 +14540,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_sp_mag7_firebitten_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Dart",
@@ -14555,7 +14555,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_cu_mp9_chevron_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -14701,7 +14701,7 @@
     ]
   },
   "The Gamma Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Five-SeveN | Violent Daimyo",
         "description": "Highly accurate and armor-piercing, the pricy Five-Seven is a slow-loader that compensates with a generous 20-round magazine and forgiving recoil. It has been custom painted with a graphic design in violet and black.\\n\\n<i>How will you rule?</i>",
@@ -14715,7 +14715,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_cu_five_seven_daimyo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Carnivore",
@@ -14730,7 +14730,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_aq_mac_10_alien_camo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "PP-Bizon | Harvester",
@@ -14745,7 +14745,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_gs_pp_bizon_harvester_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Ice Cap",
@@ -14760,7 +14760,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_am_tec_9_sea_salt_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Exo",
@@ -14775,7 +14775,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_aq_nova_sci_fi_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Iron Clad",
@@ -14790,7 +14790,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_gs_p250_metal_panels_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Aerial",
@@ -14805,7 +14805,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_cu_sg553_aerial_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -14966,7 +14966,7 @@
     ]
   },
   "The Clutch Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Five-SeveN | Flame Test",
         "description": "Highly accurate and armor-piercing, the pricy Five-Seven is a slow-loader that compensates with a generous 20-round magazine and forgiving recoil. A silver flame on the muzzle overlays a purple base with a metal flake finish.\\n\\n<i>Element detected: Cs</i>",
@@ -14980,7 +14980,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_gs_fiveseven_hot_rod_violet_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "XM1014 | Oxide Blaze",
@@ -14995,7 +14995,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_cu_xm1014_oxide_blaze_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "PP-Bizon | Night Riot",
@@ -15010,7 +15010,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_cu_bizon_riot_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P2000 | Urban Hazard",
@@ -15025,7 +15025,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_cu_p2000_urban_hazard_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Black Sand",
@@ -15040,7 +15040,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_cu_mp9_black_sand_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Aloha",
@@ -15055,7 +15055,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_sp_sg533_aloha_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "R8 Revolver | Grip",
@@ -15070,7 +15070,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_revolver_gs_revolver_tread_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -15370,7 +15370,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Five-SeveN | Crimson Blossom",
         "description": "Highly accurate and armor-piercing, the pricy Five-Seven is a slow-loader that compensates with a generous 20-round magazine and forgiving recoil. A wine colored rose bud hydrographic pattern has been applied.\\n\\n<i>No rose without a thorn</i>",
@@ -15384,7 +15384,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_fiveseven_hy_bud_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "FAMAS | Sundown",
@@ -15399,7 +15399,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_sp_palm_sunset_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "UMP-45 | Day Lily",
@@ -15414,7 +15414,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_hy_bloom_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP7 | Teal Blossom",
@@ -15429,7 +15429,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_sp_bud_green_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -15654,7 +15654,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "AWP | Acheron",
         "description": "High risk and high reward, the infamous AWP is recognizable by its signature report and one-shot, one-kill policy. A multicolored hydrographic pattern has been applied.\\n\\n<i>A weapon of woe</i>",
@@ -15668,7 +15668,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_awp_hy_nuclear_skulls_redblue_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Facility Negative",
@@ -15683,7 +15683,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_hy_blueprint_aqua_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP5-SD | Co-Processor",
@@ -15698,7 +15698,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp5sd_am_circuitboard_aqua_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Exchanger",
@@ -15713,7 +15713,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_hy_ducts_blue_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -15936,7 +15936,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "G3SG1 | New Roots",
         "description": "The pricy G3SG1 lowers movement speed considerably but compensates with a higher rate of fire than other sniper rifles. It has been spray-painted with a vine and flower pattern in various shades of green.\\n\\n<i>Room to grow</i>",
@@ -15950,7 +15950,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_g3sg1_sp_moro_carving_lightblue_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Amber Fade",
@@ -15965,7 +15965,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_aa_fade_metallic_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Quick Sand",
@@ -15980,7 +15980,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_hy_torn_camo_paints_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Black & Tan",
@@ -15995,7 +15995,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_hy_desert_multicam_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -16096,7 +16096,7 @@
     ]
   },
   "The Falchion Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Glock-18 | Bunsen Burner",
         "description": "The Glock 18 is a serviceable first-round pistol that works best against unarmored opponents and is capable of firing three-round bursts. It has been given a blue patina which has been polished off parts of the slide to result in a graphic flame design.\\n\\n<i>KNOCK KNOCK</i>",
@@ -16110,7 +16110,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_aq_glock18_flames_blue_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Rocket Pop",
@@ -16125,7 +16125,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_cu_galilar_particles_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P90 | Elite Build",
@@ -16140,7 +16140,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p90_cu_p90_mastery_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "UMP-45 | Riot",
@@ -16155,7 +16155,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_cu_ump45_uproar_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Ranger",
@@ -16170,7 +16170,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_cu_nova_ranger_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "USP-S | Torque",
@@ -16185,7 +16185,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_usp_silencer_cu_usp_progressiv_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -16346,7 +16346,7 @@
     ]
   },
   "The Spectrum 2 Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "Glock-18 | Off World",
         "description": "The Glock 18 is a serviceable first-round pistol that works best against unarmored opponents and is capable of firing three-round bursts. It has been hand painted with multiple coats of blue paint.\\n\\n<i>The topcoat is still drying</i>",
@@ -16360,7 +16360,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_glock_cu_glock_indigo_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "AUG | Triqua",
@@ -16375,7 +16375,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_cu_aug_orange_triangle_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "G3SG1 | Hunter",
@@ -16390,7 +16390,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_g3sg1_gs_g3sg1_cetme_redux_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAC-10 | Oceanic",
@@ -16405,7 +16405,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mac10_am_mac10_oceani_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Sawed-Off | Morris",
@@ -16420,7 +16420,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sawedoff_aq_sawed-off_flower_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Cracked Opal",
@@ -16435,7 +16435,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_cu_tec9_cracked_opal_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Jungle Slipstream",
@@ -16450,7 +16450,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_hy_scar20_jungle_slipstream_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -16611,7 +16611,7 @@
     ]
   },
   "The Revolution Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "MP5-SD | Liquidation",
         "description": "Often imitated but never equaled, the iconic MP5 is perhaps the most versatile and popular SMG in the world. This SD variant features an integrated silencer, making an already formidable weapon whisper-quiet. Its dark base and carefully selected red and blue highlights make this custom painted MP5-SD appear as if it's glowing under ambient light.\\n\\n<i>Quiet reflection</i>",
@@ -16625,7 +16625,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp5sd_cu_mp5sd_quick_liquidation_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Insomnia",
@@ -16640,7 +16640,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_cu_mag7_insomnia_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Rebel",
@@ -16655,7 +16655,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_cu_tec9_freedom_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP9 | Featherweight",
@@ -16670,7 +16670,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp9_cu_mp9_superlight_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Re.built",
@@ -16685,7 +16685,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_cu_p250_rebuilt_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SCAR-20 | Fragments",
@@ -16700,7 +16700,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_scar20_gs_scar_fragments_black_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "SG 553 | Cyberforce",
@@ -16715,7 +16715,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_sg556_cu_sg553_cyberforce_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -17015,7 +17015,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "AK-47 | Steel Delta",
         "description": "Powerful and reliable, the AK-47 is one of the most popular assault rifles in the world. It is most deadly in short, controlled bursts of fire. The lines of this custom paint job resemble grooves on a topographical map.\\n\\n<i>Bleed between the lines</i>",
@@ -17029,7 +17029,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ak47_gs_ak47_strone_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "AWP | Black Nile",
@@ -17044,7 +17044,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_awp_gs_awp_strone_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Copper Coated",
@@ -17059,7 +17059,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_gs_mag7_goold_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Mummy's Rot",
@@ -17074,7 +17074,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_cu_tec9_mummy_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -17175,7 +17175,7 @@
     ]
   },
   "The eSports 2013 Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "FAMAS | Doomkitty",
         "description": "A cheap option for cash-strapped players, the FAMAS effectively fills the niche between more expensive rifles and the less-effective SMGs. It has been hydro-dipped with a graphic of overlapping cat skulls.",
@@ -17189,7 +17189,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_hy_doomkitty_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "M4A4 | Faded Zebra",
@@ -17204,7 +17204,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_sp_zebracam_bw_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Memento",
@@ -17219,7 +17219,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_hy_icosahedron_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -17320,7 +17320,7 @@
     ]
   },
   "The Phoenix Collection": {
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "UMP-45 | Corporal",
         "description": "The misunderstood middle child of the SMG family, the UMP45's small magazine is the only drawback to an otherwise versatile close-quarters automatic. It has been custom painted in a military motif.\\n\\n<i>Respect can never be taken, only earned</i>",
@@ -17334,7 +17334,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_ump45_cu_ump_corporal_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MAG-7 | Heaven Guard",
@@ -17349,7 +17349,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mag7_cu_mag7_heaven_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Negev | Terrain",
@@ -17364,7 +17364,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_negev_sp_negev_turq_terrain_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Sandstorm",
@@ -17379,7 +17379,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_cu_tec9_sandstorm_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -17664,7 +17664,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "AUG | Carved Jade",
         "description": "Powerful and accurate, the AUG scoped assault rifle compensates for its long reload times with low spread and a high rate of fire. It has been painted with a chrome base coat and candied in transparent jade-green anodized effect paint.\\n\\n<i>The finest of the finer things</i>",
@@ -17678,7 +17678,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_aug_am_jade_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "FAMAS | Dark Water",
@@ -17693,7 +17693,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_famas_am_zebra_dark_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Galil AR | Dusk Ruins",
@@ -17708,7 +17708,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_galilar_hy_ruins_red_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Tec-9 | Blast From the Past",
@@ -17723,7 +17723,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_tec9_hy_ancient_tiles_peach_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -17888,7 +17888,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "P2000 | Silver",
         "description": "Accurate and controllable, the German-made P2000 is a serviceable first-round pistol that works best against unarmored opponents. It has been painted with a chrome base coat and candied in transparent silver anodized effect paint.\\n\\n<i>There is beauty in simplicity - Franz Kriegeld, Phoenix Tactician</i>",
@@ -17902,7 +17902,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_hkp2000_an_silver_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "MP7 | Whiteout",
@@ -17917,7 +17917,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_mp7_so_whiteout_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ]
   },
@@ -17986,7 +17986,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "XM1014 | Blaze Orange",
         "description": "The XM1014 is a powerful fully automatic shotgun that justifies its heftier price tag with the ability to paint a room with lead fast. It has been painted using a photographic hunting camo hydrographic.",
@@ -18000,7 +18000,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_xm1014_hy_hunter_blaze_orange_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "PP-Bizon | Modern Hunter",
@@ -18015,7 +18015,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_bizon_hy_hunter_modern_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Modern Hunter",
@@ -18030,7 +18030,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_hy_hunter_modern_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "Nova | Blaze Orange",
@@ -18045,7 +18045,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_nova_hy_hunter_blaze_orange_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       },
       {
         "name": "P250 | Modern Hunter",
@@ -18060,7 +18060,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_p250_hy_hunter_modern_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [
@@ -18193,7 +18193,7 @@
         "rarity_name": "Industrial Grade"
       }
     ],
-    "Mil-Spec Grade": [
+    "Mil-Spec": [
       {
         "name": "M4A4 | Radiation Hazard",
         "description": "More accurate but less damaging than its AK-47 counterpart, the M4A4 is the full-auto assault rifle of choice for CTs. It has been spray-painted with radiological warning hazard patterns.",
@@ -18207,7 +18207,7 @@
           }
         ],
         "image": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/main/static/panorama/images/econ/default_generated/weapon_m4a1_sp_nukestripe_orange_light_png.png",
-        "rarity_name": "Mil-Spec Grade"
+        "rarity_name": "Mil-Spec"
       }
     ],
     "Restricted": [

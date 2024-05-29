@@ -94,6 +94,10 @@
   max-width: 35px;
   max-height: 35px;
 }
+.collection-image {
+  max-width: 45px;
+  max-height: 45px;
+}
 .generate-button {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 17px;
