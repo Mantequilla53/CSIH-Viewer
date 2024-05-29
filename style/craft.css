@@ -131,9 +131,25 @@
   overflow: hidden;
   padding: 0 10px;
   background-color: #393E46;
-  transition: max-height 0.3s ease, padding 0.3s ease;
+  transition: max-height 1s ease, padding 1s ease;
 }
 .new-content.show {
   max-height: none;
   padding: 10px;
+}
+.output-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px;
+}
+
+.output-item {
+  width: 150px;
+}
+
+.output-item img {
+  width: 120px;
+  height: auto;
 }

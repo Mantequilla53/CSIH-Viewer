@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 function showCraftedContent(description, entries, contentContainer, tabStatsContainer) {
   const tradeUpTypeCount = {
     'Industrial Grade': 0,
@@ -51,6 +54,8 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
       if (filteredPlusItems.length > 0) {
         const { d, t, plusItems, minusItems } = entry;
         const takenColor = extractItemColor(minusItems[0].itemType);
+        const givenColor = extractItemColor(plusItems[0].itemType);
+        const inputType = minusItems[0].itemType;
         const entryElement = document.createElement('div');
         entryElement.classList.add('entry');
         entryElement.innerHTML = `
@@ -60,7 +65,7 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
             <div class="card-container">
               ${plusItems.length > 0 ? `
                 <div class="card given-item">
-                  <div class="card-color" style="background-color: ${extractItemColor(plusItems[0].itemType)}"></div>
+                  <div class="card-color" style="background-color: ${givenColor}"></div>
                   <div class="given-item-image">
                     <img src="images/${plusItems[0].itemName}.png">
                   </div>
@@ -100,28 +105,110 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
         contentContainer.appendChild(entryElement);
 
         const generateButton = entryElement.querySelector('.generate-button');
-        const dropContent = entryElement.querySelector('.new-content');
-        generateButton.addEventListener('click', () => {
-          dropContent.classList.toggle('show');
-          generateButton.classList.toggle('active');
-          if (dropContent.classList.contains('show')) {
-            const outputText = possibleOutputs(minusItems);
-            dropContent.textContent = outputText;
-          } else {
-            dropContent.textContent = '';
-          }     
-        });
+const dropContent = entryElement.querySelector('.new-content');
+generateButton.addEventListener('click', () => {
+  dropContent.classList.toggle('show');
+  generateButton.classList.toggle('active');
+  if (dropContent.classList.contains('show')) {
+    const outputText = possibleOutputs(inputType, minusItems, givenColor);
+    dropContent.innerHTML = outputText;
+  } else {
+    dropContent.innerHTML = '';
+  }     
+});
       }
     });
   }
   updateContentContainer();
 }
 
-function possibleOutputs(minusItems) {
-  return 'Coming Soon';
-  //return minusItems.market_name;
+function possibleOutputs(inputType, minusItems, givenColor) {
+  const itemSetNames = [...new Set(minusItems.map(item => item.itemSetName))];
+  const outputFilePath = path.join(__dirname, 'output.json');
+  const outputFileContent = fs.readFileSync(outputFilePath, 'utf8');
+  const collectionData = JSON.parse(outputFileContent);
+
+  const outputItems = [];
+
+  itemSetNames.forEach(setName => {
+    const collection = collectionData[setName];
+    if (collection) {
+      const inputTypeIndex = getItemTypeIndex(inputType);
+      const outputType = getItemTypeByIndex(inputTypeIndex + 1);
+      const outputItemsInCollection = collection[outputType];
+      if (outputItemsInCollection) {
+        outputItems.push(...outputItemsInCollection);
+      }
+    }
+  });
+
+  console.log('Output Items:', outputItems);
+
+  if (outputItems.length === 0) {
+    return '<p>No possible outputs found.</p>';
+  }
+
+  const collectionCounts = {};
+
+  minusItems.forEach(item => {
+    const collection = item.itemSetName;
+    collectionCounts[collection] = (collectionCounts[collection] || 0) + 1;
+  });
+
+  console.log('Collection Counts:', collectionCounts);
+
+  const outputBallots = {};
+
+  outputItems.forEach(item => {
+    const collection = item.collections[0].name;
+    const collectionCount = collectionCounts[collection] || 0;
+    const outputItemsInCollection = outputItems.filter(outputItem => outputItem.collections[0].name === collection);
+    const ballots = collectionCount * outputItemsInCollection.length;
+    outputBallots[item.name] = ballots;
+
+    console.log('Item:', item.name);
+    console.log('Collection:', collection);
+    console.log('Collection Count:', collectionCount);
+    console.log('Output Items in Collection:', outputItemsInCollection);
+    console.log('Ballots:', ballots);
+    console.log('---');
+  });
+
+  console.log('Output Ballots:', outputBallots);
+
+  const totalBallots = Object.values(outputBallots).reduce((sum, ballots) => sum + ballots, 0);
+
+  console.log('Total Ballots:', totalBallots);
+
+  const outputCards = outputItems.map(item => {
+    const itemBallots = outputBallots[item.name] || 0;
+    const odds = totalBallots > 0 ? ((itemBallots / totalBallots) * 100).toFixed(2) : '0.00';
+
+    return `
+      <div class="card output-item">
+        <div class="card-color" style="background-color: ${givenColor}"></div>
+        <div class="card-image-container">
+          <img src="${item.image}">
+        </div>
+        <p>${item.name}</p>
+        <p>${item.collections[0].name}</p>
+        <p>Odds: ${odds}%</p>
+      </div>
+    `;
+  }).join('');
+
+  return `<div class="output-items-container">${outputCards}</div>`;
 }
 
+function getItemTypeIndex(itemType) {
+  const itemTypes = ['Consumer Grade', 'Industrial Grade', 'Mil-Spec', 'Restricted', 'Classified', 'Covert'];
+  return itemTypes.indexOf(itemType);
+}
+
+function getItemTypeByIndex(index) {
+  const itemTypes = ['Consumer Grade', 'Industrial Grade', 'Mil-Spec Grade', 'Restricted', 'Classified', 'Covert'];
+  return itemTypes[index] || 'Covert';
+}
 function extractItemColor(itemType) {
   const colorMap = {
     'Consumer Grade': 'rgb(176, 195, 217)',
