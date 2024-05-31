@@ -1,0 +1,113 @@
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    margin: 20px;
+  }
+  
+  .item-card {
+    display: flex;
+    align-items: center;
+    background-color: #393E46;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .item-card:hover {
+    background-color: #4a4f57;
+  }
+  
+  .item-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-right: 10px;
+  }
+  
+  .item-info {
+    flex: 1;
+  }
+  
+  .item-info h4 {
+    margin: 0;
+  }
+  
+  .item-info p {
+    margin: 5px 0;
+  }
+  #reset-container {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 20px;
+    background-color: #393E46;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  #reset-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #reset-button:hover {
+    background-color: #4a4f57;
+  }
+  
+  .button-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: auto;
+  }
+  #content-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    grid-gap: 20px;
+    margin: 40px 20px;
+    padding: 20px;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+  }
+  
+  .entry-container {
+    background-color: #393E46;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .entry-container .entry-header p {
+    margin: 0;
+  }
+  
+  .entry-container .entry-image {
+    text-align: center;
+  }
+  
+  .entry-container .entry-image img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+  }
+  
+  .entry-container .entry-case p {
+    margin: 0;
+  }

@@ -59,76 +59,73 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
         const entryElement = document.createElement('div');
         entryElement.classList.add('entry');
         entryElement.innerHTML = `
-            <div class="entry-header">
-              <span>${d} ${t}</span>
+  <div class="entry-header">
+    <span>${d} ${t}</span>
+  </div>
+  <div class="card-container">
+    <div class="minus-items-container">
+      ${minusItems.map(item => `
+        <div class="card taken-item">
+          <div class="card-color" style="background-color: ${takenColor}"></div>
+          <div class="card-image-container">
+            <img src="images/${item.itemName}.png">
+            ${item.stickers && item.stickers.length > 0 ? `
+              <div class="item-separator"></div>
+              <div class="stickers-section">
+                ${item.stickers.map(sticker => `
+                  <img class="sticker-image" src="images/${sticker.imgSrc}.png">
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+          <p>${item.market_name}</p>
+          <p>${item.itemSetName}</p>
+        </div>
+      `).join('')}
+    </div>
+    <div class="plus-items-wrapper">
+      <div class="plus-items-top">
+        ${plusItems.length > 0 ? `
+          <div class="card given-item plus-item">
+            <div class="card-color" style="background-color: ${givenColor}"></div>
+            <div class="card-image-container">
+              <img src="images/${plusItems[0].itemName}.png">
             </div>
-            <div class="card-container">
-              ${plusItems.length > 0 ? `
-                <div class="card given-item">
-                  <div class="card-color" style="background-color: ${givenColor}"></div>
-                  <div class="given-item-image">
-                    <img src="images/${plusItems[0].itemName}.png">
-                  </div>
-                  <div class="given-item-text">
-                    <p>${plusItems[0].market_name}</p>
-                    <p>${plusItems[0].itemSetName}</p>
-                  </div>
-                </div>
-              ` : ''}
-                <div class="taken-items-container">
-                  ${minusItems.map(item => `
-                    <div class="card taken-item">
-                      <div class="card-color" style="background-color: ${takenColor}"></div>
-                        <div class="card-image-container">
-                          <img src="images/${item.itemName}.png">
-                          ${item.stickers && item.stickers.length > 0 ? `
-                          <div class="item-separator"></div>
-                            <div class="stickers-section">
-                              ${item.stickers.map(sticker => `
-                                <img class="sticker-image" src="images/${sticker.imgSrc}.png">
-                              `).join('')}
-                            </div>
-                          ` : ''}
-                        </div>  
-                      <p>${item.market_name}</p>
-                      <p>${item.itemSetName}</p>
-                    </div>
-                  `).join('')}
-                </div>
-              <div class="new-content"></div>
-            </div>
-          <button class="generate-button">
-            <span>Generate Possible Outputs</span>
-            <i class="arrow-icon"></i>
-          </button>
-        `;
+            <p>${plusItems[0].market_name}</p>
+            <p>${plusItems[0].itemSetName}</p>
+          </div>
+        ` : ''}
+        <div class="card show-outcomes-card">
+          <span>Show Possible Outcomes</span>
+        </div>
+      </div>
+      <div class="plus-items-container"></div>
+    </div>
+  `;
         contentContainer.appendChild(entryElement);
 
-        const generateButton = entryElement.querySelector('.generate-button');
-const dropContent = entryElement.querySelector('.new-content');
-generateButton.addEventListener('click', () => {
-  dropContent.classList.toggle('show');
-  generateButton.classList.toggle('active');
-  if (dropContent.classList.contains('show')) {
-    const outputText = possibleOutputs(inputType, minusItems, givenColor);
-    dropContent.innerHTML = outputText;
-  } else {
-    dropContent.innerHTML = '';
-  }     
-});
+        const showOutcomesCard = entryElement.querySelector('.show-outcomes-card');
+  const plusItemsTop = entryElement.querySelector('.plus-items-top');
+  const plusItemsContainer = entryElement.querySelector('.plus-items-container');
+
+  showOutcomesCard.addEventListener('click', () => {
+    plusItemsTop.style.display = 'none';
+    const outputText = possibleOutputs(inputType, minusItems, givenColor, plusItems[0]);
+    plusItemsContainer.innerHTML = outputText;
+  });
       }
     });
   }
   updateContentContainer();
 }
 
-function possibleOutputs(inputType, minusItems, givenColor) {
+function possibleOutputs(inputType, minusItems, givenColor, plusItem) {
   const itemTypes = ['Consumer Grade', 'Industrial Grade', 'Mil-Spec', 'Restricted', 'Classified', 'Covert'];
   const itemSetNames = [...new Set(minusItems.map(item => item.itemSetName))];
   const outputFilePath = path.join(__dirname, 'output.json');
   const collectionData = JSON.parse(fs.readFileSync(outputFilePath, 'utf8'));
   
-  const outputItems = itemSetNames.reduce((items, setName) => {
+  let outputItems = itemSetNames.reduce((items, setName) => {
     const collection = collectionData[setName];
     if (collection) {
       const inputTypeIndex = itemTypes.indexOf(inputType);
@@ -155,23 +152,66 @@ function possibleOutputs(inputType, minusItems, givenColor) {
   
   const totalBallots = Object.values(outputBallots).reduce((sum, ballots) => sum + ballots, 0);
   
+  // Remove parentheses from plusItem market_name for matching
+  const plusItemNameWithoutParentheses = plusItem.market_name.split(' (')[0];
+
+  // Find the matching plusItem and its collection
+  let matchingPlusItem = null;
+  let matchingCollection = null;
+  for (const item of outputItems) {
+    if (item.name.split(' (')[0] === plusItemNameWithoutParentheses) {
+      matchingPlusItem = item;
+      matchingCollection = item.collections[0].name;
+      break;
+    }
+  }
+
+  if (matchingPlusItem) {
+    // Remove the matching plusItem from its original position
+    outputItems = outputItems.filter(item => item !== matchingPlusItem);
+
+    // Sort outputItems by collection, with the matching collection first
+    outputItems.sort((itemA, itemB) => {
+      const collectionA = itemA.collections[0].name;
+      const collectionB = itemB.collections[0].name;
+      if (collectionA === matchingCollection) return -1;
+      if (collectionB === matchingCollection) return 1;
+      return 0;
+    });
+
+    // Insert the matching plusItem at the beginning of its collection
+    const matchingCollectionIndex = outputItems.findIndex(item => item.collections[0].name === matchingCollection);
+    outputItems.splice(matchingCollectionIndex, 0, matchingPlusItem);
+  } else {
+    console.log(`No matching plusItem found for ${plusItem.market_name}`);
+  }
+
   const outputCards = outputItems.map(item => {
     const itemBallots = outputBallots[item.name] || 0;
     const odds = totalBallots > 0 ? ((itemBallots / totalBallots) * 100).toFixed(2) : '0.00';
+    const isPlusItem = item === matchingPlusItem;
+
+    // Add parentheses to the matched item's name
+    const displayName = isPlusItem ? `${item.name.split(' (')[0]} (${plusItem.market_name.split(' (')[1]}` : item.name;
+
     return `
-      <div class="card output-item">
+      <div class="card output-item${isPlusItem ? ' plus-item' : ''}">
         <div class="card-color" style="background-color: ${givenColor}"></div>
         <div class="card-image-container">
           <img src="${item.image}">
         </div>
-        <p>${item.name}</p>
+        <p>${displayName}</p>
         <img class="collection-image" src="${item.collections[0].image}">
         <p>Odds: ${odds}%</p>
       </div>
     `;
-  }).join('');
-  
-  return `<div class="output-items-container">${outputCards}</div>`;
+  });
+
+  return `
+    <div class="plus-items-grid">
+      ${outputCards.join('')}
+    </div>
+  `;
 }
 
 function extractItemColor(itemType) {

@@ -4,12 +4,15 @@
   border: 2px solid #EEEEEE;
   padding: 10px;
 }
+
 #content-container {
   margin: 20px;
 }
+
 .trade-up-type-checkbox {
   margin-left: 20px;
 }
+
 .entry {
   margin-bottom: 20px;
   border-radius: 5px;
@@ -17,16 +20,53 @@
   background-color: #2e3238;
   overflow: hidden;
 }
+
 .entry-header {
   margin-top: 15px;
   margin-left: 15px;
   font-size: 18px;
 }
+
 .card-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 20px;
 }
+
+.minus-items-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  margin-right: 20px;
+}
+
+.plus-items-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 2px solid #EEEEEE;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  height: 400px;
+}
+
+.plus-items-top {
+  display: flex;
+  gap: 10px;
+}
+
+.plus-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
 .card {
   padding: 5px;
   border-radius: 10px;
@@ -34,6 +74,7 @@
   position: relative;
   background-color: #393E46;
 }
+
 .card-color {
   position: absolute;
   top: 0;
@@ -43,19 +84,27 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.given-item {
+
+.given-item,
+.output-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  width: 200px;
+  justify-content: space-between;
 }
-.given-item img {
-  width: 100px;
+
+.given-item img,
+.output-item img {
+  width: 100%;
   height: auto;
+  max-width: 120px;
+  max-height: 120px;
+  object-fit: contain;
 }
 .taken-item {
   width: 150px;
 }
+
 .taken-items-container {
   display: flex;
   flex-wrap: wrap;
@@ -63,6 +112,7 @@
   gap: 10px;
   margin: 20px;
 }
+
 .card-image-container {
   display: flex;
   flex-direction: column;
@@ -71,21 +121,25 @@
   border: 1px solid #EEEEEE;
   margin-top: 6px;
 }
+
 .taken-item img {
   width: 120px;
   height: auto;
 }
+
 .item-separator {
   width: 90%;
   height: 1px;
-  background-color: #EEEEEE;  
+  background-color: #EEEEEE;
 }
+
 .stickers-section {
   display: flex;
   justify-content: center;
   gap: 5px;
   margin-top: 5px;
 }
+
 .sticker-image {
   display: flex;
   flex-wrap: wrap;
@@ -94,66 +148,45 @@
   max-width: 35px;
   max-height: 35px;
 }
-.collection-image {
-  max-width: 45px;
-  max-height: 45px;
-}
-.generate-button {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 17px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 10px;
-  background-color: transparent;
-  color: #EEEEEE;
-  border: none;
-  border-radius: 5px;
-  position: relative;
+
+.collection-image img{
+  max-width: 35px;
+  max-height: 35px;
 }
 
-.generate-button:hover {
-  background-color: #4a4f57;
-}
-
-.generate-button .arrow-icon {
-  margin-top: 5px;
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid #EEEEEE;
-  transition: transform 0.3s ease;
-}
-
-.generate-button.active .arrow-icon {
-  transform: rotate(180deg);
-}
-.new-content {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 10px;
-  background-color: #393E46;
-  transition: max-height 1s ease, padding 1s ease;
-}
-.new-content.show {
-  max-height: none;
-  padding: 10px;
-}
-.output-items-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px;
-}
-
-.output-item {
+.plus-item,
+.show-outcomes-card {
   width: 150px;
 }
 
-.output-item img {
-  width: 120px;
+.show-outcomes-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #393E46;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
   height: auto;
+}
+
+.show-outcomes-card:hover {
+  background-color: #4a4f57;
+}
+
+.show-outcomes-card span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  color: #EEEEEE;
+}
+.card.output-item.plus-item {
+  border: 2px solid #ff0000;
+}
+
+.plus-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  width: 100%;
 }
