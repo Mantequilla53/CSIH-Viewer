@@ -88,13 +88,15 @@ ipcMain.on('set-cookie', async (event, cookie) => {
       scrapedData: []
     };
     fs.writeFileSync(scrapedDataFilePath, JSON.stringify(jsonDumpData, null));
+
+    let cursorFound = true;
+
     const startScraping = async () => {
-      let cursorFound = true;
       while (cursorFound) {
         try {
           cursorFound = await handleScrapedData(cookie, scrapedDataFilePath);
           if (cursorFound) {
-            await new Promise(resolve => setTimeout(resolve, 5000)); // Wait for 5 seconds
+            await new Promise(resolve => setTimeout(resolve, 5000));
           } else {
             console.log('Scraping completed. No more cursor found.');
           }
@@ -103,12 +105,14 @@ ipcMain.on('set-cookie', async (event, cookie) => {
         }
       }
     };
-  startScraping();
-  event.reply('scrape-started');
-  ipcMain.on('stop-scraping', () => {
-    cursorFound = false;
-    console.log('Scraping stopped by user.');
-  });
+
+    startScraping();
+    event.reply('scrape-started');
+
+    ipcMain.on('stop-scraping', () => {
+      cursorFound = false;
+      console.log('Scraping stopped by user.');
+    });
   } catch (error) {
     console.error('cookie error', error);
   }

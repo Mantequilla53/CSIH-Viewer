@@ -1,17 +1,27 @@
 function showCaseDropContent(description, entries, contentContainer, tabStatsContainer) {
     const itemCounts = {};
+    const totalCaseDrops = entries.length;
+
+
+    const oldestEntry = entries[entries.length - 1];
+
+    let mostDroppedCase = { caseName: '', count: 0 };
+
+    entries.forEach((entry) => {
+      const { plusItems } = entry;
+      plusItems.forEach((item) => {
+        const itemName = item.market_name;
+        if (itemCounts[itemName]) {
+          itemCounts[itemName].count++;
+        } else {
+          itemCounts[itemName] = { count: 1, imgSrc: item.itemName, itemSet: item.itemSetName, itemColor: item.itemType };
+        }
   
-	entries.forEach((entry) => {
-	  const { plusItems } = entry;
-	  plusItems.forEach((item) => {
-		const itemName = item.market_name;
-		if (itemCounts[itemName]) {
-		  itemCounts[itemName].count++;
-		} else {
-		  itemCounts[itemName] = { count: 1, imgSrc: item.itemName, itemSet: item.itemSetName, itemColor: item.itemType };
-		}
-	  });
-	});
+        if (itemCounts[itemName].count > mostDroppedCase.count) {
+          mostDroppedCase = { caseName: itemName, count: itemCounts[itemName].count };
+        }
+      });
+    });
   
 	let selectedCase = null;
 
@@ -71,30 +81,47 @@ function showCaseDropContent(description, entries, contentContainer, tabStatsCon
       }
     
       tabStatsContainer.innerHTML = `
-      <link rel="stylesheet" href="style/casedrop.css">
-      <h3>${description}</h3>
-      <div class="card-container">
-        ${Object.entries(itemCounts)
-          .map(
-            ([item, { count, imgSrc }]) => {
-              return `
-                <div class="item-card" data-item="${item}">
-                  <img src="images/${imgSrc}.png" alt="${item}">
-                  <div class="item-info">
-                    <h4>${item}</h4>
-                    ${count > 1 ? `<p>Count: ${count}</p>` : ''}
-                  </div>
-                </div>
-              `;
-            }
-          )
-          .join('')}
+  <link rel="stylesheet" href="style/casedrop.css">
+  <h3>${description}</h3> 
+  <div class="stats-container">
+    <div class="stat-item">
+      <span class="stat-label">Total Case Drops:</span>
+      <span class="stat-value">${totalCaseDrops}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Oldest Drop:</span>
+      <div class="stat-value">
+        <div>${oldestEntry.d} - ${oldestEntry.t}</div>
+        <div>${oldestEntry.plusItems[0].market_name}</div>
       </div>
-      <div id="reset-container" style="display: none;">
-        <span class="button-text"></span>
-        <button id="reset-button">×</button>
-      </div>
-    `;
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Most Dropped Case:</span>
+      <span class="stat-value">${mostDroppedCase.caseName} (${mostDroppedCase.count} drops)</span>
+    </div>
+  </div>
+  <div class="card-container">
+    ${Object.entries(itemCounts)
+      .map(
+        ([item, { count, imgSrc }]) => {
+          return `
+            <div class="item-card" data-item="${item}">
+              <img src="images/${imgSrc}.png" alt="${item}">
+              <div class="item-info">
+                <h4>${item}</h4>
+                ${count > 1 ? `<p>Count: ${count}</p>` : ''}
+              </div>
+            </div>
+          `;
+        }
+      )
+      .join('')}
+  </div>
+  <div id="reset-container" style="display: none;">
+    <span class="button-text"></span>
+    <button id="reset-button">×</button>
+  </div>
+`;
     
     const itemCards = tabStatsContainer.querySelectorAll('.item-card');
     itemCards.forEach(card => {

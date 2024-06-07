@@ -1,0 +1,45 @@
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    grid-gap: 20px;
+    margin: 20px;
+  }
+  
+  .card {
+    background-color: #393E46;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7px;
+    background-color: var(--item-color);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .card-header {
+    font-weight: bold;
+  }
+  
+  .weapon-given {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .weapon-given img {
+    width: 125px;
+    height: auto;
+    text-align: center;
+  }
+  
+  .weapon-given span {
+    font-size: 14px;
+  }
