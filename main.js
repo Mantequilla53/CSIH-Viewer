@@ -96,7 +96,7 @@ ipcMain.on('set-cookie', async (event, cookie) => {
         try {
           cursorFound = await handleScrapedData(cookie, scrapedDataFilePath);
           if (cursorFound) {
-            await new Promise(resolve => setTimeout(resolve, 5000));
+            await new Promise(resolve => setTimeout(resolve, 4000));
           } else {
             console.log('Scraping completed. No more cursor found.');
           }

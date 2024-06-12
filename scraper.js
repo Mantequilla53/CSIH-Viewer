@@ -169,9 +169,10 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                 'Earned a case drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && tradeHistoryItem.toLowerCase().includes('case'),
                 'Earned a graffiti drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && tradeHistoryItem.toLowerCase().includes('sealed graffiti'),
                 'Earned a weapon drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && !(tradeHistoryItem.toLowerCase().includes('case' || 'sealed graffiti')),
-                'Earned': (description) => description === 'Earned a promotional item',
+                'Earned': (description) => ['Earned a promotional item', 'Received by entering product code'].includes(description),
                 'Sticker applied/removed': (description) => ['Sticker applied', 'Sticker removed'].includes(description),
-                'Name Tag applied/removed': (description) => ['Name Tag applied', 'Name Tag removed'].includes(description)
+                'Name Tag applied/removed': (description) => ['Name Tag applied', 'Name Tag removed'].includes(description),
+                'Used': (description) => description === 'Used'
             };
             const imageUrls = [];
             const scrapedEntries = await Promise.all(tradeRows.map(async (index, element) => {
@@ -199,11 +200,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                           if (description === 'Unlocked a container' && itemName.toLowerCase().match(/\bkey\b/)) {
                               return null;
                           }
-                          const {
-                              appid,
-                              classid,
-                              instanceid
-                          } = $(el).data();
+                          const { appid, classid, instanceid } = $(el).data();
                           const jsonId = `${classid}_${instanceid}`;
                           const itemDescription = jsonData.descriptions?.[appid]?.[jsonId] ?? '';
                           if (itemDescription) {
@@ -276,8 +273,19 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                               tradeName = description.replace(/^(You traded with|Your trade with|Your held trade with)\s*/, '').trim();
                           } else if (mappedDescription === 'Sticker applied/removed' || mappedDescription === 'Name Tag applied/removed') {
                               tradeName = description;
-                          } else if (mappedDescription === 'Earned a weapon drop') {
-                              console.log(plusItems[0]?.market_name, description);
+                          } else if (mappedDescription === 'Used') {
+                            const hasGraffitiItem = minusItems.some(item => item.market_name && item.market_name.startsWith('Sealed Graffiti'));
+                            if (hasGraffitiItem) {
+                                console.log('sealed graffiti');
+                                return undefined;
+                            }
+                          
+                            if (minusItems.length === 1 && minusItems[0].market_name && minusItems[0].market_name.startsWith('Graffiti')) {
+                              description = 'Graffiti Used';
+                              descriptionChanged = true;
+                            }
+                          }
+                          else if (mappedDescription === 'Earned a weapon drop') {
                               if (plusItems.length > 0 && plusItems[0]?.market_name && !plusItems[0].market_name.includes('|')) {
                                   description = 'Earned';
                                   descriptionChanged = true;
@@ -305,11 +313,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
             for (const { url, isBuildUrl } of imageUrls) {
                 await imageDwnld(url, isBuildUrl);
             }
-            return {
-                scrapeData,
-                cursor,
-                cursorFound
-            };
+            return { scrapeData, cursor, cursorFound };
         } else {
             console.log('Failed to scrape JSON data');
         }

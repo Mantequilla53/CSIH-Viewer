@@ -14,6 +14,7 @@ const { showContainerContent } = require('./container');
 const { showARContent } = require('./combined_ar');
 const { showCaseDropContent } = require('./case_drop');
 const { showWeaponDropContent} = require('./weapon_drop');
+const { showGraffitiDrop } = require('./graffiti_drop');
 
 const $ = (id) => document.getElementById(id);
 const tabContainer = $('tab-container');
@@ -138,7 +139,10 @@ function showTabContent(description) {
   else if (description === 'Name Tag applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Name Tag')}
   else if (description === 'Earned a case drop'){showCaseDropContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Earned a weapon drop'){showWeaponDropContent(description, entries, contentContainer, tabStatsContainer)}
-  else if (['Earned a graffiti drop', 'Earned a souvenir drop', 'Earned', 'Leveled up a challenge coin'].includes(description)) 
+  else if (description === 'Earned a graffiti drop'){showGraffitiDrop(description, entries, contentContainer, tabStatsContainer)}
+  else if (description === 'Earned a souvenir drop'){showWeaponDropContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (description === 'Earned'){showWeaponDropContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (['Leveled up a challenge coin'].includes(description)) 
     {showDropContent(description, entries, contentContainer, tabStatsContainer)} 
   else {
     entries.forEach((entry) => {
