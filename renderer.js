@@ -15,6 +15,8 @@ const { showARContent } = require('./combined_ar');
 const { showCaseDropContent } = require('./case_drop');
 const { showWeaponDropContent} = require('./weapon_drop');
 const { showGraffitiDrop } = require('./graffiti_drop');
+const { showUsedContent } = require('./used');
+const { showDefaultCards } = require('./default_cards');
 
 const $ = (id) => document.getElementById(id);
 const tabContainer = $('tab-container');
@@ -33,8 +35,8 @@ let currentTab = null;
 const groupPatterns = {
   'Unlocked': ['Unlocked a'],
   'Earned': ['Earned a', 'Earned'],
-  'Market': ['You listed an item on the Community Market', 'You purchased an item on the Community Market', 'You canceled a listing on the Community Market', 'Listed on the Steam Community Market', 'Received from the Community Market'],
-  'Misc.': ['Received by entering product code', 'Received a gift', 'You deleted', 'Leveled up a challenge coin', 'Swapped StatTrak™ values', 'Unsealed']
+  'Market': ['Listed on Community Market', 'Purchased on Community Market', 'Canceled listing on Community Market', 'Listed on the Steam Community Market', 'Received from the Community Market'],
+  'Misc.': ['Received a gift', 'You deleted', 'Leveled up a challenge coin', 'Swapped StatTrak™ values', 'Graffiti Opened', 'Graffiti Used']
 };
 
 const form = document.querySelector('form');
@@ -139,9 +141,13 @@ function showTabContent(description) {
   else if (description === 'Name Tag applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Name Tag')}
   else if (description === 'Earned a case drop'){showCaseDropContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Earned a weapon drop'){showWeaponDropContent(description, entries, contentContainer, tabStatsContainer)}
-  else if (description === 'Earned a graffiti drop'){showGraffitiDrop(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Earned a souvenir drop'){showWeaponDropContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Earned'){showWeaponDropContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (description === 'Used'){showUsedContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (['Graffiti Used', 'Graffiti Opened', 'Earned a graffiti drop'].includes(description))
+    {showGraffitiDrop(description, entries, contentContainer, tabStatsContainer)}
+  else if (['Listed on Community Market','Canceled listing on Community Market','Purchased on Community Market','Received a gift', 'You deleted'].includes(description))
+    {showDefaultCards(description, entries, contentContainer, tabStatsContainer)}
   else if (['Leveled up a challenge coin'].includes(description)) 
     {showDropContent(description, entries, contentContainer, tabStatsContainer)} 
   else {

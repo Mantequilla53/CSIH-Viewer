@@ -172,7 +172,12 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                 'Earned': (description) => ['Earned a promotional item', 'Received by entering product code'].includes(description),
                 'Sticker applied/removed': (description) => ['Sticker applied', 'Sticker removed'].includes(description),
                 'Name Tag applied/removed': (description) => ['Name Tag applied', 'Name Tag removed'].includes(description),
-                'Used': (description) => description === 'Used'
+                'Used': (description) => description === 'Used',
+                'Graffiti Opened': (description) => description === 'Unsealed',
+                'Operation Reward': (description) => description === 'Mission reward',
+                'Listed on Community Market': (description) => description === 'You listed an item on the Community Market.',
+                'Purchased on Community Market': (description) => description === 'You purchased an item on the Community Market.',
+                'Canceled listing on Community Market': (description) => description === 'You canceled a listing on the Community Market. The item was returned to you.'
             };
             const imageUrls = [];
             const scrapedEntries = await Promise.all(tradeRows.map(async (index, element) => {
@@ -276,16 +281,13 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                           } else if (mappedDescription === 'Used') {
                             const hasGraffitiItem = minusItems.some(item => item.market_name && item.market_name.startsWith('Sealed Graffiti'));
                             if (hasGraffitiItem) {
-                                console.log('sealed graffiti');
                                 return undefined;
-                            }
-                          
+                            }        
                             if (minusItems.length === 1 && minusItems[0].market_name && minusItems[0].market_name.startsWith('Graffiti')) {
                               description = 'Graffiti Used';
                               descriptionChanged = true;
                             }
-                          }
-                          else if (mappedDescription === 'Earned a weapon drop') {
+                          } else if (mappedDescription === 'Earned a weapon drop') {
                               if (plusItems.length > 0 && plusItems[0]?.market_name && !plusItems[0].market_name.includes('|')) {
                                   description = 'Earned';
                                   descriptionChanged = true;
