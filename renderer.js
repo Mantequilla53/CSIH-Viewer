@@ -8,7 +8,6 @@ const { showCaseContent } = require('./newUnlockedCase');
 const { showStickerCapContent } = require('./stickerCapsule');
 const { showCraftedContent } = require('./crafted');
 const { showOperationContent } = require('./operationDrops');
-const { showPurchaseContent } = require('./storePurchase');
 const { showContainerContent } = require('./container');
 const { showARContent } = require('./combined_ar');
 const { showCaseDropContent } = require('./case_drop');
@@ -126,18 +125,20 @@ function showTabContent(description) {
   const entries = existingData[description];
     
   if (description === 'Unlocked a case') {showCaseContent(description, entries, contentContainer, tabStatsContainer)} 
-  else if (description === 'You traded with') {showTradeContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Unlocked a sticker capsule') {showStickerCapContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Unlocked a package') {showPackageContent(description, entries, contentContainer, tabStatsContainer)} 
-  else if (description === 'Trade Up') {showCraftedContent(description, entries, contentContainer, tabStatsContainer)} 
-  else if (description === 'Operation Reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
-  else if (description === 'Purchased from the store'){showPurchaseContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Unlocked a container'){showContainerContent(description, entries, contentContainer, tabStatsContainer)}
+  
+  else if (description === 'You traded with') {showTradeContent(description, entries, contentContainer, tabStatsContainer)} 
+  else if (description === 'Trade Up') {showCraftedContent(description, entries, contentContainer, tabStatsContainer)} 
+  else if (description === 'Earned a case drop'){showCaseDropContent(description, entries, contentContainer, tabStatsContainer)}
+
   else if (description === 'Sticker applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Sticker')}
   else if (description === 'Name Tag applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Name Tag')}
-  else if (description === 'Earned a case drop'){showCaseDropContent(description, entries, contentContainer, tabStatsContainer)}
+
+  else if (description === 'Operation Reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
   else if (['Listed on Community Market','Canceled listing on Community Market','Purchased on Community Market','Received a gift', 'You deleted',
-    'Graffiti Used', 'Graffiti Opened', 'Earned a graffiti drop', 'Earned', 'Earned a souvenir drop', 'Earned a weapon drop', 'Used'].includes(description))
+    'Graffiti Used', 'Graffiti Opened', 'Earned a graffiti drop', 'Earned', 'Earned a souvenir drop', 'Earned a weapon drop', 'Used', 'Purchased from the store'].includes(description))
     {showDefaultCards(description, entries, contentContainer, tabStatsContainer)}
   else {
     entries.forEach((entry) => {
