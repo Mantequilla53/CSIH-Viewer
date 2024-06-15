@@ -7,15 +7,11 @@ const { showPackageContent } = require('./capsule_container');
 const { showCaseContent } = require('./newUnlockedCase');
 const { showStickerCapContent } = require('./stickerCapsule');
 const { showCraftedContent } = require('./crafted');
-const { showDropContent} = require('./drops');
 const { showOperationContent } = require('./operationDrops');
 const { showPurchaseContent } = require('./storePurchase');
 const { showContainerContent } = require('./container');
 const { showARContent } = require('./combined_ar');
 const { showCaseDropContent } = require('./case_drop');
-const { showWeaponDropContent} = require('./weapon_drop');
-const { showGraffitiDrop } = require('./graffiti_drop');
-const { showUsedContent } = require('./used');
 const { showDefaultCards } = require('./default_cards');
 
 const $ = (id) => document.getElementById(id);
@@ -134,22 +130,15 @@ function showTabContent(description) {
   else if (description === 'Unlocked a sticker capsule') {showStickerCapContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Unlocked a package') {showPackageContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Trade Up') {showCraftedContent(description, entries, contentContainer, tabStatsContainer)} 
-  else if (description === 'Mission reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (description === 'Operation Reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Purchased from the store'){showPurchaseContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Unlocked a container'){showContainerContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Sticker applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Sticker')}
   else if (description === 'Name Tag applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Name Tag')}
   else if (description === 'Earned a case drop'){showCaseDropContent(description, entries, contentContainer, tabStatsContainer)}
-  else if (description === 'Earned a weapon drop'){showWeaponDropContent(description, entries, contentContainer, tabStatsContainer)}
-  else if (description === 'Earned a souvenir drop'){showWeaponDropContent(description, entries, contentContainer, tabStatsContainer)}
-  else if (description === 'Earned'){showWeaponDropContent(description, entries, contentContainer, tabStatsContainer)}
-  else if (description === 'Used'){showUsedContent(description, entries, contentContainer, tabStatsContainer)}
-  else if (['Graffiti Used', 'Graffiti Opened', 'Earned a graffiti drop'].includes(description))
-    {showGraffitiDrop(description, entries, contentContainer, tabStatsContainer)}
-  else if (['Listed on Community Market','Canceled listing on Community Market','Purchased on Community Market','Received a gift', 'You deleted'].includes(description))
+  else if (['Listed on Community Market','Canceled listing on Community Market','Purchased on Community Market','Received a gift', 'You deleted',
+    'Graffiti Used', 'Graffiti Opened', 'Earned a graffiti drop', 'Earned', 'Earned a souvenir drop', 'Earned a weapon drop', 'Used'].includes(description))
     {showDefaultCards(description, entries, contentContainer, tabStatsContainer)}
-  else if (['Leveled up a challenge coin'].includes(description)) 
-    {showDropContent(description, entries, contentContainer, tabStatsContainer)} 
   else {
     entries.forEach((entry) => {
       const { d, t, plusItems, minusItems, tradeName } = entry;
@@ -161,13 +150,13 @@ function showTabContent(description) {
         ${plusItems.length > 0 ? `
           <p>Given to Inventory:</p>
           <ul>
-            ${plusItems.map(item => `<li>${item.market_name} - - ${item.itemType}${item.tag_name ? ` - - ${item.tag_name}` : ''}</li>`).join('')}
+            ${plusItems.map(item => `<li>${item.market_name}</li>`).join('')}
           </ul>
         ` : ''}
         ${minusItems.length > 0 ? `
           <p>Taken from Inventory:</p>
           <ul>
-            ${minusItems.map(item => `<li>${item.market_name} - - ${item.itemType}${item.tag_name ? ` - - ${item.tag_name}` : ''}</li>`).join('')}
+            ${minusItems.map(item => `<li>${item.market_name}</li>`).join('')}
           </ul>
         ` : ''} 
         <hr>
