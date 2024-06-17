@@ -35,10 +35,11 @@ const groupPatterns = {
 };
 
 const form = document.querySelector('form');
+const submitButton = document.querySelector('#submit-button');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   const userInput = document.querySelector('#input-field').value;
-  console.log('received:', userInput)
+  console.log('received:', userInput);
   ipcRenderer.send('set-cookie', userInput);
 });
 
@@ -73,7 +74,9 @@ fileSelector.addEventListener('change', (event) => {
   $('selected-file').textContent = selectedFileName;
   console.log(selectedFileName);
   if (selectedFileName) {
-    const filePath = path.join(__dirname, './dump', selectedFileName);
+    submitButton.textContent = 'Update File';
+    const dumpDirectory = path.join(process.resourcesPath, 'dump');
+    const filePath = path.join(dumpDirectory, selectedFileName);
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
         console.error('Error reading JSON file:', err);
@@ -90,6 +93,7 @@ fileSelector.addEventListener('change', (event) => {
       }
     });
   } else {
+    submitButton.textContent = 'Submit';
     console.log('none');
   }
 });
@@ -103,7 +107,13 @@ ipcRenderer.on('scrape-started', () => {
 });
 
 $('stopScraping').addEventListener('click', () => {
+  $('scrape-date').innerHTML = '';
   ipcRenderer.send('stop-scraping');
+  $('scrape-date').innerHTML = 'Stopped Scraping';
+});
+
+ipcRenderer.on('scrape-date', (event, date) => {
+  $('scrape-date').innerHTML = `Currently Scraping: ${date}`;
 });
 
 ipcRenderer.on('scraped-data', (event, newDataString) => {

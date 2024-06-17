@@ -172,7 +172,7 @@ function showStickerCapContent(description, entries, contentContainer, tabStatsC
             <ul class="no-bullet">
             ${filteredPlusItems.map(item => {
               return `<li>
-                <img data-src="images/${item.itemName}.png" class="lazy-image">
+                <img data-src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" class="lazy-image">
                 <span>${part1}<br>${part2}</span>
               </li>`;
             }).join('')}
@@ -187,7 +187,7 @@ function showStickerCapContent(description, entries, contentContainer, tabStatsC
                 if (marketName.endsWith('|')) {marketName = marketName.slice(0, -1).trim();}
                 return marketName;
               }).join(', ')}</span>
-              <img data-src="images/${matchedMinusItems[0].itemName}.png" class="lazy-image">
+              <img data-src="${path.join(process.resourcesPath, 'images', `${matchedMinusItems[0].itemName}.png`)}" class="lazy-image">
             </div>
           </div>
           ` : ''}

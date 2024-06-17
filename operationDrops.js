@@ -63,7 +63,7 @@ function showOperationContent(description, entries, contentContainer, tabStatsCo
           ${plusItems.map(item => {
             return `<div class="item">
               <div class="item-image">
-              <img data-src="images/${item.itemName}.png" class="lazy-image">
+              <img data-src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" class="lazy-image">
               </div>
               <div class="item-name">
                 <span>${item.market_name}</span>

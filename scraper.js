@@ -18,7 +18,8 @@ function trimItemType(itemType) {
 }
 
 async function imageDwnld(urlOrIconUrl, isBuildUrl = true) {
-    const directoryPath = './images';
+    const resourcesPath = process.resourcesPath;
+    const directoryPath = path.join(resourcesPath, 'images');
     if (!fs.existsSync(directoryPath)) {
         fs.mkdirSync(directoryPath);
     }
@@ -64,22 +65,6 @@ async function imageDwnld(urlOrIconUrl, isBuildUrl = true) {
         console.error(`Error downloading image ${compressedUrl}:`, error);
         return null;
     }
-}
-
-async function saveJson(scrapeData, scrapedDataFilePath) {
-    let existingJson = {
-        dumpInfo: {},
-        scrapedData: []
-    };
-
-    if (fs.existsSync(scrapedDataFilePath)) {
-        const fileContent = fs.readFileSync(scrapedDataFilePath, 'utf-8');
-        existingJson = JSON.parse(fileContent);
-    }
-
-    existingJson.scrapedData.push(scrapeData);
-
-    fs.writeFileSync(scrapedDataFilePath, JSON.stringify(existingJson, null));
 }
 
 const HEADERS = {
@@ -326,6 +311,5 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
 }
 module.exports = {
     scrapeUInfo,
-    scrapeIH,
-    saveJson
+    scrapeIH
 };

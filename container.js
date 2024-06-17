@@ -22,7 +22,7 @@ function showContainerContent(description, entries, contentContainer, tabStatsCo
         <ul class="no-bullet">
           ${plusItems.map(item => {
             return `<li>
-              <img src="images/${item.itemName}.png" width="120" height="92.4">
+              <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" width="120" height="92.4">
               <span>${item.market_name}</span>
             </li>`;
           }).join('')}
@@ -32,7 +32,7 @@ function showContainerContent(description, entries, contentContainer, tabStatsCo
         <div class="card-footer">
           <div class="case-unboxed">
             <span class="item-name">${minusItems[0].market_name}</span>
-            <img src="images/${minusItems[0].itemName}.png" alt="${minusItems[0].market_name}">
+            <img src="${path.join(process.resourcesPath, 'images', `${minusItems[0].itemName}.png`)}"" alt="${minusItems[0].market_name}">
           </div>
         </div>
       ` : ''}

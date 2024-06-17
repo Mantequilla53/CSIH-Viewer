@@ -9,7 +9,8 @@ let time = 0;
 let time_frac = 0;
 
 function getJsonFiles() {
-  const dumpDirectory = path.join(__dirname, './dump');
+  const resourcesPath = process.resourcesPath;
+  const dumpDirectory = path.join(resourcesPath, 'dump');
 
   if (!fs.existsSync(dumpDirectory)) {
     fs.mkdirSync(dumpDirectory);
@@ -35,10 +36,13 @@ mainWindow.webContents.on('did-finish-load', () => {
   mainWindow.webContents.send('json-files', jsonFiles);
 });
 
-function sendSData(data) {
-  //difference between how I'm doing it and ipc sending the scraped-data
-  //needs fixed
-  const newData = JSON.stringify(data)
+function sendSData(data, includeDateElement = false) {
+  const newData = JSON.stringify(data);
+  if (includeDateElement && data.length > 0) {
+    const firstEntry = data[0];
+    const dateElement = `${firstEntry.d}-${firstEntry.t}`;
+    mainWindow.webContents.send('scrape-date', dateElement);
+  }
   mainWindow.webContents.send('scraped-data', newData);
 }
 
@@ -58,14 +62,28 @@ ipcMain.on('process-dump', (event, jsonData) => {
   sendSData(processedData);
 });
 
-const handleScrapedData = async (cookie, scrapedDataFilePath) => {
+const handleScrapedData = async (userId, cookie, scrapedDataFilePath) => {
   try {
-    const { scrapeData, cursor, cursorFound } = await scraper.scrapeIH( userId, cookie, s, time, time_frac, scrapedDataFilePath);
-    await scraper.saveJson(scrapeData, scrapedDataFilePath);
-    sendSData(scrapeData);
+    const { scrapeData, cursor, cursorFound } = await scraper.scrapeIH(userId, cookie, s, time, time_frac, scrapedDataFilePath);
+    
+    let existingJson = {
+      dumpInfo: {},
+      scrapedData: []
+  };
+
+  if (fs.existsSync(scrapedDataFilePath)) {
+      const fileContent = fs.readFileSync(scrapedDataFilePath, 'utf-8');
+      existingJson = JSON.parse(fileContent);
+  }
+
+  existingJson.scrapedData.push(scrapeData);
+
+  fs.writeFileSync(scrapedDataFilePath, JSON.stringify(existingJson, null));
+    sendSData(scrapeData, true);
     if (cursorFound) {
       ({ s, time, time_frac } = cursor);
     } else {
+      mainWindow.webContents.send('scrape-date', 'Scrape Finished');
       console.log('scrape done');
     }
     return cursorFound;
@@ -73,13 +91,51 @@ const handleScrapedData = async (cookie, scrapedDataFilePath) => {
     console.error('Error handling scraped data:', error);
   }
 };
-  
+
+/*
+ipcMain.on('update-file', async (event, { file, cookies }) => {
+  try {
+    const scrapedDataFilePath = path.join(__dirname, './dump', file);
+    const jsonDumpData = JSON.parse(fs.readFileSync(scrapedDataFilePath));
+    const { userId } = jsonDumpData.dumpInfo;
+
+    let cursorFound = true;
+
+    const startScraping = async () => {
+      while (cursorFound) {
+        try {
+          cursorFound = await handleScrapedData(userId, cookies, scrapedDataFilePath);
+          if (cursorFound) {
+            await new Promise(resolve => setTimeout(resolve, 4000));
+          } else {
+            console.log('Scraping completed. No more cursor found.');
+          }
+        } catch (error) {
+          console.error('Error in scrape loop:', error);
+        }
+      }
+    };
+
+    startScraping();
+    event.reply('scrape-started');
+
+    ipcMain.on('stop-scraping', () => {
+      cursorFound = false;
+      console.log('Scraping stopped by user.');
+    });
+  } catch (error) {
+    console.error('Error updating file:', error);
+  }
+});
+*/
 ipcMain.on('set-cookie', async (event, cookie) => {
   try {
-    userId = await scraper.scrapeUInfo(cookie);
+    const userId = await scraper.scrapeUInfo(cookie);
     event.reply('scrape-response', userId);
     const dumpDateInfo = generateFilePath();
-    const scrapedDataFilePath = `./dump/${dumpDateInfo}.json`;
+    const resourcesPath = process.resourcesPath;
+    const dumpDirectory = path.join(resourcesPath, 'dump');
+    const scrapedDataFilePath = path.join(dumpDirectory, `${dumpDateInfo}.json`);
     const jsonDumpData = {
       dumpInfo: {
         userId: userId,
@@ -94,7 +150,7 @@ ipcMain.on('set-cookie', async (event, cookie) => {
     const startScraping = async () => {
       while (cursorFound) {
         try {
-          cursorFound = await handleScrapedData(cookie, scrapedDataFilePath);
+          cursorFound = await handleScrapedData(userId, cookie, scrapedDataFilePath);
           if (cursorFound) {
             await new Promise(resolve => setTimeout(resolve, 4000));
           } else {

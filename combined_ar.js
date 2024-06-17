@@ -1,4 +1,5 @@
 function showARContent(description, entries, contentContainer, tabStatsContainer, type) {
+    
     tabStatsContainer.innerHTML = `<link rel="stylesheet" href="style/stickerar_new.css">
     <h2>${description}</h2>
     <div class="filter-options">
@@ -33,13 +34,13 @@ function showARContent(description, entries, contentContainer, tabStatsContainer
                     <div class="card-content">
                         <div class="item-image-container">
                             <div class="item-image">
-                                <img src="./images/${itemToDisplay[0].itemName}.png" alt="${itemToDisplay[0].market_name}">
+                                <img src="${path.join(process.resourcesPath, 'images', `${itemToDisplay[0].itemName}.png`)}" alt="${itemToDisplay[0].market_name}">
                             </div>
                             <div class="item-separator"></div>
                             <div class="sticker-list">
                                 ${itemToDisplay[0].stickers.length > 0 ? itemToDisplay[0].stickers.map(sticker => `
                                     <div class="sticker">  
-                                        <img src="./images/${sticker.imgSrc}.png" alt="${sticker.name}">
+                                        <img src="${path.join(process.resourcesPath, 'images', `${sticker.imgSrc}.png`)}" alt="${sticker.name}">
                                     </div>
                                 `).join('') : '<p>No Stickers</p>'}
                             </div>
@@ -69,7 +70,7 @@ function findChange(tradeName, plusItems, minusItems, type) {
             return value ? `
                 <div class="card-footer">
                     <p>${action}:</p>
-                    <img src="./images/${value.imgSrc}.png" alt="${value.name}" class="sticker-image">
+                    <img src="./resources/images/${value.imgSrc}.png" alt="${value.name}" class="sticker-image">
                 </div>
             ` : '';
         }

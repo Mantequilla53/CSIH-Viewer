@@ -89,7 +89,7 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
                   <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
                     <div class="item-image-container">
                       <div class="item-image-wrapper">
-                        <img src="images/${item.itemName}.png" width="120" height="92.4">
+                        <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" width="120" height="92.4">
                       </div>
                       ${item.tag_name ? `
                         <div class="tag-indicator" title="${item.tag_name}"></div>
@@ -98,7 +98,7 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
                         <div class="sticker-separator"></div>
                         <div class="sticker-images">
                           ${item.stickers.map((sticker) => `
-                            <img src="images/${sticker.imgSrc}.png" width="40" height="30.8">
+                            <img src="${path.join(process.resourcesPath, 'images', `${sticker.imgSrc}.png`)}" width="40" height="30.8">
                           `).join('')}
                         </div>
                       ` : ''}

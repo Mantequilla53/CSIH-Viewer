@@ -23,17 +23,20 @@
     "sharp": "^0.33.3"
   },
   "build": {
-    "appId": "com.csih.app",
-    "productName": "CSIH Viewer",
-    "target": "zip",
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "**/*",
-      "!.vscode",
-      "!dump",
-      "!images"
-    ]
+  "appId": "your.app.id",
+  "productName": "CSIHViewer",
+  "directories": {
+    "output": "dist"
+  },
+  "files": [
+    "**/*",
+    "!.vscode",
+    "!dump",
+    "!images"
+  ],
+  "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
   }
+}
 }

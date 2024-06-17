@@ -235,7 +235,7 @@ function showPackageContent(description, entries, contentContainer, tabStatsCont
       <ul class="no-bullet">
         ${filteredPlusItems.map(item => {
           return `<li>
-            <img src="images/${item.itemName}.png" width="120" height="92.4">
+            <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" width="120" height="92.4">
             <span>${formatItemName(item.market_name)}</span>
           </li>`;
         }).join('')}
@@ -245,7 +245,7 @@ function showPackageContent(description, entries, contentContainer, tabStatsCont
       <div class="card-footer">
         <div class="case-unboxed">
           <span class="item-name">${matchedMinusItems[0].market_name}</span>
-          <img src="images/${matchedMinusItems[0].itemName}.png" alt="${matchedMinusItems[0].market_name}">
+          <img src="${path.join(process.resourcesPath, 'images', `${matchedMinusItems[0].itemName}.png`)}" alt="${matchedMinusItems[0].market_name}">
         </div>
       </div>
     ` : ''}

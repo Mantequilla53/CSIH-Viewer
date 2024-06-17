@@ -68,12 +68,12 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
         <div class="card taken-item">
           <div class="card-color" style="background-color: ${takenColor}"></div>
           <div class="card-image-container">
-            <img src="images/${item.itemName}.png">
+            <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}">
             ${item.stickers && item.stickers.length > 0 ? `
               <div class="item-separator"></div>
               <div class="stickers-section">
                 ${item.stickers.map(sticker => `
-                  <img class="sticker-image" src="images/${sticker.imgSrc}.png">
+                  <img class="sticker-image" src="${path.join(process.resourcesPath, 'images', `${sticker.imgSrc}.png`)}">
                 `).join('')}
               </div>
             ` : ''}
@@ -89,7 +89,7 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
           <div class="card given-item plus-item">
             <div class="card-color" style="background-color: ${givenColor}"></div>
             <div class="card-image-container">
-              <img src="images/${plusItems[0].itemName}.png">
+              <img src="${path.join(process.resourcesPath, 'images', `${plusItems[0].itemName}.png`)}">
             </div>
             <p>${plusItems[0].market_name}</p>
             <p>${plusItems[0].itemSetName}</p>
@@ -152,10 +152,8 @@ function possibleOutputs(inputType, minusItems, givenColor, plusItem) {
   
   const totalBallots = Object.values(outputBallots).reduce((sum, ballots) => sum + ballots, 0);
   
-  // Remove parentheses from plusItem market_name for matching
   const plusItemNameWithoutParentheses = plusItem.market_name.split(' (')[0];
 
-  // Find the matching plusItem and its collection
   let matchingPlusItem = null;
   let matchingCollection = null;
   for (const item of outputItems) {
@@ -167,10 +165,8 @@ function possibleOutputs(inputType, minusItems, givenColor, plusItem) {
   }
 
   if (matchingPlusItem) {
-    // Remove the matching plusItem from its original position
     outputItems = outputItems.filter(item => item !== matchingPlusItem);
 
-    // Sort outputItems by collection, with the matching collection first
     outputItems.sort((itemA, itemB) => {
       const collectionA = itemA.collections[0].name;
       const collectionB = itemB.collections[0].name;
@@ -179,7 +175,6 @@ function possibleOutputs(inputType, minusItems, givenColor, plusItem) {
       return 0;
     });
 
-    // Insert the matching plusItem at the beginning of its collection
     const matchingCollectionIndex = outputItems.findIndex(item => item.collections[0].name === matchingCollection);
     outputItems.splice(matchingCollectionIndex, 0, matchingPlusItem);
   } else {
@@ -191,7 +186,6 @@ function possibleOutputs(inputType, minusItems, givenColor, plusItem) {
     const odds = totalBallots > 0 ? ((itemBallots / totalBallots) * 100).toFixed(2) : '0.00';
     const isPlusItem = item === matchingPlusItem;
 
-    // Add parentheses to the matched item's name
     const displayName = isPlusItem ? `${item.name.split(' (')[0]} (${plusItem.market_name.split(' (')[1]}` : item.name;
 
     return `

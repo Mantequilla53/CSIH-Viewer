@@ -40,12 +40,12 @@ function showDefaultCards(description, entries, contentContainer, tabStatsContai
 				}, 0);
 				displayName = `${totalStars} Stars for ${starMatch[2]}`;
 			} else if (description === 'Purchased from the store') {
-        const { name, count } = processPurchasedItems(plusItems, minusItems);
-        displayName = name;
-        if (count > 1) {
-          displayCount = `<span class="item-count">Count: ${count}</span>`;
-        }
-      } else if (items.length > 1) {
+				const { name, count } = removeCoupons(plusItems, minusItems);
+				displayName = name;
+				if (count > 1) {
+					displayCount = `<span class="item-count">Count: ${count}</span>`;
+				  }
+			  } else if (items.length > 1) {
 				displayCount = `<span class="item-count">Count: ${items.length}</span>`;
 			}
 
@@ -54,7 +54,7 @@ function showDefaultCards(description, entries, contentContainer, tabStatsContai
           <span class="date-time">${d} ${t}</span>
         </div>
         <div class="weapon-given">
-          <img src="images/${item.itemName}.png" width="120" height="92.4">
+          <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" width="120" height="92.4">
           <span>${displayName}</span>
           ${displayCount}
         </div>
@@ -67,40 +67,46 @@ function showDefaultCards(description, entries, contentContainer, tabStatsContai
 	}
 	renderContentContainer();
 }
-function processPurchasedItems(plusItems, minusItems) {
-  /*
-    This function is only used for entries with a description of
-    'Purchased from the store' to remove coupons from the entry
-    that throw off the count
-  */
-  const itemCounts = plusItems.reduce((counts, item) => {
-    const key = `${item.itemName}-${item.market_name}`;
-    counts[key] = (counts[key] || 0) + 1;
-    return counts;
-  }, {});
-
-  minusItems.forEach((item) => {
-    const key = `${item.itemName}-${item.market_name}`;
-    if (itemCounts[key]) {
-      itemCounts[key]--;
-    }
-  });
-
-  const filteredPlusItems = Object.entries(itemCounts)
-    .filter(([key, count]) => count > 0)
-    .map(([key]) => {
-      const [itemName, marketName] = key.split('-');
-      return { itemName, market_name: marketName };
-    });
-
-  if (filteredPlusItems.length > 0) {
-    const { market_name, itemName } = filteredPlusItems[0];
-    const count = itemCounts[`${itemName}-${market_name}`];
-    return { name: market_name, count };
-  }
-
-  return { name: '', count: 0 };
+function removeCoupons(plusItems, minusItems) {
+	const minusItemsCount = new Map();
+				minusItems.forEach((item) => {
+				  const key = `${item.itemName}-${item.market_name}`;
+				  if (minusItemsCount.has(key)) {
+					minusItemsCount.set(key, minusItemsCount.get(key) + 1);
+				  } else {
+					minusItemsCount.set(key, 1);
+				  }
+				});
+		
+				const filteredPlusItems = plusItems.filter((item) => {
+				  const key = `${item.itemName}-${item.market_name}`;
+				  if (minusItemsCount.has(key)) {
+					const count = minusItemsCount.get(key);
+					if (count > 0) {
+					  minusItemsCount.set(key, count - 1);
+					  return false;
+					}
+				  }
+				  return true;
+				});
+		
+				const plusItemsCount = new Map();
+				filteredPlusItems.forEach((item) => {
+				  if (plusItemsCount.has(item.market_name)) {
+					plusItemsCount.set(item.market_name, plusItemsCount.get(item.market_name) + 1);
+				  } else {
+					plusItemsCount.set(item.market_name, 1);
+				  }
+				});
+		
+				if (plusItemsCount.size > 0) {
+				  const [name, count] = [...plusItemsCount.entries()][0];
+				  return { name, count };
+				}
+				return { name: '', count: 0 };
 }
+
+
 function extractItemColor(marketName) {
 	const itemMap = {
 		'Battle Green': '#789d53',

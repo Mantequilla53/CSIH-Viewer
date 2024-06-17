@@ -1,3 +1,5 @@
+const path = require('path');
+
 function showCaseContent(description, entries, contentContainer, tabStatsContainer) {
   const itemTypeCounts = {
     'Mil-Spec': 0,
@@ -228,8 +230,9 @@ function showCaseContent(description, entries, contentContainer, tabStatsContain
             <div class="weapon-given">
               <ul class="no-bullet">
               ${filteredPlusItems.map(item => {
+                const imagePath = path.join(process.resourcesPath, 'images', `${item.itemName}.png`);
                 return `<li>
-                  <img src="images/${item.itemName}.png" width="120" height="92.4">
+                  <img src="${imagePath}" width="120" height="92.4">
                   <span>${formatItemName(item.market_name)}</span>
               </li>`;
               }).join('')}
@@ -239,7 +242,7 @@ function showCaseContent(description, entries, contentContainer, tabStatsContain
               <div class="card-footer">
                 <div class="case-unboxed">
                   <span class="item-name">${matchedMinusItems[0].market_name.startsWith('Operation') ? matchedMinusItems[0].market_name.slice(9) : matchedMinusItems[0].market_name}</span>
-                  <img src="images/${matchedMinusItems[0].itemName}.png" alt="${matchedMinusItems[0].market_name}">
+                  <img src="${path.join(process.resourcesPath, 'images', `${matchedMinusItems[0].itemName}.png`)}" alt="${matchedMinusItems[0].market_name}">
                 </div>
               </div>
             ` : ''}
