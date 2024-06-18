@@ -106,7 +106,6 @@ function removeCoupons(plusItems, minusItems) {
 				return { name: '', count: 0 };
 }
 
-//
 function extractItemColor(marketName) {
 	const itemMap = {
 		'Battle Green': '#789d53',
