@@ -122,7 +122,7 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
 function possibleOutputs(inputType, minusItems, givenColor, plusItem) {
   const itemTypes = ['Consumer Grade', 'Industrial Grade', 'Mil-Spec', 'Restricted', 'Classified', 'Covert'];
   const itemSetNames = [...new Set(minusItems.map(item => item.itemSetName))];
-  const outputFilePath = path.join(__dirname, 'output.json');
+  const outputFilePath = path.join(__dirname, '../output.json');
   const collectionData = JSON.parse(fs.readFileSync(outputFilePath, 'utf8'));
   
   let outputItems = itemSetNames.reduce((items, setName) => {
