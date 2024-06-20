@@ -2,16 +2,16 @@ const { ipcRenderer } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-const { showTradeContent } = require('./trade');
-const { showPackageContent } = require('./capsule_container');
-const { showCaseContent } = require('./newUnlockedCase');
-const { showStickerCapContent } = require('./stickerCapsule');
-const { showCraftedContent } = require('./crafted');
-const { showOperationContent } = require('./operationDrops');
-const { showContainerContent } = require('./container');
-const { showARContent } = require('./combined_ar');
-const { showCaseDropContent } = require('./case_drop');
-const { showDefaultCards } = require('./default_cards');
+const { showTradeContent } = require('./components/trade');
+const { showPackageContent } = require('./components/capsule_container');
+const { showCaseContent } = require('./components/newUnlockedCase');
+const { showStickerCapContent } = require('./components/stickerCapsule');
+const { showCraftedContent } = require('./components/crafted');
+const { showOperationContent } = require('./components/operationDrops');
+const { showContainerContent } = require('./components/container');
+const { showARContent } = require('./components/combined_ar');
+const { showCaseDropContent } = require('./components/case_drop');
+const { showDefaultCards } = require('./components/default_cards');
 
 const $ = (id) => document.getElementById(id);
 const tabContainer = $('tab-container');
@@ -31,7 +31,7 @@ const groupPatterns = {
   'Unlocked': ['Unlocked a'],
   'Earned': ['Earned a', 'Earned'],
   'Market': ['Listed on Community Market', 'Purchased on Community Market', 'Canceled listing on Community Market', 'Listed on the Steam Community Market', 'Received from the Community Market'],
-  'Misc.': ['Received a gift', 'You deleted', 'Leveled up a challenge coin', 'Swapped StatTrak™ values', 'Graffiti Opened', 'Graffiti Used']
+  'Misc.': ['Received a gift', 'Deleted', 'Leveled up a challenge coin', 'Swapped StatTrak', 'Graffiti']
 };
 
 const form = document.querySelector('form');
@@ -139,16 +139,17 @@ function showTabContent(description) {
   else if (description === 'Unlocked a package') {showPackageContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Unlocked a container'){showContainerContent(description, entries, contentContainer, tabStatsContainer)}
   
-  else if (description === 'You traded with') {showTradeContent(description, entries, contentContainer, tabStatsContainer)} 
+  else if (description === 'Traded With') {showTradeContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Trade Up') {showCraftedContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Earned a case drop'){showCaseDropContent(description, entries, contentContainer, tabStatsContainer)}
 
   else if (description === 'Sticker applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Sticker')}
   else if (description === 'Name Tag applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Name Tag')}
 
-  else if (description === 'Operation Reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
-  else if (['Listed on Community Market','Canceled listing on Community Market','Purchased on Community Market','Received a gift', 'You deleted',
-    'Graffiti Used', 'Graffiti Opened', 'Earned a graffiti drop', 'Earned', 'Earned a souvenir drop', 'Earned a weapon drop', 'Used', 'Purchased from the store'].includes(description))
+  //else if (description === 'Operation Reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (['Listed on Community Market','Canceled listing on Community Market','Purchased on Community Market','Received a gift', 'Deleted',
+    'Graffiti Used', 'Graffiti Opened', 'Earned a graffiti drop', 'Earned', 'Earned a souvenir drop', 'Earned a weapon drop', 'Used', 
+    'Purchased from the store', 'Operation Reward'].includes(description))
     {showDefaultCards(description, entries, contentContainer, tabStatsContainer)}
   else {
     entries.forEach((entry) => {

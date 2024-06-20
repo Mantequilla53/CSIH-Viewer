@@ -84,50 +84,13 @@ const handleScrapedData = async (userId, cookie, scrapedDataFilePath) => {
       ({ s, time, time_frac } = cursor);
     } else {
       mainWindow.webContents.send('scrape-date', 'Scrape Finished');
-      console.log('scrape done');
     }
     return cursorFound;
   } catch (error) {
-    console.error('Error handling scraped data:', error);
+    mainWindow.webContents.send('scrape-date', error);
   }
 };
 
-/*
-ipcMain.on('update-file', async (event, { file, cookies }) => {
-  try {
-    const scrapedDataFilePath = path.join(__dirname, './dump', file);
-    const jsonDumpData = JSON.parse(fs.readFileSync(scrapedDataFilePath));
-    const { userId } = jsonDumpData.dumpInfo;
-
-    let cursorFound = true;
-
-    const startScraping = async () => {
-      while (cursorFound) {
-        try {
-          cursorFound = await handleScrapedData(userId, cookies, scrapedDataFilePath);
-          if (cursorFound) {
-            await new Promise(resolve => setTimeout(resolve, 4000));
-          } else {
-            console.log('Scraping completed. No more cursor found.');
-          }
-        } catch (error) {
-          console.error('Error in scrape loop:', error);
-        }
-      }
-    };
-
-    startScraping();
-    event.reply('scrape-started');
-
-    ipcMain.on('stop-scraping', () => {
-      cursorFound = false;
-      console.log('Scraping stopped by user.');
-    });
-  } catch (error) {
-    console.error('Error updating file:', error);
-  }
-});
-*/
 ipcMain.on('set-cookie', async (event, cookie) => {
   try {
     const userId = await scraper.scrapeUInfo(cookie);
@@ -153,11 +116,9 @@ ipcMain.on('set-cookie', async (event, cookie) => {
           cursorFound = await handleScrapedData(userId, cookie, scrapedDataFilePath);
           if (cursorFound) {
             await new Promise(resolve => setTimeout(resolve, 4000));
-          } else {
-            console.log('Scraping completed. No more cursor found.');
           }
         } catch (error) {
-          console.error('Error in scrape loop:', error);
+          mainWindow.webContents.send('scrape-date', 'error in scrape loop');
         }
       }
     };
@@ -167,10 +128,9 @@ ipcMain.on('set-cookie', async (event, cookie) => {
 
     ipcMain.on('stop-scraping', () => {
       cursorFound = false;
-      console.log('Scraping stopped by user.');
     });
   } catch (error) {
-    console.error('cookie error', error);
+    mainWindow.webContents.send('scrape-date', 'cookie error');
   }
 });
 }

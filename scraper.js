@@ -146,7 +146,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
             const scrapeData = [];
 
             const descriptionMap = {
-                'You traded with': (description) => ['You traded with', 'Your trade with', 'Your held trade with'].some(phrase => description.startsWith(phrase)),
+                'Traded With': (description) => ['You traded with', 'Your trade with', 'Your held trade with'].some(phrase => description.startsWith(phrase)),
                 'Unlocked a case': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('case'),
                 'Unlocked a sticker capsule': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('sticker |'),
                 'Unlocked a package': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('package'),
@@ -160,9 +160,11 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                 'Used': (description) => description === 'Used',
                 'Graffiti Opened': (description) => description === 'Unsealed',
                 'Operation Reward': (description) => description === 'Mission reward',
-                'Listed on Community Market': (description) => description === 'You listed an item on the Community Market.',
+                'Listed on Community Market': (description) => ['You listed an item on the Community Market.'].some(phrase => description.startsWith(phrase)),
                 'Purchased on Community Market': (description) => description === 'You purchased an item on the Community Market.',
-                'Canceled listing on Community Market': (description) => description === 'You canceled a listing on the Community Market. The item was returned to you.'
+                'Canceled listing on Community Market': (description) => description === 'You canceled a listing on the Community Market. The item was returned to you.',
+                'Deleted': (description) => description === 'You deleted'
+
             };
             const imageUrls = [];
             const scrapedEntries = await Promise.all(tradeRows.map(async (index, element) => {
@@ -259,7 +261,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                   let descriptionChanged = false;
                   for (const [mappedDescription, condition] of Object.entries(descriptionMap)) {
                       if (condition(description, tradeHistoryItem)) {
-                          if (mappedDescription === 'You traded with') {
+                          if (mappedDescription === 'Traded With') {
                               tradeName = description.replace(/^(You traded with|Your trade with|Your held trade with)\s*/, '').trim();
                           } else if (mappedDescription === 'Sticker applied/removed' || mappedDescription === 'Name Tag applied/removed') {
                               tradeName = description;

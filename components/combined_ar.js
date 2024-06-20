@@ -70,7 +70,7 @@ function findChange(tradeName, plusItems, minusItems, type) {
             return value ? `
                 <div class="card-footer">
                     <p>${action}:</p>
-                    <img src="./resources/images/${value.imgSrc}.png" alt="${value.name}" class="sticker-image">
+                    <img src="${path.join(process.resourcesPath, 'images', `${value.imgSrc}.png`)}" alt="${value.name}" class="sticker-image">
                 </div>
             ` : '';
         }
