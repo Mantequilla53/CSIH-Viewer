@@ -11,7 +11,7 @@ function showDefaultCards(description, entries, contentContainer, tabStatsContai
 		const itemFilter = entries[0].plusItems && entries[0].plusItems.length > 0 ? 'plusItems' : 'minusItems';
 
 		entries.forEach((entry) => {
-			const { d, t, plusItems, minusItems } = entry;
+			const { d, t, plusItems, minusItems, tradeName } = entry;
 			const items = entry[itemFilter];
 			const item = items[0];
 			const entryElement = document.createElement('div');
@@ -45,20 +45,26 @@ function showDefaultCards(description, entries, contentContainer, tabStatsContai
 				if (count > 1) {
 					displayCount = `<span class="item-count">Count: ${count}</span>`;
 				  }
-			  } else if (items.length > 1) {
+			} else if (items.length > 1) {
 				displayCount = `<span class="item-count">Count: ${items.length}</span>`;
+			} else if (description === 'Purchased on Community Market') {
+				if (tradeName) {
+					displayCount = `<span class="item-count">Price: ${tradeName}</span>`;
+				} else {
+					displayCount = '<span class="item-count-undefined">Price: Undefined</span>';
+				}
 			}
 
 			entryElement.innerHTML = `
-        <div class="card-header">
-          <span class="date-time">${d} ${t}</span>
-        </div>
-        <div class="weapon-given">
+  <div class="card-header">
+    <span class="date-time">${d} ${t}</span>
+  </div>
+  <div class="weapon-given">
           <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" width="120" height="92.4">
-          <span>${displayName}</span>
-          ${displayCount}
-        </div>
-      `;
+    <span>${displayName}</span>
+    <div>${displayCount}</div>
+  </div>
+`;
 
 			cardContainerElement.appendChild(entryElement);
 		});
@@ -132,20 +138,24 @@ function extractItemColor(marketName) {
 		'Mil-Spec': 'rgb(75, 105, 255)',
 		'High Grade Patch': 'rgb(75, 105, 255)',
 		'High Grade Collectible': 'rgb(75, 105, 255)',
+		'Genuine High Grade Collectible': 'rgb(75, 105, 255)',
 		'High Grade Graffiti': 'rgb(75, 105, 255)',
 		'High Grade Sticker': 'rgb(75, 105, 255)',
 		'Restricted': 'rgb(136, 71, 255)',
 		'Remarkable Patch': 'rgb(136, 71, 255)',
 		'Remarkable Collectible': 'rgb(136, 71, 255)',
+		'Genuine Remarkable Collection': 'rgb(136, 71, 255)',
 		'Remarkable Graffiti': 'rgb(136, 71, 255)',
 		'Remarkable Sticker': 'rgb(136, 71, 255)',
 		'Classified': 'rgb(211, 44, 230)',
 		'Exotic Patch': 'rgb(211, 44, 230)',
 		'Exotic Collectible': 'rgb(211, 44, 230)',
+		'Genuine Exotic Collectible': 'rgb(211, 44, 230)',
 		'Exotic Graffiti': 'rgb(211, 44, 230)',
 		'Exotic Sticker': 'rgb(211, 44, 230)',
 		'Covert': 'rgb(235, 75, 75)',
 		'Extraordinary Collectible': 'rgb(235, 75, 75)',
+		'Genuine Extraordinary Collectible': 'rgb(235, 75, 75)',
 		'Extraordinary Sticker': 'rgb(235, 75, 75)',
 		'Extraordinary': 'rgb(255, 215, 0)'
 	};

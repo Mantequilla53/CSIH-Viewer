@@ -1,5 +1,12 @@
-function showARContent(description, entries, contentContainer, tabStatsContainer, type) {
-    
+function showARContent(description, entries, contentContainer, tabStatsContainer) {
+    let type = '';
+    if (description === 'Sticker applied/removed'){
+        type = 'Sticker';
+    } else {
+        type = 'Name Tag';
+    }
+
+
     tabStatsContainer.innerHTML = `<link rel="stylesheet" href="style/stickerar_new.css">
     <h2>${description}</h2>
     <div class="filter-options">

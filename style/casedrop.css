@@ -1,6 +1,6 @@
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     grid-gap: 20px;
     margin: 20px;
   }
@@ -47,9 +47,10 @@
     width: 100px;
     height: 100px;
     object-fit: contain;
-    margin-right: 10px;
   }
-  
+  .item-count {
+    color:yellow;
+  }
   .item-info {
     flex: 1;
   }
@@ -99,8 +100,8 @@
   }
   #content-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-gap: 15px;
     margin: 40px 20px;
     padding: 20px;
     border: 2px solid #EEEEEE;
@@ -111,8 +112,19 @@
     background-color: #393E46;
     border-radius: 5px;
     padding: 10px;
+    position: relative;
   }
-  
+  .entry-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7px;
+    background-color: var(--item-color);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
   .entry-container .entry-header p {
     margin: 0;
   }

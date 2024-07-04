@@ -1,0 +1,246 @@
+body {
+  background-color: #222831;
+  color: #EEEEEE;
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+#stopScraping {
+  display: none;
+}
+
+#tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#tab-container > * {
+  margin: 0;
+}
+
+#tab-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #393e46;
+  color: #eeeeee;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#tab-container button:hover {
+  background-color: #4a4f57;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #393e46;
+  color: #eeeeee;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-button::after {
+  content: "\25BC";
+  margin-left: 5px;
+}
+
+.dropdown-button:hover {
+  background-color: #4a4f57;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #393e46;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  border-radius: 5px;
+}
+
+.dropdown-content button {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #393e46;
+  color: #eeeeee;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: left;
+}
+
+.dropdown-content button:hover {
+  background-color: #4a4f57;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #393e46;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.header-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-left h1 {
+  margin: 0;
+  font-size: 35px;
+}
+
+.input-options {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.inline-form {
+  display: flex;
+  align-items: center;
+}
+
+.inline-form label {
+  margin-right: 10px;
+}
+
+.inline-form input[type="text"] {
+  padding: 5px 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 3px;
+}
+
+.inline-form button {
+  padding: 5px 10px;
+  background-color: #00adb5;
+  font-weight: bold;
+  color: #eeeeee;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.inline-form button:hover {
+  background-color: #00c2cb;
+}
+
+.or-divider {
+  font-weight: bold;
+  color: #00adb5;
+}
+
+.file-selector-container {
+  display: flex;
+  align-items: center;
+}
+
+#file-selector {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+#userId {
+  font-weight: bold;
+}
+
+#avatarImg img {
+  max-width: 64px;
+  max-height: 64px;
+  border-radius: 50%;
+}
+.home-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  overflow: hidden;
+  padding: 20px;
+}
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.left-side {
+  flex: 1;
+  padding-right: 20px;
+}
+.right-side {
+  flex: 1;
+  background-color: #ddd; /* Placeholder for image area */
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home-container h1 {
+  color: #0779e4;
+  margin-bottom: 10px;
+}
+.button {
+  display: inline-block;
+  background-color: #0779e4;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+.button:hover {
+  background-color: #0556a3;
+}
+.home-cards {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+.home-card {
+  flex: 1;
+  background: #4a4f57;
+  margin: 0 10px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.steps {
+  background: #4a4f57;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}

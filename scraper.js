@@ -1,76 +1,65 @@
 const cheerio = require('cheerio');
-const fs = require('fs');
-const path = require('path');
 const axios = require('axios');
 const crypto = require('crypto');
-
-function trimItemType(itemType) {
-    if (itemType.includes('★')) {
-        return 'Extraordinary';
-    }
-    const keywords = ['Consumer Grade', 'Industrial Grade', 'Mil-Spec', 'Restricted', 'Classified', 'Covert'];
-    for (const keyword of keywords) {
-        if (itemType.includes(keyword)) {
-            return keyword;
-        }
-    }
-    return itemType;
-}
-
-async function imageDwnld(urlOrIconUrl, isBuildUrl = true) {
-    const resourcesPath = process.resourcesPath;
-    const directoryPath = path.join(resourcesPath, 'images');
-    if (!fs.existsSync(directoryPath)) {
-        fs.mkdirSync(directoryPath);
-    }
-    let imgUrl = urlOrIconUrl;
-    const compressedUrl = crypto.createHash('md5').update(imgUrl).digest('hex');
-    if (isBuildUrl) {
-        if (!urlOrIconUrl || urlOrIconUrl.trim() === '') {
-            console.error('Error: iconUrl is blank.');
-            return;
-        }
-        imgUrl = `https://community.cloudflare.steamstatic.com/economy/image/${urlOrIconUrl}/150fx150f?allow_animated=1`;
-    }
-
-    const filePath = path.join(directoryPath, `${compressedUrl}.png`);
-    if (fs.existsSync(filePath)) {
-        return `${compressedUrl}`;
-    }
-
-    try {
-        const response = await axios.get(imgUrl, {
-            responseType: 'stream'
-        });
-        const writer = fs.createWriteStream(filePath);
-        response.data.pipe(writer);
-
-        await new Promise((resolve, reject) => {
-            writer.on('finish', resolve);
-            writer.on('error', reject);
-        });
-
-        if (!isBuildUrl) {
-            const sharp = require('sharp');
-            const resizedFilePath = path.join(directoryPath, `${compressedUrl}_resized.png`);
-            await sharp(filePath)
-                .resize(50, 50)
-                .toFile(resizedFilePath);
-            await fs.promises.unlink(filePath);
-            await fs.promises.rename(resizedFilePath, filePath);
-        }
-
-        return `${compressedUrl}`;
-    } catch (error) {
-        console.error(`Error downloading image ${compressedUrl}:`, error);
-        return null;
-    }
-}
+const { trimItemType, imageDwnld, parseStickerInfo } = require('./utils');
+const fs = require('fs');
 
 const HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
     'Accept-Language': 'en-US;q=0.7,en;q=0.3',
     'Referer': 'https://steamcommunity.com/my/'
+}
+
+function logToFile(message) {
+    fs.appendFile('scraper.log', `${message}\n`, (err) => {
+      if (err) {
+        console.error('Error writing to log file:', err);
+      }
+    });
+  }
+
+async function scrapeMarketHistory(cookie) {
+    let start = 0;
+  const count = 500;
+  let totalCount = 0;
+  const purchasedItems = [];
+
+  do {
+    const response = await axios.get(`https://steamcommunity.com/market/myhistory/render/?query=&start=${start}&count=${count}`, {
+        headers: {
+            ...HEADERS,
+            'Cookie': cookie
+        }
+    });
+    const data = response.data;
+    totalCount = data.total_count;
+
+    const resultsHtml = data.results_html;
+
+    const $ = cheerio.load(resultsHtml);
+
+    const listingRows = $('.market_listing_row');
+
+    listingRows.each((index, element) => {
+      const gameName = $(element).find('.market_listing_game_name').text().trim();
+      if (gameName === 'Counter-Strike 2') {
+        const itemName = $(element).find('.market_listing_item_name').text().trim();
+        const price = $(element).find('.market_listing_price').text().trim();
+        const gainOrLoss = $(element).find('.market_listing_gainorloss').text().trim();
+        if (gainOrLoss === '+') {
+          const purchasedItem = {
+            itemName,
+            price,
+          };
+
+          purchasedItems.push(purchasedItem);
+        }
+      }
+    });
+
+    start += count;
+  } while (start < totalCount);
+  return purchasedItems;
 }
 
 async function scrapeUInfo(cookie) {
@@ -80,46 +69,35 @@ async function scrapeUInfo(cookie) {
                 ...HEADERS,
                 'Cookie': cookie
             },
-            maxRedirects: 0,
+            maxRedirects: 5,
             validateStatus: function(status) {
-                return status >= 200 && status < 303;
+                return status >= 200 && status < 400;
             }
         });
 
-        return response.headers.location;
+        const finalUrl = response.request.res.responseUrl || response.config.url;
+        
+        const $ = cheerio.load(response.data);
+        const avatarElement = $('.user_avatar.playerAvatar');
+        let avatarUrl = avatarElement.find('img').attr('src');
+        const username = avatarElement.find('img').attr('alt');
+        avatarUrl = avatarUrl.replace(/(\.\w+)$/, '_medium$1');
+        return {
+            finalUrl,
+            avatarUrl,
+            username
+        };
     } catch (error) {
-        if (error.response && error.response.status === 302) {
-            const redirectedUrl = error.response.headers.location;
-            return redirectedUrl;
-        } else {
-            console.error('Error:', error);
-            throw error;
+        console.error('Error:', error.message);
+        if (error.response) {
+            console.error('Response status:', error.response.status);
+            console.error('Response headers:', error.response.headers);
         }
+        throw error;
     }
 }
 
-async function parseStickerInfo(stickerInfo) {
-    const $ = cheerio.load(stickerInfo);
-    const imgTags = $('img');
-    const stickerNames = $('div').text().trim().replace('Sticker: ', '').split(', ');
-
-    const stickers = [];
-
-    for (let i = 0; i < imgTags.length; i++) {
-        const img = imgTags[i];
-        const imgSrc = $(img).attr('src');
-        if (imgSrc) {
-            const stickerName = stickerNames[i];
-            stickers.push({
-                name: stickerName,
-                imgSrc: imgSrc
-            });
-        }
-    }
-    return stickers;
-}
-
-async function scrapeIH(userId, cookie, s, time, time_frac) {
+async function scrapeIH(userId, cookie, s, time, time_frac, purchasedItems) {
     const sessionId = cookie.match(/sessionid=([^;]+)/i)?.[1] || null;
     const ih_url = `${userId}inventoryhistory/?ajax=1&cursor%5Btime%5D=${time}&cursor%5Btime_frac%5D=${time_frac}&cursor%5Bs%5D=${s}&sessionid=${sessionId}&app%5B%5D=730`;
 
@@ -151,20 +129,19 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                 'Unlocked a sticker capsule': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('sticker |'),
                 'Unlocked a package': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('package'),
                 'Trade Up': (description) => description === 'Crafted',
-                'Earned a case drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && tradeHistoryItem.toLowerCase().includes('case'),
+                'Earned a case drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && (tradeHistoryItem.toLowerCase().includes('case' || 'capsule')),
                 'Earned a graffiti drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && tradeHistoryItem.toLowerCase().includes('sealed graffiti'),
                 'Earned a weapon drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && !(tradeHistoryItem.toLowerCase().includes('case' || 'sealed graffiti')),
-                'Earned': (description) => ['Earned a promotional item', 'Received by entering product code'].includes(description),
+                'Earned': (description) => ['Earned a promotional item', 'Received by entering product code', 'Leveled up a challenge coin'].includes(description),
                 'Sticker applied/removed': (description) => ['Sticker applied', 'Sticker removed'].includes(description),
                 'Name Tag applied/removed': (description) => ['Name Tag applied', 'Name Tag removed'].includes(description),
                 'Used': (description) => description === 'Used',
                 'Graffiti Opened': (description) => description === 'Unsealed',
                 'Operation Reward': (description) => description === 'Mission reward',
-                'Listed on Community Market': (description) => ['You listed an item on the Community Market.'].some(phrase => description.startsWith(phrase)),
+                'Listed on Community Market': (description) => description === 'You listed an item on the Community Market.',
                 'Purchased on Community Market': (description) => description === 'You purchased an item on the Community Market.',
                 'Canceled listing on Community Market': (description) => description === 'You canceled a listing on the Community Market. The item was returned to you.',
                 'Deleted': (description) => description === 'You deleted'
-
             };
             const imageUrls = [];
             const scrapedEntries = await Promise.all(tradeRows.map(async (index, element) => {
@@ -179,7 +156,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
           
                   if (description === 'Traded') {
                       tradeName = 'Missing Trade Name';
-                      description = 'You traded with';
+                      description = 'Traded With';
                   }
           
                   const plusItems = [];
@@ -286,7 +263,19 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
                           break;
                       }
                   }
-          
+                  if (description === 'Purchased on Community Market') {
+                    logToFile(`Processing item: ${plusItems[0]?.market_name}`);
+                    const matchingItemIndex = purchasedItems.findIndex(item => item && plusItems[0]?.market_name.startsWith(item.itemName));
+                    if (matchingItemIndex !== -1) {
+                      logToFile(`Matching item found: ${JSON.stringify(purchasedItems[matchingItemIndex])}`);
+                      tradeName = purchasedItems[matchingItemIndex].price;
+                      delete purchasedItems[matchingItemIndex];
+                      logToFile(`Purchased item match - Price: ${tradeName}`);
+                    } else {
+                      logToFile(`No matching item found for: ${plusItems[0]?.market_name}`);
+                    }
+                  }
+
                   return {
                       d,
                       t,
@@ -302,6 +291,10 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
             for (const { url, isBuildUrl } of imageUrls) {
                 await imageDwnld(url, isBuildUrl);
             }
+            if (!cursorFound) {
+                const remainingItems = purchasedItems.filter(item => item !== undefined);
+                logToFile(`Remaining items: ${JSON.stringify(remainingItems)}`);
+            }
             return { scrapeData, cursor, cursorFound };
         } else {
             console.log('Failed to scrape JSON data');
@@ -313,5 +306,6 @@ async function scrapeIH(userId, cookie, s, time, time_frac) {
 }
 module.exports = {
     scrapeUInfo,
-    scrapeIH
+    scrapeIH,
+    scrapeMarketHistory
 };

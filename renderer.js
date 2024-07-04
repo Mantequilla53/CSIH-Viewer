@@ -11,6 +11,7 @@ const { showOperationContent } = require('./components/operationDrops');
 const { showContainerContent } = require('./components/container');
 const { showARContent } = require('./components/combined_ar');
 const { showCaseDropContent } = require('./components/case_drop');
+const { showWeaponDropContent } = require('./components/weaponDrop');
 const { showDefaultCards } = require('./components/default_cards');
 
 const $ = (id) => document.getElementById(id);
@@ -18,10 +19,11 @@ const tabContainer = $('tab-container');
 const contentContainer = $('content-container');
 const tabStatsContainer = $('tab-stats');
 const fileSelector = $('file-selector');
-const user_id = $('dump-user-id');
-const dump_date = $('dump-date');
 const userId = $('userId');
-
+const scrapeDate = $('scrape-date');
+const avatar = $('avatarImg');
+const inputField = $('input-field');
+const submitButton = $('submit-button');
 
 let selectedFileName = '';
 let existingData = {};
@@ -31,22 +33,32 @@ const groupPatterns = {
   'Unlocked': ['Unlocked a'],
   'Earned': ['Earned a', 'Earned'],
   'Market': ['Listed on Community Market', 'Purchased on Community Market', 'Canceled listing on Community Market', 'Listed on the Steam Community Market', 'Received from the Community Market'],
-  'Misc.': ['Received a gift', 'Deleted', 'Leveled up a challenge coin', 'Swapped StatTrak', 'Graffiti']
+  'Misc.': ['Received a gift', 'Deleted', 'Leveled up a challenge coin', 'Swapped StatTrak', 'Graffiti Opened', 'Graffiti Used']
 };
 
 const form = document.querySelector('form');
-const submitButton = document.querySelector('#submit-button');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
-  const userInput = document.querySelector('#input-field').value;
-  console.log('received:', userInput);
-  ipcRenderer.send('set-cookie', userInput);
+  const userInput = inputField.value;
+  if (submitButton.textContent === 'Submit') {
+    ipcRenderer.send('set-cookie', userInput);
+    submitButton.textContent = 'Stop Scraping';
+    inputField.disabled = true;
+    fileSelector.disabled = true;
+  } else {
+    ipcRenderer.send('stop-scraping');
+    submitButton.textContent = 'Submit';
+    inputField.disabled = false;
+    fileSelector.disabled = false;
+    scrapeDate.innerHTML = 'Stopped Scraping';
+  }
 });
 
 ipcRenderer.on('json-files', (event, jsonFiles) => {
   if (jsonFiles.length > 0) {
     fileSelector.style.display = 'inline-block';
-    fileSelector.innerHTML = '<option value="">Select JSON Dump</option>';
+    
+    fileSelector.innerHTML = '<option value="">Select Output File</option>';
     jsonFiles.forEach(file => {
       const option = document.createElement('option');
       option.value = file;
@@ -58,23 +70,23 @@ ipcRenderer.on('json-files', (event, jsonFiles) => {
     });
   } else {
     fileSelector.style.display = 'none';
+
   }
 });
 
 fileSelector.addEventListener('change', (event) => {
-  contentContainer.innerHTML = '';
-  tabStatsContainer.innerHTML = '';
+  clearContent();
   tabContainer.innerHTML = '';
-  user_id.innerHTML = '';
-  dump_date.innerHTML = '';
+  userId.innerHTML = '';
+  scrapeDate.innerHTML = '';
+  avatar.innerHTML = '';
 
   existingData = {};
 
   selectedFileName = event.target.value;
-  $('selected-file').textContent = selectedFileName;
-  console.log(selectedFileName);
   if (selectedFileName) {
-    submitButton.textContent = 'Update File';
+    submitButton.disabled = true;
+    inputField.disabled = true;
     const dumpDirectory = path.join(process.resourcesPath, 'dump');
     const filePath = path.join(dumpDirectory, selectedFileName);
     fs.readFile(filePath, 'utf8', (err, data) => {
@@ -84,36 +96,38 @@ fileSelector.addEventListener('change', (event) => {
       }
       try {
         const jsonData = JSON.parse(data);
-        const { userId, dumpDate} = jsonData.dumpInfo;
-        user_id.textContent = `UserID: ${userId}`;
-        dump_date.textContent = `Last Dump Update: ${dumpDate}`;
+        const { username, user_imgSrc, dumpDate} = jsonData.dumpInfo;
+        userId.textContent = `${username}`;
+        //scrapeDate.textContent = `Last Dump Update: ${dumpDate}`;
+        avatar.innerHTML = `<img src="${user_imgSrc}" alt="User Avatar">`;
         ipcRenderer.send('process-dump', jsonData);
       } catch (error) {
         console.error('Error parsing JSON file:', error);
       }
     });
   } else {
+    submitButton.disabled = false;
     submitButton.textContent = 'Submit';
-    console.log('none');
+    inputField.disabled = false;
+    showHome();
   }
 });
 
-ipcRenderer.on('scrape-response', (event, item) => {
-  userId.innerHTML = item;
+ipcRenderer.on('scrape-response', (event, userName, avatarImg) => {
+  userId.innerHTML = userName;
+  avatar.innerHTML = `<img src="${avatarImg}" alt="User Avatar">`;
 });
 
-ipcRenderer.on('scrape-started', () => {
-  $('stopScraping').style.display = 'block';
-});
-
-$('stopScraping').addEventListener('click', () => {
-  $('scrape-date').innerHTML = '';
-  ipcRenderer.send('stop-scraping');
-  $('scrape-date').innerHTML = 'Stopped Scraping';
-});
 
 ipcRenderer.on('scrape-date', (event, date) => {
-  $('scrape-date').innerHTML = `Currently Scraping: ${date}`;
+  scrapeDate.innerHTML = `Currently Scraping: ${date}`;
+});
+
+ipcRenderer.on('scrape-complete', () => {
+  submitButton.textContent = 'Submit';
+  inputField.disabled = false;
+  fileSelector.disabled = false;
+  scrapeDate.innerHTML = 'Scraping Complete';
 });
 
 ipcRenderer.on('scraped-data', (event, newDataString) => {
@@ -129,9 +143,50 @@ ipcRenderer.on('scraped-data', (event, newDataString) => {
   updateTabs();
 });
 
-function showTabContent(description) {
+showHome();
+
+function clearContent() {
   contentContainer.innerHTML = '';
   tabStatsContainer.innerHTML = '';
+}
+
+function showHome() {
+  clearContent();
+  contentContainer.innerHTML = `
+    <div class="home-container">
+        <section class="top-section">
+            <div class="left-side">
+                <h1>CSIHV</h1>
+                <p>Counter Strike Inventory History Viewer</p>
+                <a href="#" class="button">Get Started</a>
+            </div>
+        </section>
+
+        <section class="home-cards">
+            <div class="home-card">
+                <h2>1.</h2>
+                <p></p>
+            </div>
+            <div class="home-card">
+                <h2>2.</h2>
+                <p></p>
+            </div>
+            <div class="home-card">
+                <h2>3.</h2>
+                <p></p>
+            </div>
+        </section>
+
+        <section class="steps">
+            <h2>How to Find Your Steam Cookies</h2>
+        </section>
+    </div>
+  `;
+
+}
+
+function showTabContent(description) {
+  clearContent();
   const entries = existingData[description];
     
   if (description === 'Unlocked a case') {showCaseContent(description, entries, contentContainer, tabStatsContainer)} 
@@ -141,14 +196,11 @@ function showTabContent(description) {
   
   else if (description === 'Traded With') {showTradeContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Trade Up') {showCraftedContent(description, entries, contentContainer, tabStatsContainer)} 
+  else if (description === 'Earned a weapon drop'){showWeaponDropContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Earned a case drop'){showCaseDropContent(description, entries, contentContainer, tabStatsContainer)}
-
-  else if (description === 'Sticker applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Sticker')}
-  else if (description === 'Name Tag applied/removed'){showARContent(description, entries, contentContainer, tabStatsContainer, 'Name Tag')}
-
-  //else if (description === 'Operation Reward'){showOperationContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (['Sticker applied/removed', 'Name Tag applied/removed'].includes(description)){showARContent(description, entries, contentContainer, tabStatsContainer)}
   else if (['Listed on Community Market','Canceled listing on Community Market','Purchased on Community Market','Received a gift', 'Deleted',
-    'Graffiti Used', 'Graffiti Opened', 'Earned a graffiti drop', 'Earned', 'Earned a souvenir drop', 'Earned a weapon drop', 'Used', 
+    'Graffiti Used', 'Graffiti Opened', 'Earned a graffiti drop', 'Earned', 'Earned a souvenir drop', 'Used', 
     'Purchased from the store', 'Operation Reward'].includes(description))
     {showDefaultCards(description, entries, contentContainer, tabStatsContainer)}
   else {
