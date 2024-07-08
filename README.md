@@ -49,5 +49,5 @@ To get started with CSIHV, follow these simple steps:
 
 ## Acknowledgments
 
-*[ByMykel's](https://github.com/ByMykel/CSGO-API) Counter Strike api
-*[Kyle5507](https://github.com/kyle5507) for helping with initial logic in earlier versions of CSIHV
+* [ByMykel's](https://github.com/ByMykel/CSGO-API) Counter Strike api
+* [Kyle5507](https://github.com/kyle5507) for helping with initial logic in earlier versions of CSIHV
