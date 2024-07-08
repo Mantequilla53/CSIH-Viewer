@@ -42,6 +42,9 @@ To get started with CSIHV, follow these simple steps:
       * In the new section, under the "Headers" tab, find "Cookie:" in the Request Headers
       * Copy the entire text string next to "Cookie:"
       * Paste this string into CSIHV when prompted
+![Screenshot_400](https://github.com/Mantequilla53/CSIH-Viewer/assets/77872710/cab3cd95-4854-49ec-bff1-7275cfcb9881)
+![Screenshot_401](https://github.com/Mantequilla53/CSIH-Viewer/assets/77872710/a6336397-3c22-402d-80d6-104c58785468)
+![Screenshot_402](https://github.com/Mantequilla53/CSIH-Viewer/assets/77872710/36105531-8e45-4acd-9de5-2ad8c4ce4dfd)
 
 ## Built With
 
