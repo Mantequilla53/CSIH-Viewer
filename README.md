@@ -36,12 +36,12 @@ To get started with CSIHV, follow these simple steps:
       • Press F12 or right-click and select "Inspect"
    4. Refresh your Steam profile page (Press F5 or use the refresh button)
    5. In Developer Tools:
-      • Go to the "Network" tab
-      • Find the entry with your Steam custom URL or Steam64 ID
-      • Click on this entry
-      • In the new section, under the "Headers" tab, find "Cookie:" in the Request Headers
-      • Copy the entire text string next to "Cookie:"
-      • Paste this string into CSIHV when prompted
+      * Go to the "Network" tab
+      * Find the entry with your Steam custom URL or Steam64 ID
+      * Click on this entry
+      * In the new section, under the "Headers" tab, find "Cookie:" in the Request Headers
+      * Copy the entire text string next to "Cookie:"
+      * Paste this string into CSIHV when prompted
 
 ## Built With
 
