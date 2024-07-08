@@ -33,7 +33,7 @@ To get started with CSIHV, follow these simple steps:
    1. Log into your Steam account via web browser
    2. Go to your Steam profile (https://steamcommunity.com/my/)
    3. Open Developer Tools:
-      • Press F12 or right-click and select "Inspect"
+      * Press F12 or right-click and select "Inspect"
    4. Refresh your Steam profile page (Press F5 or use the refresh button)
    5. In Developer Tools:
       * Go to the "Network" tab
