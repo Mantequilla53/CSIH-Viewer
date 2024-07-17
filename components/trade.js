@@ -1,4 +1,5 @@
 function showTradeContent(description, entries, contentContainer, tabStatsContainer) {
+  const { extractItemColor } = require('../utils');
   const tradeNameCounts = {};
 
   entries.forEach((entry) => {
@@ -87,23 +88,25 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
               <div class="item-grid">
                 ${Object.values(groupedItems).map((item) => `
                   <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
-                    <div class="item-image-container">
-                      <div class="item-image-wrapper">
-                        <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" width="120" height="92.4">
-                      </div>
-                      ${item.tag_name ? `
-                        <div class="tag-indicator" title="${item.tag_name}"></div>
-                      ` : ''}
+                    <div class="weapon-given-image-container">
+                        <img src="images/${item.itemName}.png" width="120" height="92.4">
+                      ${item.itemWear ? `<span class="item-wear">${shortenItemWear(item.itemWear)}</span>` : ''}
+                      ${item.tag_name ? `<div class="tag-indicator" title="${item.tag_name}"></div>` : ''}
                       ${item.stickers && item.stickers.length > 0 ? `
                         <div class="sticker-separator"></div>
                         <div class="sticker-images">
                           ${item.stickers.map((sticker) => `
-                            <img src="${path.join(process.resourcesPath, 'images', `${sticker.imgSrc}.png`)}" width="40" height="30.8">
+                            <img src="images/${sticker.imgSrc}.png" width="40" height="30.8">
                           `).join('')}
                         </div>
                       ` : ''}
                     </div>
-                    <p>${item.market_name} ${item.count > 1 ? `(count ${item.count})` : ''}</p>
+                    <div class="item-name">
+                      <span>${item.market_name}</span>
+                    </div>
+                    <div class="item-count">
+                      <span>${item.count > 1 ? `Count: ${item.count}` : ''}</span>
+                    </div>
                   </div>
                 `).join('')}
               </div>
@@ -144,7 +147,16 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
 
   renderTrades();
 }
-
+const shortenItemWear = (itemWear) => {
+            const wearMap = {
+              'Factory New': 'FN',
+              'Minimal Wear': 'MW',
+              'Field-Tested': 'FT',
+              'Well-Worn': 'WW',
+              'Battle-Scarred': 'BS'
+            };
+            return wearMap[itemWear] || itemWear;
+          };
 function groupItems(items) {
   return items.reduce((acc, item) => {
     const stickerNames = item.stickers ? item.stickers.map(sticker => sticker.name).join('-') : '';
@@ -156,38 +168,6 @@ function groupItems(items) {
     }
     return acc;
   }, {});
-}
-
-function extractItemColor(itemType) {
-  const colorMap = {
-    'Consumer Grade': 'rgb(176, 195, 217)',
-    'Industrial Grade': 'rgb(94, 152, 217)',
-    //blue
-    'Mil-Spec': 'rgb(75, 105, 255)',
-    'High Grade Patch': 'rgb(75, 105, 255)',
-    'High Grade Collectible': 'rgb(75, 105, 255)',
-    'High Grade Graffiti': 'rgb(75, 105, 255)',
-    'High Grade Sticker': 'rgb(75, 105, 255)',
-    //purple
-    'Restricted': 'rgb(136, 71, 255)',
-    'Remarkable Patch': 'rgb(136, 71, 255)',
-    'Remarkable Collectible': 'rgb(136, 71, 255)',
-    'Remarkable Graffiti': 'rgb(136, 71, 255)',
-    'Remarkable Sticker': 'rgb(136, 71, 255)',
-    //pink
-    'Classified': 'rgb(211, 44, 230)',
-    'Exotic Patch': 'rgb(211, 44, 230)',
-    'Exotic Collectible': 'rgb(211, 44, 230)',
-    'Exotic Graffiti': 'rgb(211, 44, 230)',
-    'Exotic Sticker': 'rgb(211, 44, 230)',
-    //red
-    'Covert': 'rgb(235, 75, 75)',
-    'Extraordinary Collectible': 'rgb(235, 75, 75)',
-    'Extraordinary Sticker': 'rgb(235, 75, 75)',
-    //yellow
-    'Extraordinary': 'rgb(255, 215, 0)'
-  };
-  return colorMap[itemType] || 'white';
 }
 
 module.exports = {

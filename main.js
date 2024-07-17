@@ -9,8 +9,7 @@ let time = 0;
 let time_frac = 0;
 
 function getJsonFiles() {
-  const resourcesPath = process.resourcesPath;
-  const dumpDirectory = path.join(resourcesPath, 'dump');
+  const dumpDirectory = path.join(__dirname, './dump');
 
   if (!fs.existsSync(dumpDirectory)) {
     fs.mkdirSync(dumpDirectory);
@@ -67,8 +66,7 @@ ipcMain.on('set-cookie', async (event, cookie) => {
     const userId = await scraper.scrapeUInfo(cookie);
     event.reply('scrape-response', userId.username, userId.avatarUrl);
     const dumpDateInfo = generateFilePath();
-    const resourcesPath = process.resourcesPath;
-    const dumpDirectory = path.join(resourcesPath, 'dump');
+    const dumpDirectory = path.join(__dirname, './dump');
     const scrapedDataFilePath = path.join(dumpDirectory, `${dumpDateInfo}.json`);
     const jsonDumpData = {
       dumpInfo: {
@@ -84,6 +82,7 @@ ipcMain.on('set-cookie', async (event, cookie) => {
     let cursorFound = true;
 
     const startScraping = async () => {
+      
       const purchasedItems = await scraper.scrapeMarketHistory(cookie);
       while (cursorFound) {
         try {

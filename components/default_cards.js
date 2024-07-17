@@ -1,12 +1,22 @@
 function showDefaultCards(description, entries, contentContainer, tabStatsContainer) {
+	const { extractItemColor } = require('../utils');
 	tabStatsContainer.innerHTML = `
     <link rel="stylesheet" href="style/weapondrop.css">
     <h3>${description}</h3>
   `;
 
 	function renderContentContainer() {
-		const cardContainerElement = document.createElement('div');
-		cardContainerElement.classList.add('card-container');
+		
+		const shortenItemWear = (itemWear) => {
+			const wearMap = {
+				'Factory New': 'FN',
+				'Minimal Wear': 'MW',
+				'Field-Tested': 'FT',
+				'Well-Worn': 'WW',
+				'Battle-Scarred': 'BS'
+			};
+			return wearMap[itemWear] || itemWear;
+		};
 
 		const itemFilter = entries[0].plusItems && entries[0].plusItems.length > 0 ? 'plusItems' : 'minusItems';
 
@@ -31,7 +41,15 @@ function showDefaultCards(description, entries, contentContainer, tabStatsContai
 			entryElement.style.setProperty('--item-color', itemColor);
 
 			let displayName = item.market_name;
-			let displayCount = '';
+      		let displayCount = '';
+      		let borderColor = '';
+
+      		if (displayName.startsWith('StatTrak')) {
+        		borderColor = 'rgb(207, 106, 50)';
+      		} else if (displayName.includes('Souvenir')) {
+       			 borderColor = 'rgb(255, 215, 0)';
+      		}
+
 			const starMatch = item.market_name.match(/^(\d+) Stars? for (.+)$/);
 			if (starMatch) {
 				const totalStars = items.reduce((sum, item) => {
@@ -56,20 +74,29 @@ function showDefaultCards(description, entries, contentContainer, tabStatsContai
 			}
 
 			entryElement.innerHTML = `
-  <div class="card-header">
-    <span class="date-time">${d} ${t}</span>
-  </div>
-  <div class="weapon-given">
-          <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" width="120" height="92.4">
-    <span>${displayName}</span>
-    <div>${displayCount}</div>
-  </div>
-`;
+        <div class="card-header">
+          <span class="date-time">${d} ${t}</span>
+        </div>
+        <div class="weapon-given">
+          <div class="weapon-given-image-container" style="border-color: ${borderColor}">
+            <img src="images/${item.itemName}.png" width="120" height="92.4">
+            ${item.itemWear ? `<span class="item-wear">${shortenItemWear(item.itemWear)}</span>` : ''}
+            ${item.stickers && item.stickers.length > 0 ? `
+              <div class="sticker-separator"></div>
+              <div class="sticker-images">
+                ${item.stickers.map((sticker) => `
+                  <img src="images/${sticker.imgSrc}.png" width="45" height="45">
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+          <span>${displayName}</span>
+          <div>${displayCount}</div>
+        </div>
+      `;
 
-			cardContainerElement.appendChild(entryElement);
+contentContainer.appendChild(entryElement);
 		});
-
-		contentContainer.appendChild(cardContainerElement);
 	}
 	renderContentContainer();
 }
@@ -110,56 +137,6 @@ function removeCoupons(plusItems, minusItems) {
 				  return { name, count };
 				}
 				return { name: '', count: 0 };
-}
-
-function extractItemColor(marketName) {
-	const itemMap = {
-		'Battle Green': '#789d53',
-		'Monarch Blue': '#4e7fa9',
-		'Monster Purple': '#6e4f9f',
-		'Princess Pink': '#9d567a',
-		'SWAT Blue': '#4c5b98',
-		'Tiger Orange': '#b87148',
-		'Tracer Yellow': '#d4c95b',
-		'Violent Violet': '#af92df',
-		'War Pig Pink': '#e4ccd5',
-		'Wire Blue': '#6ba5b2',
-		'Bazooka Pink': '#ba68b2',
-		'Blood Red': '#b14d4d',
-		'Brick Red': '#874444',
-		'Cash Green': '#a6c4a5',
-		'Desert Amber': '#ae833d',
-		'Dust Brown': '#8f7d5d',
-		'Frog Green': '#488f80',
-		'Jungle Green': '#417a4a',
-		'Shark White': '#c1c1c1',
-		'Consumer Grade': 'rgb(176, 195, 217)',
-		'Industrial Grade': 'rgb(94, 152, 217)',
-		'Mil-Spec': 'rgb(75, 105, 255)',
-		'High Grade Patch': 'rgb(75, 105, 255)',
-		'High Grade Collectible': 'rgb(75, 105, 255)',
-		'Genuine High Grade Collectible': 'rgb(75, 105, 255)',
-		'High Grade Graffiti': 'rgb(75, 105, 255)',
-		'High Grade Sticker': 'rgb(75, 105, 255)',
-		'Restricted': 'rgb(136, 71, 255)',
-		'Remarkable Patch': 'rgb(136, 71, 255)',
-		'Remarkable Collectible': 'rgb(136, 71, 255)',
-		'Genuine Remarkable Collection': 'rgb(136, 71, 255)',
-		'Remarkable Graffiti': 'rgb(136, 71, 255)',
-		'Remarkable Sticker': 'rgb(136, 71, 255)',
-		'Classified': 'rgb(211, 44, 230)',
-		'Exotic Patch': 'rgb(211, 44, 230)',
-		'Exotic Collectible': 'rgb(211, 44, 230)',
-		'Genuine Exotic Collectible': 'rgb(211, 44, 230)',
-		'Exotic Graffiti': 'rgb(211, 44, 230)',
-		'Exotic Sticker': 'rgb(211, 44, 230)',
-		'Covert': 'rgb(235, 75, 75)',
-		'Extraordinary Collectible': 'rgb(235, 75, 75)',
-		'Genuine Extraordinary Collectible': 'rgb(235, 75, 75)',
-		'Extraordinary Sticker': 'rgb(235, 75, 75)',
-		'Extraordinary': 'rgb(255, 215, 0)'
-	};
-	return itemMap[marketName] || 'white';
 }
 
 module.exports = {

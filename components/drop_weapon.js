@@ -1,4 +1,5 @@
 function showWeaponDropContent(description, entries, contentContainer, tabStatsContainer) {
+  const { extractItemColor } = require('../utils');
   const outputData = require('../output.json');
   const collectionCounts = {};
   const totalWeaponDrops = entries.length;
@@ -42,17 +43,20 @@ function showWeaponDropContent(description, entries, contentContainer, tabStatsC
         const { d, t, plusItems } = entry;
         const itemColor = extractItemColor(plusItems[0].itemType); 
         const entryElement = document.createElement('div');
-        entryElement.className = 'entry-container';
+        entryElement.classList.add('card');
         entryElement.style.setProperty('--item-color', itemColor);
         entryElement.innerHTML = `
-          <div class="entry-header">
-            <p>${d}  - ${t}</p>
+          <div class="card-header">
+            <span class="date-time">${d} ${t}</span>
           </div>
-          <div class="entry-image">
-            <img src="${path.join(process.resourcesPath, 'images', `${plusItems[0].itemName}.png`)}" alt="${plusItems[0].market_name}">
+          <div class="weapon-given-image-container">
+            <img src="./images/${plusItems[0].itemName}.png" alt="${plusItems[0].market_name}">
           </div>
           <div class="entry-case">
-            <p>${plusItems[0].market_name}</p>
+            <span>${plusItems[0].market_name}</span>
+          </div>
+          <div class="entry-collection">
+            <span>${plusItems[0].itemSetName}</span>
           </div>
         `;
         contentContainer.appendChild(entryElement);
@@ -88,7 +92,7 @@ function showWeaponDropContent(description, entries, contentContainer, tabStatsC
   }
 
   tabStatsContainer.innerHTML = `
-    <link rel="stylesheet" href="style/casedrop.css">
+    <link rel="stylesheet" href="style/weapondrop.css">
     <h3>${description}</h3>
     <div class="stats-container">
       <div class="stat-item">
@@ -116,7 +120,7 @@ function showWeaponDropContent(description, entries, contentContainer, tabStatsC
                   <img src="${collectionImage}" alt="${collection}">
                 <div class="item-info">
                   <h4>${collection}</h4>
-                  <p class="item-count">Count: ${count}</p>
+                  ${count > 1 ? `<span class="drop-count">Count: ${count}</span>` : ''}
                 </div>
               </div>
             `;
@@ -142,19 +146,6 @@ function showWeaponDropContent(description, entries, contentContainer, tabStatsC
 
   renderContentContainer();
   renderResetButton();
-}
-
-function extractItemColor(itemType) {
-  const colorMap = {
-    'Consumer Grade': 'rgb(176, 195, 217)',
-    'Industrial Grade': 'rgb(94, 152, 217)',
-    'Mil-Spec': 'rgb(75, 105, 255)',
-    'Restricted': 'rgb(136, 71, 255)',
-    'Classified': 'rgb(211, 44, 230)',
-    'Covert': 'rgb(235, 75, 75)',
-    'Extraordinary': 'rgb(255, 215, 0)'
-  };
-  return colorMap[itemType] || 'white';
 }
 
 module.exports = {

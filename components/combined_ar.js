@@ -1,4 +1,5 @@
 function showARContent(description, entries, contentContainer, tabStatsContainer) {
+    const { extractItemColor } = require('../utils');
     let type = '';
     if (description === 'Sticker applied/removed'){
         type = 'Sticker';
@@ -7,7 +8,7 @@ function showARContent(description, entries, contentContainer, tabStatsContainer
     }
 
 
-    tabStatsContainer.innerHTML = `<link rel="stylesheet" href="style/stickerar_new.css">
+    tabStatsContainer.innerHTML = `<link rel="stylesheet" href="style/weapondrop.css">
     <h2>${description}</h2>
     <div class="filter-options">
         <label>
@@ -22,41 +23,56 @@ function showARContent(description, entries, contentContainer, tabStatsContainer
 
     function updateCards() {
         const selectedTradeNames = [...tabStatsContainer.querySelectorAll('input[type="checkbox"]:checked')].map(checkbox => checkbox.value);
+
+        const shortenItemWear = (itemWear) => {
+            const wearMap = {
+              'Factory New': 'FN',
+              'Minimal Wear': 'MW',
+              'Field-Tested': 'FT',
+              'Well-Worn': 'WW',
+              'Battle-Scarred': 'BS'
+            };
+            return wearMap[itemWear] || itemWear;
+          };
+
         contentContainer.innerHTML = '';
         entries.forEach((entry) => {
             if (selectedTradeNames.includes(entry.tradeName)) {
                 const { d, t, plusItems, minusItems, tradeName } = entry;
-                const cardElement = document.createElement('div');
+                const entryElement = document.createElement('div');
 
                 const tradeNameClass = tradeName.toLowerCase().replace(/ /g, '-');
-                cardElement.classList.add('card', tradeNameClass);
+                entryElement.classList.add('card', tradeNameClass);
 
                 const itemToDisplay = plusItems.length ? plusItems : minusItems;
                 const itemColor = itemToDisplay[0]?.itemType ? extractItemColor(itemToDisplay[0].itemType) : 'white';
-                cardElement.style.setProperty('--item-color', itemColor);
-                cardElement.innerHTML = `
+                entryElement.style.setProperty('--item-color', itemColor);
+                entryElement.innerHTML = `
                     <div class="card-header">
                         <span>${d} ${t}</span>
                     </div>
-                    <div class="card-content">
-                        <div class="item-image-container">
+                    <div class="weapon-given">
+                        <div class="weapon-given-image-container">
                             <div class="item-image">
-                                <img src="${path.join(process.resourcesPath, 'images', `${itemToDisplay[0].itemName}.png`)}" alt="${itemToDisplay[0].market_name}">
+                                <img src="./images/${itemToDisplay[0].itemName}.png" alt="${itemToDisplay[0].market_name}">
                             </div>
-                            <div class="item-separator"></div>
-                            <div class="sticker-list">
-                                ${itemToDisplay[0].stickers.length > 0 ? itemToDisplay[0].stickers.map(sticker => `
-                                    <div class="sticker">  
-                                        <img src="${path.join(process.resourcesPath, 'images', `${sticker.imgSrc}.png`)}" alt="${sticker.name}">
-                                    </div>
-                                `).join('') : '<p>No Stickers</p>'}
+                            ${itemToDisplay[0].itemWear ? `<span class="item-wear">${shortenItemWear(itemToDisplay[0].itemWear)}</span>` : ''}
+                            ${itemToDisplay[0].stickers ? `<div class="sticker-separator"></div>
+                                   <div class="sticker-images">
+                                     ${itemToDisplay[0].stickers.map(sticker => `
+                                       <div class="sticker">
+                                         <img src="./images/${sticker.imgSrc}.png" alt="${sticker.name}">
+                                       </div>
+                                     `).join('')}
+                                   </div>`
+                                : ''}
                             </div>
                         </div>
-                        <p>${itemToDisplay[0].market_name}</p>
+                        <span>${itemToDisplay[0].market_name}</span>
                     </div>
                     ${findChange(tradeName, plusItems, minusItems, type)}
                 `;
-                contentContainer.appendChild(cardElement);
+                contentContainer.appendChild(entryElement);
             }
         });
     }
@@ -77,7 +93,7 @@ function findChange(tradeName, plusItems, minusItems, type) {
             return value ? `
                 <div class="card-footer">
                     <p>${action}:</p>
-                    <img src="${path.join(process.resourcesPath, 'images', `${value.imgSrc}.png`)}" alt="${value.name}" class="sticker-image">
+                    <img src="./images/${value.imgSrc}.png" alt="${value.name}" class="sticker-image">
                 </div>
             ` : '';
         }
@@ -117,19 +133,6 @@ function getStickerDiff(plusStickers, minusStickers) {
         const minusSticker = minusStickers[index];
         return !minusSticker || plusSticker.name !== minusSticker.name || plusSticker.codename !== minusSticker.codename;
     });
-}
-
-function extractItemColor(itemType) {
-    const colorMap = {
-        'Consumer Grade': 'rgb(176, 195, 217)',
-        'Industrial Grade': 'rgb(94, 152, 217)',
-        'Mil-Spec': 'rgb(75, 105, 255)',
-        'Restricted': 'rgb(136, 71, 255)',
-        'Classified': 'rgb(211, 44, 230)',
-        'Covert': 'rgb(235, 75, 75)',
-        'Extraordinary': 'rgb(255, 215, 0)'
-    };
-    return colorMap[itemType] || 'white';
 }
 
 module.exports = {

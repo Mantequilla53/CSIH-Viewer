@@ -3,16 +3,16 @@ const path = require('path');
 const fs = require('fs');
 
 const { showTradeContent } = require('./components/trade');
-const { showPackageContent } = require('./components/capsule_container');
-const { showCaseContent } = require('./components/newUnlockedCase');
-const { showStickerCapContent } = require('./components/stickerCapsule');
+const { showCasePackageContent } = require('./components/u_case_package');
+const { showStickerCapContent } = require('./components/u_capsule');
 const { showCraftedContent } = require('./components/crafted');
-const { showOperationContent } = require('./components/operationDrops');
-const { showContainerContent } = require('./components/container');
+const { showContainerContent } = require('./components/u_container');
 const { showARContent } = require('./components/combined_ar');
-const { showCaseDropContent } = require('./components/case_drop');
-const { showWeaponDropContent } = require('./components/weaponDrop');
+const { showCaseDropContent } = require('./components/drop_case');
+const { showWeaponDropContent } = require('./components/drop_weapon');
 const { showDefaultCards } = require('./components/default_cards');
+const { showHome } = require('./components/home');
+const { showSwapContent } = require('./components/stattrak');
 
 const $ = (id) => document.getElementById(id);
 const tabContainer = $('tab-container');
@@ -87,7 +87,7 @@ fileSelector.addEventListener('change', (event) => {
   if (selectedFileName) {
     submitButton.disabled = true;
     inputField.disabled = true;
-    const dumpDirectory = path.join(process.resourcesPath, 'dump');
+    const dumpDirectory = path.join(__dirname, './dump');
     const filePath = path.join(dumpDirectory, selectedFileName);
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
@@ -98,7 +98,7 @@ fileSelector.addEventListener('change', (event) => {
         const jsonData = JSON.parse(data);
         const { username, user_imgSrc, dumpDate} = jsonData.dumpInfo;
         userId.textContent = `${username}`;
-        //scrapeDate.textContent = `Last Dump Update: ${dumpDate}`;
+        scrapeDate.textContent = `Last Dump Update: ${dumpDate}`;
         avatar.innerHTML = `<img src="${user_imgSrc}" alt="User Avatar">`;
         ipcRenderer.send('process-dump', jsonData);
       } catch (error) {
@@ -150,54 +150,18 @@ function clearContent() {
   tabStatsContainer.innerHTML = '';
 }
 
-function showHome() {
-  clearContent();
-  contentContainer.innerHTML = `
-    <div class="home-container">
-        <section class="top-section">
-            <div class="left-side">
-                <h1>CSIHV</h1>
-                <p>Counter Strike Inventory History Viewer</p>
-                <a href="#" class="button">Get Started</a>
-            </div>
-        </section>
-
-        <section class="home-cards">
-            <div class="home-card">
-                <h2>1.</h2>
-                <p></p>
-            </div>
-            <div class="home-card">
-                <h2>2.</h2>
-                <p></p>
-            </div>
-            <div class="home-card">
-                <h2>3.</h2>
-                <p></p>
-            </div>
-        </section>
-
-        <section class="steps">
-            <h2>How to Find Your Steam Cookies</h2>
-        </section>
-    </div>
-  `;
-
-}
-
 function showTabContent(description) {
   clearContent();
   const entries = existingData[description];
     
-  if (description === 'Unlocked a case') {showCaseContent(description, entries, contentContainer, tabStatsContainer)} 
-  else if (description === 'Unlocked a sticker capsule') {showStickerCapContent(description, entries, contentContainer, tabStatsContainer)} 
-  else if (description === 'Unlocked a package') {showPackageContent(description, entries, contentContainer, tabStatsContainer)} 
+  if (description === 'Unlocked a sticker capsule') {showStickerCapContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Unlocked a container'){showContainerContent(description, entries, contentContainer, tabStatsContainer)}
-  
+  else if (['Unlocked a case', 'Unlocked a package'].includes(description)){showCasePackageContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Traded With') {showTradeContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Trade Up') {showCraftedContent(description, entries, contentContainer, tabStatsContainer)} 
   else if (description === 'Earned a weapon drop'){showWeaponDropContent(description, entries, contentContainer, tabStatsContainer)}
   else if (description === 'Earned a case drop'){showCaseDropContent(description, entries, contentContainer, tabStatsContainer)}
+  else if (/^Swapped StatTrak\u2122? values$/.test(description)){showSwapContent(description, entries, contentContainer, tabStatsContainer)}
   else if (['Sticker applied/removed', 'Name Tag applied/removed'].includes(description)){showARContent(description, entries, contentContainer, tabStatsContainer)}
   else if (['Listed on Community Market','Canceled listing on Community Market','Purchased on Community Market','Received a gift', 'Deleted',
     'Graffiti Used', 'Graffiti Opened', 'Earned a graffiti drop', 'Earned', 'Earned a souvenir drop', 'Used', 

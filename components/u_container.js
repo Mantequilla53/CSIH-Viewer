@@ -1,5 +1,5 @@
 function showContainerContent(description, entries, contentContainer, tabStatsContainer) {
-    //used to display patches, pins and graffiti boxes
+  const { extractItemColor } = require('../utils');  
     tabStatsContainer.innerHTML = `<link rel="stylesheet" href="style/case.css">
     <h2>${description}</h2>`;
     
@@ -19,20 +19,16 @@ function showContainerContent(description, entries, contentContainer, tabStatsCo
         <span class="date-time">${d} ${t}</span>
       </div>
       <div class="weapon-given">
-        <ul class="no-bullet">
-          ${plusItems.map(item => {
-            return `<li>
-              <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" width="120" height="92.4">
-              <span>${item.market_name}</span>
-            </li>`;
-          }).join('')}
-        </ul>
+        <div class="weapon-given-image-container">        
+          <img src="images/${plusItems[0].itemName}.png" width="120" height="92.4">
+        </div>      
+      <span>${plusItems[0].market_name}</span>
       </div>
       ${minusItems.length > 0 ? `
         <div class="card-footer">
           <div class="case-unboxed">
             <span class="item-name">${minusItems[0].market_name}</span>
-            <img src="${path.join(process.resourcesPath, 'images', `${minusItems[0].itemName}.png`)}"" alt="${minusItems[0].market_name}">
+            <img src="images/${minusItems[0].itemName}.png" alt="${minusItems[0].market_name}">
           </div>
         </div>
       ` : ''}
@@ -42,24 +38,6 @@ function showContainerContent(description, entries, contentContainer, tabStatsCo
 
 }
 
-function extractItemColor(itemType) {
-    const colorMap = {
-    //patches
-    'High Grade Patch': 'rgb(75, 105, 255)',
-    'Remarkable Patch': 'rgb(136, 71, 255)',
-    'Exotic Patch': 'rgb(211, 44, 230)',
-    //pins
-    'High Grade Collectible': 'rgb(75, 105, 255)',
-    'Remarkable Collectible': 'rgb(136, 71, 255)',
-    'Exotic Collectible': 'rgb(211, 44, 230)',
-    'Extraordinary Collectible': 'rgb(235, 75, 75)',
-    //Graffiti
-    'High Grade Graffiti': 'rgb(75, 105, 255)',
-    'Remarkable Graffiti': 'rgb(136, 71, 255)',
-    'Exotic Graffiti': 'rgb(235, 75, 75)'
-    };
-    return colorMap[itemType] || 'white';
-}
 module.exports = {
     showContainerContent
 };

@@ -36,18 +36,18 @@ function showCaseDropContent(description, entries, contentContainer, tabStatsCon
               plusItems
             } = entry;
             const entryElement = document.createElement('div');
-            entryElement.className = 'entry-container';
+            entryElement.classList.add('card');
             entryElement.innerHTML = `
-              <div class="entry-header">
-                <p>${d}  - ${t}</p>
-              </div>
-              <div class="entry-image">
-                <img src="${path.join(process.resourcesPath, 'images', `${plusItems[0].itemName}.png`)}" alt="${plusItems[0].market_name}">
-              </div>
-              <div class="entry-case">
-                <p>${plusItems[0].market_name}</p>
-              </div>
-            `;
+          <div class="card-header">
+            <span class="date-time">${d} ${t}</span>
+          </div>
+          <div class="weapon-given-image-container">
+            <img src="./images/${plusItems[0].itemName}.png" alt="${plusItems[0].market_name}">
+          </div>
+          <div class="entry-case">
+            <span>${plusItems[0].market_name}</span>
+          </div>
+        `;
             contentContainer.appendChild(entryElement);
           }
         });
@@ -81,7 +81,7 @@ function showCaseDropContent(description, entries, contentContainer, tabStatsCon
       }
     
       tabStatsContainer.innerHTML = `
-  <link rel="stylesheet" href="style/casedrop.css">
+  <link rel="stylesheet" href="style/weapondrop.css">
   <h3>${description}</h3> 
   <div class="stats-container">
     <div class="stat-item">
@@ -106,10 +106,10 @@ function showCaseDropContent(description, entries, contentContainer, tabStatsCon
         ([item, { count, imgSrc }]) => {
           return `
             <div class="item-card" data-item="${item}">
-              <img src="${path.join(process.resourcesPath, 'images', `${imgSrc}.png`)}" alt="${item}">
+              <img src="images/${imgSrc}.png" alt="${item}">
               <div class="item-info">
                 <h4>${item}</h4>
-                ${count > 1 ? `<p>Count: ${count}</p>` : ''}
+                ${count > 1 ? `<span class="drop-count">Count: ${count}</span>` : ''}
               </div>
             </div>
           `;

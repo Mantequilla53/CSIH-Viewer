@@ -1,0 +1,105 @@
+#content-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+    margin: 20px;
+}
+.card {
+    background-color: #393E46;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7px;
+    background-color: var(--item-color);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.card-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.weapon-given {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.side-side-container {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+}
+.weapon-given-image-container {
+    width: 100%;
+    padding: 5px;
+    background-color: #2F343C;
+    border: 2px solid rgb(207, 106, 50);
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+}
+.weapon-given img {
+    width: 125px;
+    height: auto;
+    text-align: center;
+}
+.item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.item-name-container {
+    width: 100%;
+    margin-bottom: 5px;
+}
+.item-name {
+    font-size: 14px;
+    word-wrap: break-word;
+    display: inline-block;
+    text-align: center;
+}
+.item-counts {
+    font-size: 12px;
+}
+.sticker-separator {
+    width: 90%;
+    height: 1px;
+    background-color: #fff;
+}
+.sticker-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.sticker-images img {
+    width: 40px;
+    height: 40px;
+}
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 5px;
+}
+.tool-image img {
+    max-width: 40px;
+    height: auto;
+}
+.arrow-icon img {
+    width: 45px;
+    height: 45px;
+}

@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function showCraftedContent(description, entries, contentContainer, tabStatsContainer) {
+  const { extractItemColor } = require('../utils');
   const tradeUpTypeCount = {
     'Industrial Grade': 0,
     'Mil-Spec': 0,
@@ -65,15 +66,15 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
   <div class="card-container">
     <div class="minus-items-container">
       ${minusItems.map(item => `
-        <div class="card taken-item">
-          <div class="card-color" style="background-color: ${takenColor}"></div>
-          <div class="card-image-container">
-            <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}">
+        <div class="card taken-item" style="--item-color: ${takenColor};">
+          <div class="weapon-given-image-container">
+            <img src="images/${item.itemName}.png">
+            ${item.itemWear ? `<span class="item-wear">${shortenItemWear(item.itemWear)}</span>` : ''}
             ${item.stickers && item.stickers.length > 0 ? `
-              <div class="item-separator"></div>
-              <div class="stickers-section">
+              <div class="sticker-separator"></div>
+              <div class="sticker-image">
                 ${item.stickers.map(sticker => `
-                  <img class="sticker-image" src="${path.join(process.resourcesPath, 'images', `${sticker.imgSrc}.png`)}">
+                  <img src="images/${sticker.imgSrc}.png">
                 `).join('')}
               </div>
             ` : ''}
@@ -86,10 +87,10 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
     <div class="plus-items-wrapper">
       <div class="plus-items-top">
         ${plusItems.length > 0 ? `
-          <div class="card given-item plus-item">
-            <div class="card-color" style="background-color: ${givenColor}"></div>
-            <div class="card-image-container">
-              <img src="${path.join(process.resourcesPath, 'images', `${plusItems[0].itemName}.png`)}">
+          <div class="card given-item plus-item" style="--item-color: ${givenColor};">
+            <div class="weapon-given-image-container">
+              <img src="images/${plusItems[0].itemName}.png">
+              ${plusItems[0].itemWear ? `<span class="item-wear">${shortenItemWear(plusItems[0].itemWear)}</span>` : ''}
             </div>
             <p>${plusItems[0].market_name}</p>
             <p>${plusItems[0].itemSetName}</p>
@@ -186,17 +187,17 @@ function possibleOutputs(inputType, minusItems, givenColor, plusItem) {
     const odds = totalBallots > 0 ? ((itemBallots / totalBallots) * 100).toFixed(2) : '0.00';
     const isPlusItem = item === matchingPlusItem;
 
-    const displayName = isPlusItem ? `${item.name.split(' (')[0]} (${plusItem.market_name.split(' (')[1]}` : item.name;
-
     return `
-      <div class="card output-item${isPlusItem ? ' plus-item' : ''}">
-        <div class="card-color" style="background-color: ${givenColor}"></div>
-        <div class="card-image-container">
+      <div class="card output-item ${isPlusItem ? ' plus-item' : ''}"  style="--item-color: ${givenColor};">
+        <div class="weapon-given-image-container">
           <img src="${item.image}">
+          ${isPlusItem ? `<span class="item-wear">${shortenItemWear(plusItem.itemWear)}</span>` : ''}
         </div>
-        <p>${displayName}</p>
-        <img class="collection-image" src="${item.collections[0].image}">
-        <p>Odds: ${odds}%</p>
+        <p>${item.name}</p>
+        <div class="collection-stats">
+          <img src="${item.collections[0].image}">
+          <p>Odds: ${odds}%</p>
+        </div>
       </div>
     `;
   });
@@ -208,17 +209,16 @@ function possibleOutputs(inputType, minusItems, givenColor, plusItem) {
   `;
 }
 
-function extractItemColor(itemType) {
-  const colorMap = {
-    'Consumer Grade': 'rgb(176, 195, 217)',
-    'Industrial Grade': 'rgb(94, 152, 217)',
-    'Mil-Spec': 'rgb(75, 105, 255)',
-    'Restricted': 'rgb(136, 71, 255)',
-    'Classified': 'rgb(211, 44, 230)',
-    'Covert': 'rgb(235, 75, 75)'
+const shortenItemWear = (itemWear) => {
+  const wearMap = {
+    'Factory New': 'FN',
+    'Minimal Wear': 'MW',
+    'Field-Tested': 'FT',
+    'Well-Worn': 'WW',
+    'Battle-Scarred': 'BS'
   };
-  return colorMap[itemType] || 'white';
-}
+  return wearMap[itemWear] || itemWear;
+};
 
 module.exports = {
   showCraftedContent
