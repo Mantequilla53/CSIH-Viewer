@@ -68,13 +68,13 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
       ${minusItems.map(item => `
         <div class="card taken-item" style="--item-color: ${takenColor};">
           <div class="weapon-given-image-container">
-            <img src="images/${item.itemName}.png">
+            <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}">
             ${item.itemWear ? `<span class="item-wear">${shortenItemWear(item.itemWear)}</span>` : ''}
             ${item.stickers && item.stickers.length > 0 ? `
               <div class="sticker-separator"></div>
               <div class="sticker-image">
                 ${item.stickers.map(sticker => `
-                  <img src="images/${sticker.imgSrc}.png">
+                  <img src="${path.join(process.resourcesPath, 'images', `${sticker.imgSrc}.png`)}">
                 `).join('')}
               </div>
             ` : ''}
@@ -89,7 +89,7 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
         ${plusItems.length > 0 ? `
           <div class="card given-item plus-item" style="--item-color: ${givenColor};">
             <div class="weapon-given-image-container">
-              <img src="images/${plusItems[0].itemName}.png">
+              <img src="${path.join(process.resourcesPath, 'images', `${plusItems[0].itemName}.png`)}">
               ${plusItems[0].itemWear ? `<span class="item-wear">${shortenItemWear(plusItems[0].itemWear)}</span>` : ''}
             </div>
             <p>${plusItems[0].market_name}</p>

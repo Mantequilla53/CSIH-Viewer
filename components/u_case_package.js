@@ -210,7 +210,7 @@ const createCardElement = (date, time, plusItems, matchedMinusItems) => {
   </div>
   <div class="weapon-given">
     <div class="weapon-given-image-container" ${borderColor ? `style="border-color: ${borderColor};"` : ''}>
-      <img src="images/${plusItems[0].itemName}.png" width="120" height="92.4">
+      <img src="${path.join(process.resourcesPath, 'images', `${plusItems[0].itemName}.png`)}" width="120" height="92.4">
       <span class="item-wear">${shortenItemWear(plusItems[0].itemWear)}</span>
     </div>
     <span>${formatItemName(plusItems[0].market_name)}</span>
@@ -219,7 +219,7 @@ const createCardElement = (date, time, plusItems, matchedMinusItems) => {
     <div class="card-footer">
       <div class="case-unboxed">
         <span class="item-name">${matchedMinusItems[0].market_name.startsWith('Operation') ? matchedMinusItems[0].market_name.slice(9) : matchedMinusItems[0].market_name}</span>
-        <img src="images/${matchedMinusItems[0].itemName}.png" alt="${matchedMinusItems[0].market_name}">
+        <img src="${path.join(process.resourcesPath, 'images', `${matchedMinusItems[0].itemName}.png`)}" alt="${matchedMinusItems[0].market_name}">
       </div>
     </div>
   ` : ''}

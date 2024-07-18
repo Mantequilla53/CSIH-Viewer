@@ -79,13 +79,13 @@ function showDefaultCards(description, entries, contentContainer, tabStatsContai
         </div>
         <div class="weapon-given">
           <div class="weapon-given-image-container" style="border-color: ${borderColor}">
-            <img src="images/${item.itemName}.png" width="120" height="92.4">
+            <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" width="120" height="92.4">
             ${item.itemWear ? `<span class="item-wear">${shortenItemWear(item.itemWear)}</span>` : ''}
             ${item.stickers && item.stickers.length > 0 ? `
               <div class="sticker-separator"></div>
               <div class="sticker-images">
                 ${item.stickers.map((sticker) => `
-                  <img src="images/${sticker.imgSrc}.png" width="45" height="45">
+                  <img src="${path.join(process.resourcesPath, 'images', `${sticker.imgSrc}.png`)}" width="45" height="45">
                 `).join('')}
               </div>
             ` : ''}

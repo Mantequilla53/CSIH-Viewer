@@ -50,7 +50,8 @@ function showWeaponDropContent(description, entries, contentContainer, tabStatsC
             <span class="date-time">${d} ${t}</span>
           </div>
           <div class="weapon-given-image-container">
-            <img src="./images/${plusItems[0].itemName}.png" alt="${plusItems[0].market_name}">
+            <img src="${path.join(process.resourcesPath, 'images', `${plusItems[0].itemName}.png`)}" alt="${plusItems[0].market_name}">
+            ${plusItems[0].itemWear ? `<span class="drop-item-wear">${shortenItemWear(plusItems[0].itemWear)}</span>` : ''}
           </div>
           <div class="entry-case">
             <span>${plusItems[0].market_name}</span>
@@ -147,6 +148,17 @@ function showWeaponDropContent(description, entries, contentContainer, tabStatsC
   renderContentContainer();
   renderResetButton();
 }
+
+const shortenItemWear = (itemWear) => {
+  const wearMap = {
+    'Factory New': 'FN',
+    'Minimal Wear': 'MW',
+    'Field-Tested': 'FT',
+    'Well-Worn': 'WW',
+    'Battle-Scarred': 'BS'
+  };
+  return wearMap[itemWear] || itemWear;
+};
 
 module.exports = {
   showWeaponDropContent

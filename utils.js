@@ -18,7 +18,8 @@ function trimItemType(itemType) {
 }
 
 async function imageDwnld(urlOrIconUrl, isBuildUrl = true) {
-    const directoryPath = './images';
+    const resourcesPath = process.resourcesPath;
+    const directoryPath = path.join(resourcesPath, 'images');
     if (!fs.existsSync(directoryPath)) {
         fs.mkdirSync(directoryPath);
     }

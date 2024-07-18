@@ -59,6 +59,16 @@
   height: auto;
   text-align: center;
 }
+.drop-item-wear {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+}
 .item-wear {
   position: absolute;
   top: -5px;

@@ -87,7 +87,7 @@ fileSelector.addEventListener('change', (event) => {
   if (selectedFileName) {
     submitButton.disabled = true;
     inputField.disabled = true;
-    const dumpDirectory = path.join(__dirname, './dump');
+    const dumpDirectory = path.join(process.resourcesPath, 'dump');
     const filePath = path.join(dumpDirectory, selectedFileName);
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {

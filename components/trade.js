@@ -89,14 +89,14 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
                 ${Object.values(groupedItems).map((item) => `
                   <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
                     <div class="weapon-given-image-container">
-                        <img src="images/${item.itemName}.png" width="120" height="92.4">
+                        <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" width="120" height="92.4">
                       ${item.itemWear ? `<span class="item-wear">${shortenItemWear(item.itemWear)}</span>` : ''}
                       ${item.tag_name ? `<div class="tag-indicator" title="${item.tag_name}"></div>` : ''}
                       ${item.stickers && item.stickers.length > 0 ? `
                         <div class="sticker-separator"></div>
                         <div class="sticker-images">
                           ${item.stickers.map((sticker) => `
-                            <img src="images/${sticker.imgSrc}.png" width="40" height="30.8">
+                            <img src="${path.join(process.resourcesPath, 'images', `${sticker.imgSrc}.png`)}" width="40" height="30.8">
                           `).join('')}
                         </div>
                       ` : ''}

@@ -42,7 +42,7 @@ function showCaseDropContent(description, entries, contentContainer, tabStatsCon
             <span class="date-time">${d} ${t}</span>
           </div>
           <div class="weapon-given-image-container">
-            <img src="./images/${plusItems[0].itemName}.png" alt="${plusItems[0].market_name}">
+            <img src="${path.join(process.resourcesPath, 'images', `${plusItems[0].itemName}.png`)}" alt="${plusItems[0].market_name}">
           </div>
           <div class="entry-case">
             <span>${plusItems[0].market_name}</span>
@@ -106,7 +106,7 @@ function showCaseDropContent(description, entries, contentContainer, tabStatsCon
         ([item, { count, imgSrc }]) => {
           return `
             <div class="item-card" data-item="${item}">
-              <img src="images/${imgSrc}.png" alt="${item}">
+              <img src="${path.join(process.resourcesPath, 'images', `${imgSrc}.png`)}"" alt="${item}">
               <div class="item-info">
                 <h4>${item}</h4>
                 ${count > 1 ? `<span class="drop-count">Count: ${count}</span>` : ''}
