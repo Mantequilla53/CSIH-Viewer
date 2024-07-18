@@ -8,6 +8,10 @@ Key features:
 -   Scrape Counter-Strike inventory history
 -   Organize inventory data for easy viewing
 -   Advanced filtering options for in-depth analysis
+## CSIHV Examole Images
+![Screenshot_406](https://github.com/user-attachments/assets/b6492cf6-62d7-4fea-a4b7-215004b93365)
+![Screenshot_407](https://github.com/user-attachments/assets/5929f928-9ed7-4b29-b9ed-fb11777f5ba7)
+![Screenshot_408](https://github.com/user-attachments/assets/40d6b21f-0549-4737-a91c-7d17c2fd6f49)
 
 ## How does CSIHV work?
 CSIHV relies on the user's Steam cookies to access and scrape their Counter-Strike inventory history. Here's a step-by-step overview of how the app functions:
