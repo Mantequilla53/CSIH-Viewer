@@ -61,7 +61,7 @@
 }
 .drop-item-wear {
   position: absolute;
-  top: 5px;
+  top: -5px;
   left: 5px;
   background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
@@ -113,8 +113,8 @@
 }
 
 .sticker-images img {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: auto;
 }
 .card-footer {
   display: flex;
@@ -124,6 +124,10 @@
   border: 4px solid transparent;
   border-radius: 10px;
   padding: 10px;
+}
+.card-footer img {
+  width: 55px;
+  height: auto;
 }
 .sticker-applied .card-footer {
   border-color: green;

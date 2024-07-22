@@ -1,0 +1,149 @@
+.hero-section {
+    width: 100%;
+    background-color: #4a4f57;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+.hero-content {
+    max-width: 800px;
+}
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+.hero-content p {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+.name {
+    font-size: 48px;
+}
+.demo-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #00adb5;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+} 
+.demo-button:hover {
+    background-color: #00c2cb;
+}
+.how-to-use h3 {
+    border: 2px solid #00adb5;
+    padding: 10px;
+    display: inline-block;
+    background-color: #393e46;
+    color: white;
+    border-radius: 5px;
+    font-size: 30px;
+}
+.header-how {
+    text-align: center;
+    margin: 20px 0;
+}
+.home-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 0 30px;
+}
+.home-card {
+    background-color: #393e46;
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1 1 300px;
+    min-width: 250px;
+    position: relative;
+    overflow: hidden;
+}
+.card-number {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #00adb5;
+}
+.card-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+.card-icon img {
+    width: 50px;
+    height: 50px;
+    color: #00adb5;
+}
+.card-content {
+    margin-top: 30px;
+}
+.card-content h4 {
+    margin: 0;
+    font-size: 20px;
+}
+.yellow {
+    color: yellow;
+}
+.support-section {
+    background-color: #393e46;
+    border-radius: 8px;
+    margin: 30px 120px;
+    text-align: center;
+    color: white;
+}
+.support-section h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #00adb5;
+}
+.support-section p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+.discord-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #7289da;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+}
+.discord-button:hover {
+    background-color: #5e73bc;
+}
+.donation-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 30px 60px;
+}
+.donation-content, .donation-leaderboard {
+    flex: 1;
+    background-color: #393e46;
+    border-radius: 8px;
+    padding: 20px;
+    color: white;
+}
+.donation-content h3, .donation-leaderboard h3 {
+    color: #00adb5;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+.donation-content ul {
+    padding-left: 20px;
+}

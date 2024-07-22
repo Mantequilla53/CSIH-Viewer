@@ -3,22 +3,63 @@ const path = require('path');
 const scraper = require('./scraper');
 const fs = require('fs');
 
-//find out if there is a way to have a default value for the initial scrape
-let s = 0;
-let time = 0;
-let time_frac = 0;
+let scrapingInProgress = false;
+
+//const outputDirectory = path.join(process.resourcesPath, 'output');
+const outputDirectory = './output';
 
 function getJsonFiles() {
-  const resourcesPath = process.resourcesPath;
-  const dumpDirectory = path.join(resourcesPath, 'dump');
+  if (!fs.existsSync(outputDirectory)) {
+    fs.mkdirSync(outputDirectory);
+  }
+  return fs.readdirSync(outputDirectory).filter(file => path.extname(file) === '.json');
+}
 
-  if (!fs.existsSync(dumpDirectory)) {
-    fs.mkdirSync(dumpDirectory);
+function sendSData(mainWindow, data) {
+  if (data.length > 0) {
+    const dateElement = `${data[0].d}-${data[0].t}`;
+    mainWindow.webContents.send('scrape-date', dateElement);
+  }
+  mainWindow.webContents.send('scraped-data', JSON.stringify(data));
+}
+
+function generateFilePath() {
+  const now = new Date();
+  return `${now.getDate().toString().padStart(2, '0')}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getFullYear()}_${now.getHours().toString().padStart(2, '0')}-${now.getMinutes().toString().padStart(2, '0')}`;
+}
+
+async function startScraping(mainWindow, cookie, userId, scrapedDataFilePath) {
+  scrapingInProgress = true;
+  let s, time, time_frac = 0;
+
+  const purchasedItems = await scraper.scrapeMarketHistory(cookie);
+  
+  while (scrapingInProgress) {
+    try {
+      const startTime = Date.now();
+      const { scrapeData, cursor } = await scraper.scrapeIH(userId.finalUrl, cookie, s, time, time_frac, purchasedItems);
+      
+      let existingJson = JSON.parse(fs.readFileSync(scrapedDataFilePath, 'utf-8'));
+      existingJson.scrapedData.push(scrapeData);
+      fs.writeFileSync(scrapedDataFilePath, JSON.stringify(existingJson, null, 2));
+      
+      sendSData(mainWindow, scrapeData);
+      
+      if (cursor) {
+        ({ s, time, time_frac } = cursor);
+      } else {
+        scrapingInProgress = false;
+      }
+      
+      const endTime = Date.now();
+      await new Promise(resolve => setTimeout(resolve, Math.max(5000 - (endTime - startTime), 0)));
+    } catch (error) {
+      console.error('Error in scrape loop:', error);
+      scrapingInProgress = false;
+    }
   }
   
-  const files = fs.readdirSync(dumpDirectory);
-  const jsonFiles = files.filter(file => path.extname(file) === '.json');
-  return jsonFiles;
+  mainWindow.webContents.send('scrape-complete');
 }
 
 async function createWindow() {
@@ -30,134 +71,60 @@ async function createWindow() {
     }
   });
   mainWindow.maximize();
-mainWindow.loadFile(path.join(__dirname, 'renderer.html'));
+  await mainWindow.loadFile(path.join(__dirname, 'renderer.html'));
 
-mainWindow.webContents.on('did-finish-load', () => {
-  const jsonFiles = getJsonFiles();
-  mainWindow.webContents.send('json-files', jsonFiles);
-});
-
-function sendSData(data, includeDateElement = false) {
-  const newData = JSON.stringify(data);
-  if (includeDateElement && data.length > 0) {
-    const firstEntry = data[0];
-    const dateElement = `${firstEntry.d}-${firstEntry.t}`;
-    mainWindow.webContents.send('scrape-date', dateElement);
-  }
-  mainWindow.webContents.send('scraped-data', newData);
-}
-
-ipcMain.on('process-dump', (event, jsonData) => {
-  const processedData = [];
+  mainWindow.webContents.send('json-files', getJsonFiles());
   
-  const scrapedData = jsonData.scrapedData
-  scrapedData.forEach((group) => {
-    group.forEach((entry) => {
-      const { d, t, description, tradeName, plusItems, minusItems } = entry;
-      if (d && t && description) {
-        processedData.push({ d, t, description, tradeName, plusItems, minusItems });
-      }
-    });
+  ipcMain.on('process-output', (event, jsonData) => {
+    const processedData = jsonData.scrapedData.flat();
+    mainWindow.webContents.send('scraped-data', JSON.stringify(processedData));
   });
-  
-  sendSData(processedData);
-});
-ipcMain.on('set-cookie', async (event, cookie) => {
-  try {
-    const userId = await scraper.scrapeUInfo(cookie);
-    event.reply('scrape-response', userId.username, userId.avatarUrl);
-    const dumpDateInfo = generateFilePath();
-    const resourcesPath = process.resourcesPath;
-    const dumpDirectory = path.join(resourcesPath, 'dump');
-    const scrapedDataFilePath = path.join(dumpDirectory, `${dumpDateInfo}.json`);
-    const jsonDumpData = {
-      dumpInfo: {
-        userId: userId.finalUrl,
-        user_imgSrc: userId.avatarUrl,
-        username: userId.username,
-        dumpDate: dumpDateInfo
-      },
-      scrapedData: []
-    };
-    fs.writeFileSync(scrapedDataFilePath, JSON.stringify(jsonDumpData, null));
 
-    let cursorFound = true;
-
-    const startScraping = async () => {
+  ipcMain.on('set-cookie', async (event, cookie) => {
+    try {
+      const userId = await scraper.scrapeUInfo(cookie);
+      event.reply('scrape-response', userId.username, userId.avatarUrl);
       
-      const purchasedItems = await scraper.scrapeMarketHistory(cookie);
-      while (cursorFound) {
-        try {
-          const startTime = Date.now();
-          const { scrapeData, cursor, cursorFound: newCursorFound } = await scraper.scrapeIH(userId.finalUrl, cookie, s, time, time_frac, purchasedItems);
-          
-          let existingJson = {
-            dumpInfo: {},
-            scrapedData: []
-          };
-        
-          if (fs.existsSync(scrapedDataFilePath)) {
-            const fileContent = fs.readFileSync(scrapedDataFilePath, 'utf-8');
-            existingJson = JSON.parse(fileContent);
-          }
-          
-          existingJson.scrapedData.push(scrapeData);
-        
-          fs.writeFileSync(scrapedDataFilePath, JSON.stringify(existingJson, null));
-          sendSData(scrapeData, true);
-          
-          if (newCursorFound) {
-            ({ s, time, time_frac } = cursor);
-          } else {
-            mainWindow.webContents.send('scrape-complete');
-            console.log('scrape done');
-          }
-          
-          cursorFound = newCursorFound;
-          
-          const endTime = Date.now();
-          const scrapeDuration = endTime - startTime;
-          
-          if (cursorFound) {
-            const waitTime = Math.max(6000 - scrapeDuration, 0);
-            await new Promise(resolve => setTimeout(resolve, waitTime));
-          } else {
-            console.log('Scraping completed. No more cursor found.');
-          }
-        } catch (error) {
-          console.error('Error in scrape loop:', error);
-        }
-      }
-    };
+      const outputDateInfo = generateFilePath();
+      const scrapedDataFilePath = path.join(outputDirectory, `${outputDateInfo}.json`);
+      
+      const jsonOutputData = {
+        outputInfo: {
+          userId: userId.finalUrl,
+          user_imgSrc: userId.avatarUrl,
+          username: userId.username,
+          outputDate: outputDateInfo
+        },
+        scrapedData: []
+      };
+      fs.writeFileSync(scrapedDataFilePath, JSON.stringify(jsonOutputData, null, 2));
 
-    startScraping();
+      startScraping(mainWindow, cookie, userId, scrapedDataFilePath);
+    } catch (error) {
+      console.error('Cookie error:', error);
+    }
+  });
 
-    ipcMain.on('stop-scraping', () => {
-      cursorFound = false;
-      console.log('Scraping stopped by user.');
-    });
-  } catch (error) {
-    console.error('cookie error', error);
-  }
-});
+  ipcMain.on('request-json-files', (event) => {
+    const jsonFiles = getJsonFiles();
+    event.reply('json-files', jsonFiles);
+  });
+
+  ipcMain.on('stop-scraping', () => {
+    scrapingInProgress = false;
+  });
 }
 
-const generateFilePath = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
+app.whenReady().then(createWindow);
 
-  const filePath = `${day}-${month}-${year}_${hours}-${minutes}`;
-  return filePath;
-};
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
 
-app.whenReady().then(() => {
-  createWindow();
-
-  app.on('activate', () => {
-    // Handle macOS dock events...
-  });
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
 });

@@ -1,6 +1,6 @@
 function showWeaponDropContent(description, entries, contentContainer, tabStatsContainer) {
   const { extractItemColor } = require('../utils');
-  const outputData = require('../output.json');
+  const outputData = require('../csihv.json');
   const collectionCounts = {};
   const totalWeaponDrops = entries.length;
 
@@ -50,8 +50,10 @@ function showWeaponDropContent(description, entries, contentContainer, tabStatsC
             <span class="date-time">${d} ${t}</span>
           </div>
           <div class="weapon-given-image-container">
-            <img src="${path.join(process.resourcesPath, 'images', `${plusItems[0].itemName}.png`)}" alt="${plusItems[0].market_name}">
-            ${plusItems[0].itemWear ? `<span class="drop-item-wear">${shortenItemWear(plusItems[0].itemWear)}</span>` : ''}
+            <div class="weapon-given">
+              <img src="https://community.akamai.steamstatic.com/economy/image/${plusItems[0].itemName}/330x192?allow_animated=1" alt="${plusItems[0].market_name}">
+              ${plusItems[0].itemWear ? `<span class="drop-item-wear">${shortenItemWear(plusItems[0].itemWear)}</span>` : ''}
+            </div>
           </div>
           <div class="entry-case">
             <span>${plusItems[0].market_name}</span>

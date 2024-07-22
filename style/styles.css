@@ -183,45 +183,26 @@ body {
   max-height: 64px;
   border-radius: 50%;
 }
-.hero-section {
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: #4a4f57;
-  background-position: center;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  color: white;
+  z-index: 1000;
 }
-
-.hero-content {
-  max-width: 800px;
-}
-
-.hero-content h1 {
-  font-size: 48px;
-  margin-bottom: 10px;
-}
-
-.hero-content p {
-  font-size: 24px;
-  margin-bottom: 30px;
-}
-.name {
-  font-size: 48px;
-}
-.demo-button {
-  display: inline-block;
-  padding: 15px 30px;
-  background-color: #00adb5;
-  color: white;
-  text-decoration: none;
+.popup-content {
+  background-color: black;
+  padding: 20px;
   border-radius: 5px;
-  font-size: 18px;
-  margin-bottom: 20px;
-  transition: background-color 0.3s;
+  text-align: center;
 }
-
-.demo-button:hover {
-  background-color: #00c2cb;
+.popup-content button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
 }

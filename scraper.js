@@ -1,9 +1,7 @@
 const cheerio = require('cheerio');
 const axios = require('axios');
-const crypto = require('crypto');
 const {
     trimItemType,
-    imageDwnld,
     parseStickerInfo
 } = require('./utils');
 
@@ -15,12 +13,11 @@ const HEADERS = {
 
 async function scrapeMarketHistory(cookie) {
     let start = 0;
-    const count = 500;
     let totalCount = 0;
     const purchasedItems = [];
 
     do {
-        const response = await axios.get(`https://steamcommunity.com/market/myhistory/render/?query=&start=${start}&count=${count}`, {
+        const response = await axios.get(`https://steamcommunity.com/market/myhistory/render/?query=&start=${start}&count=500`, {
             headers: {
                 ...HEADERS,
                 'Cookie': cookie
@@ -42,17 +39,13 @@ async function scrapeMarketHistory(cookie) {
                 const price = $(element).find('.market_listing_price').text().trim();
                 const gainOrLoss = $(element).find('.market_listing_gainorloss').text().trim();
                 if (gainOrLoss === '+') {
-                    const purchasedItem = {
-                        itemName,
-                        price,
-                    };
-
+                    const purchasedItem = { itemName, price };
                     purchasedItems.push(purchasedItem);
                 }
             }
         });
 
-        start += count;
+        start += 500;
     } while (start < totalCount);
     return purchasedItems;
 }
@@ -77,11 +70,7 @@ async function scrapeUInfo(cookie) {
         let avatarUrl = avatarElement.find('img').attr('src');
         const username = avatarElement.find('img').attr('alt');
         avatarUrl = avatarUrl.replace(/(\.\w+)$/, '_medium$1');
-        return {
-            finalUrl,
-            avatarUrl,
-            username
-        };
+        return { finalUrl, avatarUrl, username };
     } catch (error) {
         console.error('Error:', error.message);
         if (error.response) {
@@ -107,9 +96,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac, purchasedItems) {
         const jsonData = response.data;
 
         if (jsonData && jsonData.success) {
-            const cursorFound = jsonData.cursor !== undefined;
             const cursor = jsonData.cursor;
-            console.log(cursor, cursorFound);
 
             const htmlData = jsonData.html;
             const cleanhtmlData = htmlData.replace(/[\t\n\r]/g, '');
@@ -119,39 +106,38 @@ async function scrapeIH(userId, cookie, s, time, time_frac, purchasedItems) {
             const scrapeData = [];
 
             const descriptionMap = {
-                'Traded With': (description) => ['You traded with', 'Your trade with', 'Your held trade with'].some(phrase => description.startsWith(phrase)),
-                'Unlocked a case': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('case'),
-                'Unlocked a sticker capsule': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('sticker |'),
-                'Unlocked a package': (description, tradeHistoryItem) => description === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('package'),
-                'Trade Up': (description) => description === 'Crafted',
-                'Earned a case drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && (tradeHistoryItem.toLowerCase().includes('case' || 'capsule')),
-                'Earned a graffiti drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && tradeHistoryItem.toLowerCase().includes('sealed graffiti'),
-                'Earned a weapon drop': (description, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(description) && !(tradeHistoryItem.toLowerCase().includes('case' || 'sealed graffiti')),
-                'Earned': (description) => ['Earned a promotional item', 'Received by entering product code', 'Leveled up a challenge coin'].includes(description),
-                'Sticker applied/removed': (description) => ['Sticker applied', 'Sticker removed'].includes(description),
-                'Name Tag applied/removed': (description) => ['Name Tag applied', 'Name Tag removed'].includes(description),
-                'Used': (description) => description === 'Used',
-                'Graffiti Opened': (description) => description === 'Unsealed',
-                'Operation Reward': (description) => description === 'Mission reward',
-                'Listed on Community Market': (description) => description === 'You listed an item on the Community Market.',
-                'Purchased on Community Market': (description) => description === 'You purchased an item on the Community Market.',
-                'Canceled listing on Community Market': (description) => description === 'You canceled a listing on the Community Market. The item was returned to you.',
-                'Deleted': (description) => description === 'You deleted'
+                'Traded With': (desc) => ['You traded with', 'Your trade with', 'Your held trade with'].some(phrase => desc.startsWith(phrase)),
+                'Unlocked a case': (desc, tradeHistoryItem) => desc === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('case'),
+                'Unlocked a sticker capsule': (desc, tradeHistoryItem) => desc === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('sticker |'),
+                'Unlocked a package': (desc, tradeHistoryItem) => desc === 'Unlocked a container' && tradeHistoryItem.toLowerCase().includes('package'),
+                'Trade Up': (desc) => desc === 'Crafted',
+                'Earned a case drop': (desc, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(desc) && (tradeHistoryItem.toLowerCase().includes('case' || 'capsule')),
+                'Earned a graffiti drop': (desc, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(desc) && tradeHistoryItem.toLowerCase().includes('sealed graffiti'),
+                'Earned a weapon drop': (desc, tradeHistoryItem) => ['Earned a new rank and got a drop', 'Got an item drop'].includes(desc) && !(tradeHistoryItem.toLowerCase().includes('case' || 'sealed graffiti')),
+                'Earned': (desc) => ['Earned a promotional item', 'Received by entering product code', 'Leveled up a challenge coin'].includes(desc),
+                'Sticker applied/removed': (desc) => ['Sticker applied', 'Sticker removed'].includes(desc),
+                'Name Tag applied/removed': (desc) => ['Name Tag applied', 'Name Tag removed'].includes(desc),
+                'Used': (desc) => desc === 'Used',
+                'Graffiti Opened': (desc) => desc === 'Unsealed',
+                'Operation Reward': (desc) => desc === 'Mission reward',
+                'Listed on Community Market': (desc) => desc === 'You listed an item on the Community Market.',
+                'Purchased on Community Market': (desc) => desc === 'You purchased an item on the Community Market.',
+                'Canceled listing on Community Market': (desc) => desc === 'You canceled a listing on the Community Market. The item was returned to you.',
+                'Deleted': (desc) => desc === 'You deleted'
             };
-            const imageUrls = [];
             const scrapedEntries = await Promise.all(tradeRows.map(async (index, element) => {
                 const dateElement = $(element).find('.tradehistory_date');
                 const d = dateElement.contents().first().text().trim();
                 const t = dateElement.find('.tradehistory_timestamp').text().trim();
-                let description = $(element).find('.tradehistory_event_description').text().trim();
+                let desc = $(element).find('.tradehistory_event_description').text().trim();
                 let tradeName = '';
 
-                if (description !== 'Moved to Storage Unit') {
+                if (desc !== 'Moved to Storage Unit') {
                     const tradeHistoryItem = $(element).find('.tradehistory_items').text();
 
-                    if (description === 'Traded') {
+                    if (desc === 'Traded') {
                         tradeName = 'Missing Trade Name';
-                        description = 'Traded With';
+                        desc = 'Traded With';
                     }
 
                     const plusItems = [];
@@ -161,7 +147,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac, purchasedItems) {
                         const plusMinus = $(itemsElement).find('.tradehistory_items_plusminus').text().trim();
                         const items = await Promise.all($(itemsElement).find('.history_item').map(async (i, el) => {
                             const itemName = $(el).find('.history_item_name').text().trim();
-                            if (description === 'Unlocked a container' && itemName.toLowerCase().match(/\bkey\b/)) {
+                            if (desc === 'Unlocked a container' && itemName.toLowerCase().match(/\bkey\b/)) {
                                 return null;
                             }
                             const {
@@ -201,12 +187,8 @@ async function scrapeIH(userId, cookie, s, time, time_frac, purchasedItems) {
                                         const parsedStickers = await parseStickerInfo(stickerInfoValue.value);
                                         stickers = parsedStickers.map(sticker => ({
                                             name: sticker.name,
-                                            imgSrc: crypto.createHash('md5').update(sticker.imgSrc).digest('hex')
+                                            imgSrc: sticker.imgSrc
                                         }));
-                                        imageUrls.push(...parsedStickers.map(sticker => ({
-                                            url: sticker.imgSrc,
-                                            isBuildUrl: false
-                                        })));
                                     }
                                     if (itemSetDesc) {
                                         itemSetName = itemSetDesc.value.trim();
@@ -222,12 +204,6 @@ async function scrapeIH(userId, cookie, s, time, time_frac, purchasedItems) {
                                     itemWear = wearMatch[1];
                                     market_name = market_name.replace(wearRegex, '').trim();
                                 }
-                                if (appid === 730) {
-                                    imageUrls.push({
-                                        url: itemUrl,
-                                        isBuildUrl: true
-                                    });
-                                }
                                 const itemData = {
                                     market_name: market_name
                                 };
@@ -236,7 +212,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac, purchasedItems) {
                                 if (nametag) itemData.tag_name = nametag;
                                 if (trimmedIT) itemData.itemType = trimmedIT;
                                 if (stCount) itemData.stCount = stCount;
-                                if (itemUrl) itemData.itemName = crypto.createHash('md5').update(itemUrl).digest('hex');
+                                if (itemUrl) itemData.itemName = itemUrl;
                                 if (stickers && stickers.length > 0) itemData.stickers = stickers;
                                 if (itemSetName) itemData.itemSetName = itemSetName;
         
@@ -249,42 +225,43 @@ async function scrapeIH(userId, cookie, s, time, time_frac, purchasedItems) {
 
                         const filteredItems = items.filter(item => item !== null);
 
-                        if (plusMinus === '+') {
-                            plusItems.push(...filteredItems);
-                        } else if (plusMinus === '-') {
-                            minusItems.push(...filteredItems);
+                        if (plusMinus === '+') { 
+                            plusItems.push(...filteredItems); 
+                        } 
+                        else if (plusMinus === '-') { 
+                            minusItems.push(...filteredItems); 
                         }
                     }).get());
 
                     let descriptionChanged = false;
                     for (const [mappedDescription, condition] of Object.entries(descriptionMap)) {
-                        if (condition(description, tradeHistoryItem)) {
+                        if (condition(desc, tradeHistoryItem)) {
                             if (mappedDescription === 'Traded With') {
-                                tradeName = description.replace(/^(You traded with|Your trade with|Your held trade with)\s*/, '').trim();
+                                tradeName = desc.replace(/^(You traded with|Your trade with|Your held trade with)\s*/, '').trim();
                             } else if (mappedDescription === 'Sticker applied/removed' || mappedDescription === 'Name Tag applied/removed') {
-                                tradeName = description;
+                                tradeName = desc;
                             } else if (mappedDescription === 'Used') {
                                 const hasGraffitiItem = minusItems.some(item => item.market_name && item.market_name.startsWith('Sealed Graffiti'));
                                 if (hasGraffitiItem) {
                                     return undefined;
                                 }
                                 if (minusItems.length === 1 && minusItems[0].market_name && minusItems[0].market_name.startsWith('Graffiti')) {
-                                    description = 'Graffiti Used';
+                                    desc = 'Graffiti Used';
                                     descriptionChanged = true;
                                 }
                             } else if (mappedDescription === 'Earned a weapon drop') {
                                 if (plusItems.length > 0 && plusItems[0]?.market_name && !plusItems[0].market_name.includes('|')) {
-                                    description = 'Earned';
+                                    desc = 'Earned';
                                     descriptionChanged = true;
                                 }
                             }
                             if (!descriptionChanged) {
-                                description = mappedDescription;
+                                desc = mappedDescription;
                             }
                             break;
                         }
                     }
-                    if (description === 'Purchased on Community Market') {
+                    if (desc === 'Purchased on Community Market') {
                         const matchingItemIndex = purchasedItems.findIndex(item => item && plusItems[0]?.market_name.startsWith(item.itemName));
                         if (matchingItemIndex !== -1) {
                             tradeName = purchasedItems[matchingItemIndex].price;
@@ -293,31 +270,12 @@ async function scrapeIH(userId, cookie, s, time, time_frac, purchasedItems) {
                             console.log('no matching item found');
                         }
                     }
-
-                    return {
-                        d,
-                        t,
-                        description,
-                        tradeName,
-                        plusItems,
-                        minusItems
-                    };
+                    return { d, t, desc, tradeName, plusItems, minusItems };
                 }
             }).get());
 
             scrapeData.push(...scrapedEntries.filter(entry => entry !== undefined));
-            for (const {
-                    url,
-                    isBuildUrl
-                }
-                of imageUrls) {
-                await imageDwnld(url, isBuildUrl);
-            }
-            return {
-                scrapeData,
-                cursor,
-                cursorFound
-            };
+            return { scrapeData, cursor };
         } else {
             console.log('Failed to scrape JSON data');
         }

@@ -1,7 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-const axios = require('axios');
-const crypto = require('crypto');
 const cheerio = require('cheerio');
 
 function trimItemType(itemType) {
@@ -15,56 +11,6 @@ function trimItemType(itemType) {
         }
     }
     return itemType;
-}
-
-async function imageDwnld(urlOrIconUrl, isBuildUrl = true) {
-    const resourcesPath = process.resourcesPath;
-    const directoryPath = path.join(resourcesPath, 'images');
-    if (!fs.existsSync(directoryPath)) {
-        fs.mkdirSync(directoryPath);
-    }
-    let imgUrl = urlOrIconUrl;
-    const compressedUrl = crypto.createHash('md5').update(imgUrl).digest('hex');
-    if (isBuildUrl) {
-        if (!urlOrIconUrl || urlOrIconUrl.trim() === '') {
-            console.error('Error: iconUrl is blank.');
-            return;
-        }
-        imgUrl = `https://community.cloudflare.steamstatic.com/economy/image/${urlOrIconUrl}/150fx150f?allow_animated=1`;
-    }
-
-    const filePath = path.join(directoryPath, `${compressedUrl}.png`);
-    if (fs.existsSync(filePath)) {
-        return `${compressedUrl}`;
-    }
-
-    try {
-        const response = await axios.get(imgUrl, {
-            responseType: 'stream'
-        });
-        const writer = fs.createWriteStream(filePath);
-        response.data.pipe(writer);
-
-        await new Promise((resolve, reject) => {
-            writer.on('finish', resolve);
-            writer.on('error', reject);
-        });
-
-        if (!isBuildUrl) {
-            const sharp = require('sharp');
-            const resizedFilePath = path.join(directoryPath, `${compressedUrl}_resized.png`);
-            await sharp(filePath)
-                .resize(50, 50)
-                .toFile(resizedFilePath);
-            await fs.promises.unlink(filePath);
-            await fs.promises.rename(resizedFilePath, filePath);
-        }
-
-        return `${compressedUrl}`;
-    } catch (error) {
-        console.error(`Error downloading image ${compressedUrl}:`, error);
-        return null;
-    }
 }
 
 async function parseStickerInfo(stickerInfo) {
@@ -141,7 +87,6 @@ function extractItemColor(marketName) {
 
 module.exports = {
     trimItemType,
-    imageDwnld,
     parseStickerInfo,
     extractItemColor
 };

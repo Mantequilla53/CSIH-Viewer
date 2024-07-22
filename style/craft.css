@@ -130,13 +130,13 @@
   height: 1px;
   background-color: #fff;
 }
-.sticker-images {
+.sticker-image {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
-.sticker-images img {
+.sticker-image img {
   width: 35px;
   height: 35px;
 }

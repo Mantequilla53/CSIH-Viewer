@@ -16,12 +16,12 @@ function showSwapContent(description, entries, contentContainer, tabStatsContain
       return `
         <div class="side-side-container">
           <div class="weapon-given-image-container">
-            <img src="${path.join(process.resourcesPath, 'images', `${plusItem.itemName}.png`)}" alt="${plusItem.market_name}">
+            <img src="https://community.akamai.steamstatic.com/economy/image/${plusItem.itemName}/330x192?allow_animated=1" alt="${plusItem.market_name}">
             ${plusItem.stickers && plusItem.stickers.length > 0 ? `
               <div class="sticker-separator"></div>
               <div class="sticker-images">
                 ${plusItem.stickers.map((sticker) => `
-                  <img src="${path.join(process.resourcesPath, 'images', `${sticker.imgSrc}.png`)}" width="45" height="45">
+                  <img src="${sticker.imgSrc}}" width="45" height="45">
                 `).join('')}
               </div>
             ` : ''}
@@ -43,7 +43,7 @@ function showSwapContent(description, entries, contentContainer, tabStatsContain
         ${index === 0 ? `
           <div class="icon-container">
             <div class="tool-image">
-              <img src="${path.join(process.resourcesPath, 'images', `${swapToolItem.itemName}.png`)}" alt="Tool Image">
+              <img src="https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXX7gNTPcUhvRpJWF7RTNu-wM7DbEl7KggZs--nLV4ygaDNJztE7ozgzNGIwqTyZ-6AlGpV7Jx10uiQotym2g3k_l0sPT6xjsLSww/360fx360f" alt="Tool Image">
             </div>
             <div class="arrow-icon">
               <img src="./assets/movement-arrows-left-right.svg" alt="Arrow Icon">

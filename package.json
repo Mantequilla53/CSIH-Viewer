@@ -18,25 +18,22 @@
   },
   "dependencies": {
     "axios": "^1.6.8",
-    "cheerio": "^1.0.0-rc.12",
-    "crypto": "^1.0.1",
-    "sharp": "^0.33.3"
+    "cheerio": "^1.0.0-rc.12"
   },
   "build": {
-  "appId": "your.app.id",
-  "productName": "CSIHViewer",
-  "directories": {
-    "output": "dist"
-  },
-  "files": [
-    "**/*",
-    "!.vscode",
-    "!dump",
-    "!images"
-  ],
-  "nsis": {
+    "appId": "your.app.id",
+    "productName": "CSIHViewer",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!.vscode",
+      "!dump"
+    ],
+    "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
+    }
   }
-}
 }

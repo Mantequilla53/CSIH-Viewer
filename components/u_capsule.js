@@ -41,7 +41,7 @@ const generateSidebarHTML = (itemCounts) => `
       .map(([item, count]) => `
         <li>
           <label title="${item}">
-            <input type="checkbox" class="item-checkbox" value="${item}" checked>
+            <input type="checkbox" class="capsule-checkbox" value="${item}" checked>
             ${item.startsWith('Operation') ? item.slice(9) : item} <span class="count">(${count})</span>
           </label>
         </li>
@@ -85,37 +85,6 @@ const generateItemTypeTableHTML = (itemCounts) => `
   </table>
 `;
 
-// Update content container based on selected item types and checked items
-const updateContentContainer = (tabContentElement, entries) => {
-  const selectedItemTypes = Array.from(tabContentElement.querySelectorAll('.item-type-checkbox:checked')).map((checkbox) => checkbox.value);
-  const checkedItems = Array.from(tabContentElement.querySelectorAll('.item-checkbox:checked')).map((checkbox) => checkbox.value);
-
-  const updatedItemCounts = initializeItemCounts();
-  const contentContainerElement = tabContentElement.querySelector('#content-container');
-  contentContainerElement.innerHTML = '<div class="card-container"></div>';
-  const cardContainer = contentContainerElement.querySelector('.card-container');
-
-  entries.forEach((entry) => {
-    const { d, t, plusItems, minusItems } = entry;
-    const matchedMinusItems = minusItems.filter((minusItem) => checkedItems.includes(minusItem.market_name));
-    const filteredPlusItems = plusItems.filter((plusItem) => selectedItemTypes.includes(plusItem.itemType));
-
-    if (matchedMinusItems.length > 0) {
-      plusItems.forEach((plusItem) => {
-        const { itemType } = plusItem;
-        updatedItemCounts.itemTypeCounts[itemType]++;
-      });
-      updatedItemCounts.totalCount += matchedMinusItems.length;
-
-      if (filteredPlusItems.length > 0) {
-        const cardElement = createCardElement(d, t, filteredPlusItems, matchedMinusItems);
-        cardContainer.appendChild(cardElement);
-      }
-    }
-  });
-  return updatedItemCounts;
-};
-
 // Create card element for displaying sticker capsule content
 const createCardElement = (date, time, plusItems, matchedMinusItems) => {
   const cardElement = document.createElement('div');
@@ -129,7 +98,7 @@ const createCardElement = (date, time, plusItems, matchedMinusItems) => {
     </div>
     <div class="weapon-given">
       <div class="weapon-given-image-container">
-        <img src="${path.join(process.resourcesPath, 'images', `${plusItems[0].itemName}.png`)}" width="120" height="92.4">
+        <img src="https://community.akamai.steamstatic.com/economy/image/${plusItems[0].itemName}/330x192?allow_animated=1">
       </div>
       <span>${removeSticker(plusItems[0].market_name)}</span>
     </div>
@@ -137,25 +106,24 @@ const createCardElement = (date, time, plusItems, matchedMinusItems) => {
       <div class="card-footer">
         <div class="case-unboxed">
           <span class="item-name">${matchedMinusItems[0].market_name}</span>
-          <img src="${path.join(process.resourcesPath, 'images', `${matchedMinusItems[0].itemName}.png`)}" alt="${matchedMinusItems[0].market_name}">
+          <img src="https://community.akamai.steamstatic.com/economy/image/${matchedMinusItems[0].itemName}/330x192?allow_animated=1" alt="${matchedMinusItems[0].market_name}">
         </div>
       </div>
     ` : ''}
   `;
 
-
   return cardElement;
 };
 
 // Update item type table with updated counts and percentages
-const updateItemTypeTable = (tabContentElement, updatedItemCounts) => {
+const updateItemTypeTable = (tabContentElement, updatedItemCounts, filteredTotalCount) => {
   const itemTypeTableBody = tabContentElement.querySelector('.item-type-table tbody');
   itemTypeTableBody.querySelectorAll('tr').forEach((row) => {
     const itemType = row.querySelector('.item-type-checkbox').value;
     const count = updatedItemCounts.itemTypeCounts[itemType];
-    const percentage = ((count / updatedItemCounts.totalCount) * 100).toFixed(3);
+    const percentage = ((count / filteredTotalCount) * 100).toFixed(3);
 
-    row.querySelector('td:nth-child(2)').textContent = `${count}/${updatedItemCounts.totalCount}`;
+    row.querySelector('td:nth-child(2)').textContent = `${count}/${filteredTotalCount}`;
     row.querySelector('td:nth-child(3)').textContent = `${percentage}%`;
   });
 };
@@ -165,7 +133,6 @@ const removeSticker = (marketName) => {
   const regex = /\bsticker\s*\|?\s*/i;
   return marketName.replace(regex, '').trim();
 };
-
 
 // Main function to show sticker capsule content
 function showStickerCapContent(description, entries, contentContainer, tabStatsContainer) {
@@ -192,23 +159,115 @@ function showStickerCapContent(description, entries, contentContainer, tabStatsC
   `;
   tabStatsContainer.appendChild(tabContentElement);
 
-  const itemTypeCheckboxes = tabContentElement.querySelectorAll('.item-type-checkbox');
-  const checkAllCheckbox = tabContentElement.querySelector('#check-all');
-  const itemCheckboxes = tabContentElement.querySelectorAll('.item-checkbox');
+  let currentPage = 1;
+  const itemsPerPage = 50;
+  let observer;
+  let filteredEntries = [];
+  let displayFilteredEntries = [];
 
-  itemTypeCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', updateContainerAndTable));
-  checkAllCheckbox.addEventListener('change', (event) => {
-    itemCheckboxes.forEach((checkbox) => (checkbox.checked = event.target.checked));
-    updateContainerAndTable();
-  });
-  itemCheckboxes.forEach((checkbox) => checkbox.addEventListener('change', updateContainerAndTable));
+  function updateContainerAndTable() {
+    currentPage = 1;
+    const cardContainer = tabContentElement.querySelector('.card-container');
+    cardContainer.innerHTML = '';
+    
+    const checkedItems = getCheckedItems();
+    const selectedItemTypes = getSelectedItemTypes();
+    
+    filteredEntries = filterEntriesByCapsules(entries, checkedItems);
+    const updatedItemCounts = calculateItemCounts(filteredEntries);
+    const filteredTotalCount = calculateTotalCount(filteredEntries);
+    
+    displayFilteredEntries = filterEntriesByItemTypes(filteredEntries, selectedItemTypes);
+    
+    renderCards();
+    updateItemTypeTable(tabContentElement, updatedItemCounts, filteredTotalCount);
+  }
+
+  function getCheckedItems() {
+    return Array.from(tabContentElement.querySelectorAll('.capsule-checkbox:checked')).map((checkbox) => checkbox.value);
+  }
+
+  function getSelectedItemTypes() {
+    return Array.from(tabContentElement.querySelectorAll('.item-type-checkbox:checked')).map((checkbox) => checkbox.value);
+  }
+
+  function filterEntriesByCapsules(entries, checkedItems) {
+    return entries.filter((entry) => {
+      return entry.minusItems.some((minusItem) => checkedItems.includes(minusItem.market_name));
+    });
+  }
+
+  function filterEntriesByItemTypes(entries, selectedItemTypes) {
+    return entries.filter((entry) => {
+      return entry.plusItems.some((plusItem) => selectedItemTypes.includes(plusItem.itemType));
+    });
+  }
+
+  function calculateItemCounts(entries) {
+    const counts = initializeItemCounts();
+    entries.forEach((entry) => {
+      entry.plusItems.forEach((item) => {
+        counts.itemTypeCounts[item.itemType]++;
+      });
+    });
+    return counts;
+  }
+
+  function calculateTotalCount(entries) {
+    return entries.reduce((total, entry) => total + entry.minusItems.length, 0);
+  }
+
+  function renderCards() {
+    const cardContainer = tabContentElement.querySelector('.card-container');
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const entriesToRender = displayFilteredEntries.slice(startIndex, endIndex);
+
+    entriesToRender.forEach((entry) => {
+      const { d, t, plusItems, minusItems } = entry;
+      const cardElement = createCardElement(d, t, plusItems, minusItems);
+      cardContainer.appendChild(cardElement);
+    });
+
+    if (entriesToRender.length > 0) {
+      const lastEntry = cardContainer.lastElementChild;
+      setupIntersectionObserver(lastEntry);
+    }
+  }
+
+  function setupIntersectionObserver(target) {
+    if (observer) {
+      observer.disconnect();
+    }
+
+    observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        loadMoreItems();
+      }
+    }, { threshold: 0.1 });
+
+    observer.observe(target);
+  }
+
+  function loadMoreItems() {
+    currentPage++;
+    renderCards();
+  }
 
   updateContainerAndTable();
 
-  function updateContainerAndTable() {
-    const updatedItemCounts = updateContentContainer(tabContentElement, entries);
-    updateItemTypeTable(tabContentElement, updatedItemCounts);
-  }
+  // Event listeners
+  tabContentElement.querySelectorAll('.item-type-checkbox, .capsule-checkbox').forEach((checkbox) => {
+    checkbox.addEventListener('change', updateContainerAndTable);
+  });
+
+  const checkAllCheckbox = tabContentElement.querySelector('#check-all');
+  checkAllCheckbox.addEventListener('change', (event) => {
+    tabContentElement.querySelectorAll('.capsule-checkbox').forEach((checkbox) => {
+      checkbox.checked = event.target.checked;
+    });
+    updateContainerAndTable();
+  });
 }
 
 module.exports = {

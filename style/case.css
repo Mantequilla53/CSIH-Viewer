@@ -148,6 +148,23 @@
     border-radius: 3px;
     font-size: 12px;
   }
+  .sticker-separator {
+    width: 90%;
+    height: 1px;
+    background-color: #fff;
+  }
+  
+  .sticker-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .sticker-images img {
+    width: 40px;
+    height: auto;
+  }
   .card-container {
     margin-top: 20px;
     display: grid;

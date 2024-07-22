@@ -1,6 +1,10 @@
+const { extractItemColor } = require('../utils');
+
 function showTradeContent(description, entries, contentContainer, tabStatsContainer) {
-  const { extractItemColor } = require('../utils');
   const tradeNameCounts = {};
+  let currentPage = 1;
+  const itemsPerPage = 20; // Adjust as needed
+  let observer;
 
   entries.forEach((entry) => {
     const { tradeName } = entry;
@@ -41,7 +45,6 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
 
   let selectedTradeName = null;
 
-
   function searchEntries(query, tradeName) {
     const filteredEntries = tradeName ? tradeNameCounts[tradeName] : entries;
     return filteredEntries.filter((entry) => {
@@ -55,7 +58,16 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
     const searchQuery = searchInput.value.trim().toLowerCase();
     const filteredEntries = searchQuery ? searchEntries(searchQuery, selectedTradeName) : (selectedTradeName ? tradeNameCounts[selectedTradeName] : entries);
 
-    filteredEntries.forEach((entry) => {
+    // Clear existing content only when changing filters
+    if (currentPage === 1) {
+      contentContainer.innerHTML = '';
+    }
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const entriesToRender = filteredEntries.slice(startIndex, endIndex);
+
+    entriesToRender.forEach((entry) => {
       const { d, t, plusItems, minusItems, tradeName } = entry;
       
       const groupedPlusItems = groupItems(plusItems);
@@ -76,51 +88,78 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
         </div>
       `;
       contentContainer.appendChild(entryElement);
-      
-      function renderItemSection(groupedItems, cardClass) {
-        if (Object.values(groupedItems).length === 0) {
-          return '';
-        }
-      
-        return `
-          <div class="item-section ${Object.values(groupedPlusItems).length > 0 && Object.values(groupedMinusItems).length > 0 ? 'half-width' : ''}">
-            <div class="item-card ${cardClass}">
-              <div class="item-grid">
-                ${Object.values(groupedItems).map((item) => `
-                  <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
-                    <div class="weapon-given-image-container">
-                        <img src="${path.join(process.resourcesPath, 'images', `${item.itemName}.png`)}" width="120" height="92.4">
-                      ${item.itemWear ? `<span class="item-wear">${shortenItemWear(item.itemWear)}</span>` : ''}
-                      ${item.tag_name ? `<div class="tag-indicator" title="${item.tag_name}"></div>` : ''}
-                      ${item.stickers && item.stickers.length > 0 ? `
-                        <div class="sticker-separator"></div>
-                        <div class="sticker-images">
-                          ${item.stickers.map((sticker) => `
-                            <img src="${path.join(process.resourcesPath, 'images', `${sticker.imgSrc}.png`)}" width="40" height="30.8">
-                          `).join('')}
-                        </div>
-                      ` : ''}
-                    </div>
-                    <div class="item-name">
-                      <span>${item.market_name}</span>
-                    </div>
-                    <div class="item-count">
-                      <span>${item.count > 1 ? `Count: ${item.count}` : ''}</span>
-                    </div>
+    });
+
+    // Set up Intersection Observer for the last item
+    if (entriesToRender.length > 0) {
+      const lastEntry = contentContainer.lastElementChild;
+      setupIntersectionObserver(lastEntry);
+    }
+  }
+
+  function renderItemSection(groupedItems, cardClass) {
+    if (Object.values(groupedItems).length === 0) {
+      return '';
+    }
+  
+    return `
+      <div class="item-section ${Object.values(groupedItems).length > 0 ? 'half-width' : ''}">
+        <div class="item-card ${cardClass}">
+          <div class="item-grid">
+            ${Object.values(groupedItems).map((item) => `
+              <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
+                <div class="weapon-given-image-container">
+                  <div class="weapon-given">    
+                    <img src="https://community.akamai.steamstatic.com/economy/image/${item.itemName}/330x192?allow_animated=1">
                   </div>
-                `).join('')}
+                  ${item.itemWear ? `<span class="item-wear">${shortenItemWear(item.itemWear)}</span>` : ''}
+                  ${item.tag_name ? `<div class="tag-indicator" title="${item.tag_name}"></div>` : ''}
+                  ${item.stickers && item.stickers.length > 0 ? `
+                    <div class="sticker-separator"></div>
+                    <div class="sticker-images">
+                      ${item.stickers.map((sticker) => `
+                            <img src="${sticker.imgSrc}" width="40" height="30.8">
+                      `).join('')}
+                    </div>
+                  ` : ''}
+                </div>
+                <div class="item-name">
+                  <span>${item.market_name}</span>
+                </div>
+                <div class="item-count">
+                  <span>${item.count > 1 ? `Count: ${item.count}` : ''}</span>
+                </div>
               </div>
-            </div>
+            `).join('')}
           </div>
-        `;
+        </div>
+      </div>
+    `;
+  }
+
+  function setupIntersectionObserver(target) {
+    if (observer) {
+      observer.disconnect();
+    }
+
+    observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        loadMoreItems();
       }
-  }); 
+    }, { threshold: 0.1 });
+
+    observer.observe(target);
+  }
+
+  function loadMoreItems() {
+    currentPage++;
+    renderTrades();
   }
 
   tradeNameSelect.addEventListener('change', (event) => {
     selectedTradeName = event.target.value;
+    currentPage = 1;
     contentContainer.innerHTML = '';
-    //searchInput.value = ''; Clear the search input when changing trade name
     if (selectedTradeName) {
       selectedTradeNameContainer.textContent = `Selected Trade Name: ${selectedTradeName}`;
       unselectButton.style.display = 'inline-block';
@@ -136,27 +175,32 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
     tradeNameSelect.value = '';
     unselectButton.style.display = 'none';
     selectedTradeName = null;
+    currentPage = 1;
     contentContainer.innerHTML = '';
     renderTrades();
   });
 
   searchInput.addEventListener('input', () => {
+    currentPage = 1;
     contentContainer.innerHTML = '';
     renderTrades();
   });
 
+  // Initial render
   renderTrades();
 }
+
 const shortenItemWear = (itemWear) => {
-            const wearMap = {
-              'Factory New': 'FN',
-              'Minimal Wear': 'MW',
-              'Field-Tested': 'FT',
-              'Well-Worn': 'WW',
-              'Battle-Scarred': 'BS'
-            };
-            return wearMap[itemWear] || itemWear;
-          };
+  const wearMap = {
+    'Factory New': 'FN',
+    'Minimal Wear': 'MW',
+    'Field-Tested': 'FT',
+    'Well-Worn': 'WW',
+    'Battle-Scarred': 'BS'
+  };
+  return wearMap[itemWear] || itemWear;
+};
+
 function groupItems(items) {
   return items.reduce((acc, item) => {
     const stickerNames = item.stickers ? item.stickers.map(sticker => sticker.name).join('-') : '';
