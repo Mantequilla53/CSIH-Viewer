@@ -147,6 +147,22 @@
 .donation-content ul {
     padding-left: 20px;
 }
+.donate-button {
+    display: inline-block;
+    background-color: #00adb5;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.donate-button:hover {
+    background-color: #00c2cb;
+}
 .donation-list {
     list-style-type: none;
     padding: 0;

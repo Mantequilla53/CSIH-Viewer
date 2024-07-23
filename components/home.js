@@ -106,6 +106,7 @@ async function showHome(contentContainer, tabStatsContainer) {
           <li>Fund the development of new features</li>
           <li>Ensure the continued maintenance and improvement of CSIHV</li>
         </ul>
+        <a href="#" class="donate-button" id="donate-link">Steam Trade Link</a>
       </div>
       <div class="donation-leaderboard">
         <h3>Donation Leaderboard</h3>
@@ -128,6 +129,11 @@ async function showHome(contentContainer, tabStatsContainer) {
       event.preventDefault();
       shell.openExternal(event.target.href);
     });
+  });
+
+  document.getElementById('donate-link').addEventListener('click', (event) => {
+    event.preventDefault();
+    shell.openExternal('https://steamcommunity.com/tradeoffer/new/?partner=194995080&token=wHW04ODS');
   });
 
   document.getElementById('discord-link').addEventListener('click', (event) => {
