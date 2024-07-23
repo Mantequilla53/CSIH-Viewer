@@ -3,7 +3,7 @@ const axios = require('axios');
 
 async function fetchDonationData() {
   try {
-    const response = await axios.get('https://raw.githubusercontent.com/yourusername/yourrepo/main/donations.json');
+    const response = await axios.get('https://raw.githubusercontent.com/Mantequilla53/CSIH-Viewer/main/donations.json');
     return response.data;
   } catch (error) {
     console.error('Error fetching donation data:', error);
@@ -12,24 +12,28 @@ async function fetchDonationData() {
 }
 
 function renderDonationLeaderboard(donations) {
-  if (!donations || donations.length === 0) {
+  if (!donations || Object.keys(donations).length === 0) {
     return '<p>No donations yet. Be the first to support us!</p>';
   }
 
-  const sortedDonations = donations.sort((a, b) => b.amount - a.amount);
+  const sortedDonations = Object.entries(donations).sort((a, b) => parseFloat(b[1].amount.slice(1)) - parseFloat(a[1].amount.slice(1)));
   const topDonations = sortedDonations.slice(0, 5);
 
   return `
-    <ol class="donation-list">
-      ${topDonations.map(donation => `
+    <ul class="donation-list">
+      ${topDonations.map(([id, donation]) => `
         <li>
-          <span class="donor-name">${donation.name}</span>
-          <span class="donation-amount">$${donation.amount.toFixed(2)}</span>
+          <img src="${donation.profilepicture}" class="donor-avatar">
+          <div class="donor-info">
+            <a href="${donation.profile_url}" class="donor-name" target="_blank">${donation.name}</a>
+            <span class="donation-amount">${donation.amount}</span>
+          </div>
         </li>
       `).join('')}
-    </ol>
+    </ul>
   `;
 }
+
 
 async function showHome(contentContainer, tabStatsContainer) {
   tabStatsContainer.innerHTML = `<link rel="stylesheet" href="style/home.css">`
@@ -96,7 +100,7 @@ async function showHome(contentContainer, tabStatsContainer) {
     <div class="donation-section">
       <div class="donation-content">
         <h3>Support CSIHV</h3>
-        <p>Your support makes a difference! While CSIHV is freely available donations are deeply appreciated. Your contribution, no matter the size, helps:</p>
+        <p>Your support makes a difference! While CSIHV is freely available and always will be, donations are deeply appreciated. Your contribution, no matter the size, helps:</p>
         <ul>
           <li>Motivate more frequent updates</li>
           <li>Fund the development of new features</li>
@@ -105,6 +109,7 @@ async function showHome(contentContainer, tabStatsContainer) {
       </div>
       <div class="donation-leaderboard">
         <h3>Donation Leaderboard</h3>
+        <div id="leaderboard-content">Loading...</div>
       </div>
     </div>
     <div class="support-section">
@@ -117,6 +122,13 @@ async function showHome(contentContainer, tabStatsContainer) {
   const donationData = await fetchDonationData();
   const leaderboardContent = document.getElementById('leaderboard-content');
   leaderboardContent.innerHTML = renderDonationLeaderboard(donationData);
+
+  document.querySelectorAll('.donor-name').forEach(link => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      shell.openExternal(event.target.href);
+    });
+  });
 
   document.getElementById('discord-link').addEventListener('click', (event) => {
     event.preventDefault();
