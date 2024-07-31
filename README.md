@@ -53,6 +53,7 @@ To get started with CSIHV, follow these simple steps:
 ## Built With
 
 * [Electron](https://www.electronjs.org/)
+* Node v20.10.0
 
 ## Acknowledgments
 
