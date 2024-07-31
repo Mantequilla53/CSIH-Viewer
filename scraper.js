@@ -120,7 +120,7 @@ async function scrapeIH(userId, cookie, s, time, time_frac, purchasedItems) {
                 'Used': (desc) => desc === 'Used',
                 'Graffiti Opened': (desc) => desc === 'Unsealed',
                 'Operation Reward': (desc) => desc === 'Mission reward',
-                'Listed on Community Market': (desc) => desc === 'You listed an item on the Community Market.',
+                'Listed on Community Market': (desc) => desc.startsWith('You listed an item on the Community Market.'),
                 'Purchased on Community Market': (desc) => desc === 'You purchased an item on the Community Market.',
                 'Canceled listing on Community Market': (desc) => desc === 'You canceled a listing on the Community Market. The item was returned to you.',
                 'Deleted': (desc) => desc === 'You deleted'
@@ -185,10 +185,19 @@ async function scrapeIH(userId, cookie, s, time, time_frac, purchasedItems) {
                                     }
                                     if (stickerInfoValue) {
                                         const parsedStickers = await parseStickerInfo(stickerInfoValue.value);
-                                        stickers = parsedStickers.map(sticker => ({
-                                            name: sticker.name,
-                                            imgSrc: sticker.imgSrc
-                                        }));
+                                        stickers = parsedStickers.map(sticker => {
+                                            const prefix = "https://steamcdn-a.akamaihd.net/apps/730/icons/econ/stickers/";
+                                            let trimmedImgSrc = sticker.imgSrc;
+                                            
+                                            if (sticker.imgSrc.startsWith(prefix)) {
+                                                trimmedImgSrc = sticker.imgSrc.substring(prefix.length);
+                                            }
+                                    
+                                            return {
+                                                name: sticker.name,
+                                                imgSrc: trimmedImgSrc
+                                            };
+                                        });
                                     }
                                     if (itemSetDesc) {
                                         itemSetName = itemSetDesc.value.trim();

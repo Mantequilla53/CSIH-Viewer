@@ -104,6 +104,23 @@
 .item-quality-table tbody tr:last-child td {
     border-bottom: none;
 }
+.stattrak-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .stattrak-info {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #CF6A32;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: rgba(207, 106, 50, 0.1);
+  }
+  #stattrak-count, #stattrak-percentage {
+    color: #CF6A32;
+  }
 .weapon-given {
     display: flex;
     flex-direction: column;

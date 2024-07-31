@@ -11,16 +11,19 @@ function showARContent(description, entries, contentContainer, tabStatsContainer
         type = 'Name Tag';
     }
 
+    const appliedCount = entries.filter(entry => entry.tradeName === `${type} applied`).length;
+    const removedCount = entries.filter(entry => entry.tradeName === `${type} removed`).length;
+
     tabStatsContainer.innerHTML = `<link rel="stylesheet" href="style/weapondrop.css">
     <h2>${description}</h2>
     <div class="filter-options">
         <label>
             <input type="checkbox" value="${type} applied" id="${type.toLowerCase()}-applied-checkbox" checked>
-            ${type} Applied
+            ${type} Applied <span class="drop-count">(${appliedCount})</span>
         </label>
         <label>
             <input type="checkbox" value="${type} removed" id="${type.toLowerCase()}-removed-checkbox" checked>
-            ${type} Removed
+            ${type} Removed <span class="drop-count">(${removedCount})</span>
         </label>
     </div>`;
 
@@ -46,13 +49,22 @@ function showARContent(description, entries, contentContainer, tabStatsContainer
 
                 const itemToDisplay = plusItems.length ? plusItems : minusItems;
                 const itemColor = itemToDisplay[0]?.itemType ? extractItemColor(itemToDisplay[0].itemType) : 'white';
+
+                let borderColor = '';
+
+                if (itemToDisplay[0].market_name.startsWith('StatTrak')) {
+                  borderColor = 'rgb(207, 106, 50)';
+                } else if (itemToDisplay[0].market_name.includes('Souvenir')) {
+                  borderColor = 'rgb(255, 215, 0)';
+                }
+
                 entryElement.style.setProperty('--item-color', itemColor);
                 entryElement.innerHTML = `
                     <div class="card-header">
                         <span>${d} ${t}</span>
                     </div>
                     <div class="weapon-given">
-                        <div class="weapon-given-image-container">
+                        <div class="weapon-given-image-container" style="border-color: ${borderColor}">
                             <div class="item-image">
                                 <img src="https://community.akamai.steamstatic.com/economy/image/${itemToDisplay[0].itemName}/330x192?allow_animated=1" alt="${itemToDisplay[0].market_name}">
                             </div>
@@ -61,7 +73,7 @@ function showARContent(description, entries, contentContainer, tabStatsContainer
                                    <div class="sticker-images">
                                      ${itemToDisplay[0].stickers.map(sticker => `
                                        <div class="sticker">
-                                         <img src="${sticker.imgSrc}" alt="${sticker.name}">
+                                         <img src="https://steamcdn-a.akamaihd.net/apps/730/icons/econ/stickers/${sticker.imgSrc}" alt="${sticker.name}">
                                        </div>
                                      `).join('')}
                                    </div>`
@@ -131,7 +143,7 @@ function findChange(tradeName, plusItems, minusItems, type) {
             return value ? `
                 <div class="card-footer">
                     <p>${action}:</p>
-                    <img src="${value.imgSrc}" alt="${value.name}" class="sticker-image">
+                    <img src="https://steamcdn-a.akamaihd.net/apps/730/icons/econ/stickers/${value.imgSrc}" alt="${value.name}" class="sticker-image">
                 </div>
             ` : '';
         }

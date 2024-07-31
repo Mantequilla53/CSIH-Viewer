@@ -81,7 +81,7 @@ function showDefaultCards(description, entries, contentContainer, tabStatsContai
               <div class="sticker-separator"></div>
               <div class="sticker-images">
                 ${item.stickers.map((sticker) => `
-                  <img src="${sticker.imgSrc}">
+                  <img src="https://steamcdn-a.akamaihd.net/apps/730/icons/econ/stickers/${sticker.imgSrc}">
                 `).join('')}
               </div>
             ` : ''}

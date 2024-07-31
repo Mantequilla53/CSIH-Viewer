@@ -25,9 +25,12 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
     });
   });
 
+  const totalTradeUpCount = Object.values(tradeUpTypeCount).reduce((sum, count) => sum + count, 0);
+
   tabStatsContainer.innerHTML = `
     <link rel="stylesheet" href="style/craft.css">
     <h3>${description}</h3>
+    <p>Total Trade-Ups: <span style="color: yellow">${totalTradeUpCount}</span></p>
     <div>
       ${Object.entries(tradeUpTypeCount)
         .map(([type, count]) => {
@@ -68,6 +71,7 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
       const { d, t, plusItems, minusItems } = entry;
       const takenColor = extractItemColor(minusItems[0].itemType);
       const givenColor = extractItemColor(plusItems[0].itemType);
+      let borderColor = '';
       const inputType = minusItems[0].itemType;
       const entryElement = document.createElement('div');
       entryElement.classList.add('entry');
@@ -77,16 +81,20 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
         </div>
         <div class="card-container">
           <div class="minus-items-container">
-            ${minusItems.map(item => `
+            ${minusItems.map(item => {
+              if (item.market_name.startsWith('StatTrak')) {
+                borderColor = 'rgb(207, 106, 50)';
+              }
+              return`
               <div class="card taken-item" style="--item-color: ${takenColor};">
-                <div class="weapon-given-image-container">
+                <div class="weapon-given-image-container" style="border-color: ${borderColor}">
                   <img src="https://community.akamai.steamstatic.com/economy/image/${item.itemName}/330x192?allow_animated=1">
                   ${item.itemWear ? `<span class="item-wear">${shortenItemWear(item.itemWear)}</span>` : ''}
                   ${item.stickers && item.stickers.length > 0 ? `
                     <div class="sticker-separator"></div>
                     <div class="sticker-image">
                       ${item.stickers.map(sticker => `
-                        <img src="${sticker.imgSrc}">
+                        <img src="https://steamcdn-a.akamaihd.net/apps/730/icons/econ/stickers/${sticker.imgSrc}">
                       `).join('')}
                     </div>
                   ` : ''}
@@ -94,13 +102,13 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
                 <p>${item.market_name}</p>
                 <p>${item.itemSetName}</p>
               </div>
-            `).join('')}
+            `}).join('')}
           </div>
           <div class="plus-items-wrapper">
             <div class="plus-items-top">
               ${plusItems.length > 0 ? `
                 <div class="card given-item plus-item" style="--item-color: ${givenColor};">
-                  <div class="weapon-given-image-container">
+                  <div class="weapon-given-image-container" style="border-color: ${borderColor}">
                     <img src="https://community.akamai.steamstatic.com/economy/image/${plusItems[0].itemName}/330x192?allow_animated=1">
                     ${plusItems[0].itemWear ? `<span class="item-wear">${shortenItemWear(plusItems[0].itemWear)}</span>` : ''}
                   </div>
@@ -124,7 +132,7 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
 
       showOutcomesCard.addEventListener('click', () => {
         plusItemsTop.style.display = 'none';
-        const outputText = possibleOutputs(inputType, minusItems, givenColor, plusItems[0]);
+        const outputText = possibleOutputs(inputType, minusItems, givenColor, plusItems[0], borderColor);
         plusItemsContainer.innerHTML = outputText;
       });
     });
@@ -159,7 +167,7 @@ function showCraftedContent(description, entries, contentContainer, tabStatsCont
   updateContentContainer();
 }
 
-function possibleOutputs(inputType, minusItems, givenColor, plusItem) {
+function possibleOutputs(inputType, minusItems, givenColor, plusItem, borderColor) {
   const itemTypes = ['Consumer Grade', 'Industrial Grade', 'Mil-Spec', 'Restricted', 'Classified', 'Covert'];
   const itemSetNames = [...new Set(minusItems.map(item => item.itemSetName))];
   const outputFilePath = path.join(__dirname, '../csihv.json');
@@ -192,12 +200,21 @@ function possibleOutputs(inputType, minusItems, givenColor, plusItem) {
   
   const totalBallots = Object.values(outputBallots).reduce((sum, ballots) => sum + ballots, 0);
   
+  const isStatTrak = plusItem.market_name.startsWith('StatTrak™');
   const plusItemNameWithoutParentheses = plusItem.market_name.split(' (')[0];
+
+  // Add StatTrak™ to all items if the plusItem is StatTrak™
+  if (isStatTrak) {
+    outputItems = outputItems.map(item => ({
+      ...item,
+      name: `StatTrak™ ${item.name}`
+    }));
+  }
 
   let matchingPlusItem = null;
   let matchingCollection = null;
   for (const item of outputItems) {
-    if (item.name.split(' (')[0] === plusItemNameWithoutParentheses) {
+    if (item.name === plusItemNameWithoutParentheses) {
       matchingPlusItem = item;
       matchingCollection = item.collections[0].name;
       break;
@@ -222,13 +239,13 @@ function possibleOutputs(inputType, minusItems, givenColor, plusItem) {
   }
 
   const outputCards = outputItems.map(item => {
-    const itemBallots = outputBallots[item.name] || 0;
+    const itemBallots = outputBallots[item.name.replace('StatTrak™ ', '')] || 0;
     const odds = totalBallots > 0 ? ((itemBallots / totalBallots) * 100).toFixed(2) : '0.00';
     const isPlusItem = item === matchingPlusItem;
 
     return `
       <div class="card output-item ${isPlusItem ? ' plus-item' : ''}"  style="--item-color: ${givenColor};">
-        <div class="weapon-given-image-container">
+        <div class="weapon-given-image-container" style="border-color: ${borderColor}">
           <img src="${item.image}">
           ${isPlusItem ? `<span class="item-wear">${shortenItemWear(plusItem.itemWear)}</span>` : ''}
         </div>

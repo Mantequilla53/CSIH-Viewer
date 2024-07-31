@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CSIHV v1.2.1</title>
+  <title>CSIHV v2.1.0</title>
   <link rel="stylesheet" href="style/styles.css">
 </head>
 <body>
   <div class="header-container">
     <div class="header-left">
+      <img src="assets/csihv-logo-3-01.svg">
       <h1>CSIHV</h1>
       <div class="input-options">
         <form class="inline-form">
@@ -14,9 +15,17 @@
           <input type="text" id="input-field" name="input-field">
           <button type="submit" id="submit-button">Submit</button>
         </form>
+        
         <div class="or-divider">OR</div>
+        
         <div class="file-selector-container">
           <select id="file-selector"></select>
+          <button type="button" id="file-explorer-btn" title="Open file location">
+            Open Output Folder
+          </button>
+          <button type="button" id="refresh-btn" title="Refresh file list">
+            Refresh Files
+          </button>
         </div>
       </div>
     </div>

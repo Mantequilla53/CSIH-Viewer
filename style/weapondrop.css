@@ -1,6 +1,6 @@
 #content-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 20px;
   margin: 20px;
 }
@@ -113,7 +113,7 @@
 }
 
 .sticker-images img {
-  width: 45px;
+  width: 40px;
   height: auto;
 }
 .card-footer {
@@ -239,4 +239,10 @@
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   grid-gap: 20px;
   margin: 20px;
+}
+.operation-buttons {
+  margin-top: 10px;
+}
+.operation-button {
+  margin-right: 5px;
 }

@@ -21,7 +21,7 @@ function showSwapContent(description, entries, contentContainer, tabStatsContain
               <div class="sticker-separator"></div>
               <div class="sticker-images">
                 ${plusItem.stickers.map((sticker) => `
-                  <img src="${sticker.imgSrc}}" width="45" height="45">
+                  <img src="https://steamcdn-a.akamaihd.net/apps/730/icons/econ/stickers/${sticker.imgSrc}}" width="45" height="45">
                 `).join('')}
               </div>
             ` : ''}

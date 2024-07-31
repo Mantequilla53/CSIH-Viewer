@@ -103,12 +103,20 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
     }
   
     return `
-      <div class="item-section ${Object.values(groupedItems).length > 0 ? 'half-width' : ''}">
-        <div class="item-card ${cardClass}">
-          <div class="item-grid">
-            ${Object.values(groupedItems).map((item) => `
+    <div class="item-section ${Object.values(groupedItems).length > 0 ? 'half-width' : ''}">
+      <div class="item-card ${cardClass}">
+        <div class="item-grid">
+          ${Object.values(groupedItems).map((item) => {
+            let borderColor = '';
+            if (item.market_name.startsWith('StatTrak')) {
+              borderColor = 'rgb(207, 106, 50)';
+            } else if (item.market_name.includes('Souvenir')) {
+              borderColor = 'rgb(255, 215, 0)';
+            }
+
+            return `
               <div class="item-entry" style="--item-color: ${extractItemColor(item.itemType)};">
-                <div class="weapon-given-image-container">
+                <div class="weapon-given-image-container" style="border-color: ${borderColor}">
                   <div class="weapon-given">    
                     <img src="https://community.akamai.steamstatic.com/economy/image/${item.itemName}/330x192?allow_animated=1">
                   </div>
@@ -118,7 +126,7 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
                     <div class="sticker-separator"></div>
                     <div class="sticker-images">
                       ${item.stickers.map((sticker) => `
-                            <img src="${sticker.imgSrc}" width="40" height="30.8">
+                            <img src="https://steamcdn-a.akamaihd.net/apps/730/icons/econ/stickers/${sticker.imgSrc}" width="40" height="40">
                       `).join('')}
                     </div>
                   ` : ''}
@@ -130,11 +138,12 @@ function showTradeContent(description, entries, contentContainer, tabStatsContai
                   <span>${item.count > 1 ? `Count: ${item.count}` : ''}</span>
                 </div>
               </div>
-            `).join('')}
-          </div>
+            `;
+          }).join('')}
         </div>
       </div>
-    `;
+    </div>
+  `;
   }
 
   function setupIntersectionObserver(target) {

@@ -6,7 +6,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: white;
 }
 .hero-content {
     max-width: 800px;
@@ -26,11 +25,11 @@
     display: inline-block;
     padding: 15px 30px;
     background-color: #00adb5;
-    color: white;
     text-decoration: none;
     border-radius: 5px;
     font-size: 18px;
     margin-bottom: 20px;
+    color: white;
     transition: background-color 0.3s;
 } 
 .demo-button:hover {
@@ -41,7 +40,6 @@
     padding: 10px;
     display: inline-block;
     background-color: #393e46;
-    color: white;
     border-radius: 5px;
     font-size: 30px;
 }
@@ -93,11 +91,20 @@
     color: yellow;
 }
 .support-section {
-    background-color: #393e46;
-    border-radius: 8px;
-    margin: 30px 120px;
+    background-color: #34383f;
+    margin: 0 -20px;
+    padding: 20px;
     text-align: center;
-    color: white;
+    position: relative;
+}
+.support-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: #00adb5;
 }
 .support-section h3 {
     font-size: 24px;

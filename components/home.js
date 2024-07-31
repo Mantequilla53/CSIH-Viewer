@@ -46,6 +46,7 @@ async function showHome(contentContainer, tabStatsContainer) {
     <div class="right-image">
     </div>
   </div>
+
   <div class="how-to-use">
     <div class="header-how">
       <h3>How to use CSIHV</h3>
@@ -97,27 +98,27 @@ async function showHome(contentContainer, tabStatsContainer) {
         </div>
       </div>
     </div>
-    <div class="donation-section">
-      <div class="donation-content">
-        <h3>Support CSIHV</h3>
-        <p>Your support makes a difference! While CSIHV is freely available and always will be, donations are deeply appreciated. Your contribution, no matter the size, helps:</p>
-        <ul>
-          <li>Motivate more frequent updates</li>
-          <li>Fund the development of new features</li>
-          <li>Ensure the continued maintenance and improvement of CSIHV</li>
-        </ul>
-        <a href="#" class="donate-button" id="donate-link">Steam Trade Link</a>
-      </div>
-      <div class="donation-leaderboard">
-        <h3>Donation Leaderboard</h3>
-        <div id="leaderboard-content">Loading...</div>
-      </div>
+  </div> 
+  <div class="donation-section">
+    <div class="donation-content">
+      <h3>Support CSIHV</h3>
+      <p>Your support makes a difference! While CSIHV is freely available and always will be, donations are deeply appreciated. Your contribution, no matter the size, helps:</p>
+      <ul>
+        <li>Motivate more frequent updates</li>
+        <li>Fund the development of new features</li>
+        <li>Ensure the continued maintenance and improvement of CSIHV</li>
+      </ul>
+      <a href="#" class="donate-button" id="donate-link">Steam Trade Link</a>
     </div>
-    <div class="support-section">
-      <h3>Need Help?</h3>
-      <p>If you have any questions or issues with the program, our community is here to help!</p>
-      <a href="#" class="discord-button" id="discord-link">Join Our Discord Server</a>
+    <div class="donation-leaderboard">
+      <h3>Donation Leaderboard</h3>
+      <div id="leaderboard-content">Loading...</div>
     </div>
+  </div>
+  <div class="support-section">
+    <h3>Need Help?</h3>
+    <p>If you have any questions or issues with the program, our community is here to help!</p>
+    <a href="#" class="discord-button" id="discord-link">Join Our Discord Server</a>
   </div>
   `;
   const donationData = await fetchDonationData();

@@ -95,10 +95,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
   background-color: #393e46;
   border-radius: 5px;
   margin-bottom: 20px;
+  border: 3px solid #00adb5;
 }
 
 .header-left {
@@ -108,10 +108,14 @@ body {
 }
 
 .header-left h1 {
-  margin: 0;
-  font-size: 35px;
+  font-size: 45px;
+  font-family: Consolas;
 }
-
+.header-left img {
+  margin: 5px;
+  width: 125px;
+  height: 125px;
+}
 .input-options {
   display: flex;
   align-items: center;
@@ -142,11 +146,16 @@ body {
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
 .inline-form button:hover {
   background-color: #00c2cb;
+}
+
+.inline-form button:active {
+  background-color: #008c92;
+  transform: scale(0.95);
 }
 
 .or-divider {
@@ -167,6 +176,27 @@ body {
   transition: background-color 0.3s ease;
 }
 
+.file-selector-container button {
+  padding: 5px 10px;
+  background-color: #00adb5;
+  font-weight: bold;
+  color: #eeeeee;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin-left: 10px;
+}
+
+.file-selector-container button:hover {
+  background-color: #00c2cb;
+}
+
+.file-selector-container button:active {
+  background-color: #008c92;
+  transform: scale(0.95);
+}
+
 .header-right {
   display: flex;
   flex-direction: row;
@@ -177,12 +207,15 @@ body {
 #userId {
   font-weight: bold;
 }
-
+#avatarImg {
+  margin-right: 10px;
+}
 #avatarImg img {
-  max-width: 64px;
-  max-height: 64px;
+  max-width: 100px;
+  max-height: 100px;
   border-radius: 50%;
 }
+
 .popup {
   position: fixed;
   top: 0;
@@ -195,12 +228,14 @@ body {
   align-items: center;
   z-index: 1000;
 }
+
 .popup-content {
   background-color: black;
   padding: 20px;
   border-radius: 5px;
   text-align: center;
 }
+
 .popup-content button {
   margin-top: 10px;
   padding: 5px 10px;

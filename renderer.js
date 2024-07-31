@@ -14,7 +14,8 @@ const components = {
   default_cards: require('./components/default_cards'),
   home: require('./components/home'),
   stattrak: require('./components/stattrak'),
-  basic: require('./components/basic')
+  basic: require('./components/basic'),
+  operation: require('./components/operation')
 };
 
 const $ = (id) => document.getElementById(id);
@@ -28,12 +29,16 @@ const elements = {
   avatar: $('avatarImg'),
   inputField: $('input-field'),
   submitButton: $('submit-button'),
-  form: document.querySelector('form')
+  form: document.querySelector('form'),
+  fileExplorerBtn: $('file-explorer-btn'),
+  refreshBtn: $('refresh-btn')
 };
 
 let selectedFileName = '';
 let existingData = {};
 let currentTab = null;
+let isUpdating = false;
+let isFirstUpdateBatch = true;
 
 const groupPatterns = {
   'Unlocked': ['Unlocked a'],
@@ -49,6 +54,7 @@ function handleSubmit(event) {
     elements.inputField.value = '';
     if (userInput.includes('sessionid=')){
       clearContent();
+      isUpdating = false;
       ipcRenderer.send('set-cookie', userInput);
       elements.submitButton.textContent = 'Stop Scraping';
       elements.inputField.disabled = true;
@@ -56,13 +62,29 @@ function handleSubmit(event) {
     } else {
       showPopup('Invalid cookie. Please make sure your input contains "sessionid=".');
     }
-  } else {
+  } else if (elements.submitButton.textContent === 'Stop Scraping'){
     ipcRenderer.send('stop-scraping');
     elements.submitButton.textContent = 'Submit';
     elements.inputField.disabled = false;
     elements.fileSelector.disabled = false;
     elements.scrapeDate.innerHTML = 'Stopped Scraping';
     requestJsonFiles();
+  } else if (elements.submitButton.textContent === 'Update Output') {
+    const userInput = elements.inputField.value;
+    elements.inputField.value = '';
+    if (userInput.includes('sessionid=')){
+      isUpdating = true;
+      if (selectedFileName) {
+        elements.inputField.disabled = true;
+        elements.fileSelector.disabled = true;
+        ipcRenderer.send('update-output', userInput, selectedFileName);
+        console.log('Sending update request with user input and selected file:', selectedFileName);
+      } else {
+        showPopup('No selected file to update');
+      }
+    } else {
+      showPopup('You must provide Steam Cookies to Update Output File.');
+    }
   }
 }
 
@@ -70,9 +92,9 @@ function handleFileSelect(event) {
   clearContent();
   selectedFileName = event.target.value;
   if (selectedFileName) {
-    elements.submitButton.disabled = true;
-    elements.inputField.disabled = true;
-    const outputDirectory = './output';
+    elements.submitButton.textContent = 'Update Output';
+    const outputDirectory = path.join(process.resourcesPath, 'output');
+    //const outputDirectory = './output';
     const filePath = path.join(outputDirectory, selectedFileName);
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
@@ -83,7 +105,7 @@ function handleFileSelect(event) {
         const jsonData = JSON.parse(data);
         const { username, user_imgSrc, outputDate } = jsonData.outputInfo;
         elements.userId.textContent = username;
-        elements.scrapeDate.textContent = `Last Output Update: ${outputDate}`;
+        //elements.scrapeDate.textContent = `Last Output Update: ${outputDate}`;
         elements.avatar.innerHTML = `<img src="${user_imgSrc}" alt="User Avatar">`;
         ipcRenderer.send('process-output', jsonData);
       } catch (error) {
@@ -91,23 +113,26 @@ function handleFileSelect(event) {
       }
     });
   } else {
-    elements.submitButton.disabled = false;
     elements.submitButton.textContent = 'Submit';
-    elements.inputField.disabled = false;
     components.home.showHome(elements.contentContainer, elements.tabStatsContainer);
   }
 }
 
 function updateFileSelector(jsonFiles) {
-  elements.fileSelector.style.display = jsonFiles.length > 0 ? 'inline-block' : 'none';
   if (jsonFiles.length > 0) {
     elements.fileSelector.innerHTML = '<option value="">Select Output File</option>' +
       jsonFiles.map(file => `<option value="${file}" ${file === selectedFileName ? 'selected' : ''}>${file}</option>`).join('');
+  } else {
+    elements.fileSelector.innerHTML = '<option value="">No Output Files</option>'
   }
 }
 
 function requestJsonFiles() {
   ipcRenderer.send('request-json-files');
+}
+
+function handleFileExplorer() {
+  ipcRenderer.send('open-file-explorer');
 }
 
 function showPopup(message) {
@@ -147,12 +172,13 @@ function showTabContent(desc) {
     'Earned a weapon drop': components.drop_weapon.showWeaponDropContent,
     'Earned a case drop': components.drop_case.showCaseDropContent,
     'Sticker applied/removed': components.combined_ar.showARContent,
-    'Name Tag applied/removed': components.combined_ar.showARContent
+    'Name Tag applied/removed': components.combined_ar.showARContent,
+    'Operation Reward': components.operation.showOperationContent
   };
 
   const groupedDescriptions = ['Listed on Community Market', 'Canceled listing on Community Market', 'Purchased on Community Market', 'Received a gift', 'Deleted',
     'Graffiti Used', 'Graffiti Opened', 'Earned a graffiti drop', 'Earned', 'Earned a souvenir drop', 'Used', 
-    'Purchased from the store', 'Operation Reward'];
+    'Purchased from the store'];
   if (desc.startsWith('Swapped StatTrak')) {
     components.stattrak.showSwapContent(desc, entries, elements.contentContainer, elements.tabStatsContainer);
   } else if (componentMap[desc]) {
@@ -228,6 +254,8 @@ function createDropdown(groupName, descriptions) {
 // Event listeners
 elements.form.addEventListener('submit', handleSubmit);
 elements.fileSelector.addEventListener('change', handleFileSelect);
+elements.refreshBtn.addEventListener('click', requestJsonFiles);
+elements.fileExplorerBtn.addEventListener('click', handleFileExplorer);
 
 // IPC listeners
 ipcRenderer.on('json-files', (event, jsonFiles) => {
@@ -251,14 +279,33 @@ ipcRenderer.on('scrape-complete', () => {
   requestJsonFiles();
 });
 
+ipcRenderer.on('update-complete', () => {
+  isUpdating = false;
+  isFirstUpdateBatch = true;
+  elements.inputField.disabled = false;
+  elements.fileSelector.disabled = false;
+  elements.scrapeDate.innerHTML = 'Update Complete';
+  requestJsonFiles();
+});
+
 ipcRenderer.on('scraped-data', (event, newDataString) => {
   const newData = JSON.parse(newDataString);
   newData.forEach((entry) => {
     const { d, t, plusItems, minusItems, tradeName, desc } = entry;
     if (!existingData[desc]) existingData[desc] = [];
-    existingData[desc].push({ d, t, plusItems, minusItems, tradeName });
+    if (isUpdating) {
+      existingData[desc].unshift({ d, t, plusItems, minusItems, tradeName });
+    } else {
+      existingData[desc].push({ d, t, plusItems, minusItems, tradeName });
+    }
   });
   updateTabs();
+});
+
+ipcRenderer.on('file-explorer-opened', (event, success) => {
+  if (!success) {
+    showPopup('Output Directory does not exist');
+  }
 });
 
 components.home.showHome(elements.contentContainer, elements.tabStatsContainer);

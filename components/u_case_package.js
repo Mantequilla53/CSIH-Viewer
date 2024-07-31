@@ -182,7 +182,7 @@ const createCardElement = (date, time, plusItems, matchedMinusItems) => {
         <div class="sticker-separator"></div>
         <div class="sticker-images">
           ${plusItems[0].stickers.map((sticker) => `
-            <img src="${sticker.imgSrc}">
+            <img src="https://steamcdn-a.akamaihd.net/apps/730/icons/econ/stickers/${sticker.imgSrc}">
           `).join('')}
         </div>
        ` : ''}
@@ -208,6 +208,15 @@ const formatItemName = (itemName) => {
   return parts.length > 1 ? `${parts[0]}<br>${parts[1].trim()}` : itemName;
 };
 
+const countSTitems = (entries) => {
+  return entries.reduce((count, entry) => {
+    if (entry.plusItems[0].market_name.startsWith('StatTrak')) {
+      return count + 1;
+    }
+    return count;
+  }, 0);
+};
+
 const shortenItemWear = (itemWear) => {
   const wearMap = {
     'Factory New': 'FN',
@@ -224,6 +233,9 @@ function showCasePackageContent(description, entries, contentContainer, tabStats
   const itemCounts = initializeItemCounts(contentType);
   updateItemCounts(entries, itemCounts);
 
+  const statTrakCount = countSTitems(entries);
+  const statTrakPercentage = ((statTrakCount / itemCounts.totalCount) * 100).toFixed(2);
+
   const tabContentElement = document.createElement('div');
   tabContentElement.innerHTML = `
     <link rel="stylesheet" href="style/case.css">
@@ -236,6 +248,14 @@ function showCasePackageContent(description, entries, contentContainer, tabStats
           <div class="item-type-container">${generateItemTypeTableHTML(itemCounts)}</div>
           <div class="item-quality-container">${generateItemQualityTableHTML(itemCounts)}</div>
         </div>
+        ${contentType === 'case' ? `
+          <div class="stattrak-container">
+            <div class="stattrak-info">
+              StatTrak™ Items Unboxed: <span id="stattrak-count">${statTrakCount} / ${itemCounts.totalCount}</span> 
+              (<span id="stattrak-percentage">${statTrakPercentage}%</span>)
+            </div>
+          </div>
+        ` : ''}
         <div id="content-container">
           <div class="card-container"></div>
         </div>
@@ -272,7 +292,16 @@ function showCasePackageContent(description, entries, contentContainer, tabStats
     filteredEntries = filterEntriesByCases(entries, checkedItems);
     const updatedItemCounts = calculateItemCounts(filteredEntries, contentType);
     const filteredTotalCount = calculateTotalCount(filteredEntries);
-    
+    if (contentType === 'case') {
+      const statTrakCount = countSTitems(filteredEntries);
+      const statTrakPercentage = ((statTrakCount / filteredTotalCount) * 100).toFixed(2);
+      const statTrakElement = tabContentElement.querySelector('#stattrak-count');
+      const statTrakPercentageElement = tabContentElement.querySelector('#stattrak-percentage');
+      if (statTrakElement && statTrakPercentageElement) {
+        statTrakElement.textContent = `${statTrakCount}/${filteredTotalCount}`;
+        statTrakPercentageElement.textContent = `${statTrakPercentage}%`;
+      }
+    }
     displayFilteredEntries = filterEntriesByItemTypes(filteredEntries, selectedItemTypes);
     
     renderCards();
